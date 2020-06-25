@@ -18,40 +18,30 @@
         </li>
         <li class="menu-item">
           <a class="menu-link" @click="goToProfiles()">
-            <i class="fas fa-users"></i>
-            <p class="title is-4 has-text-white">Perfis</p>
+            <i class="fas fa-utensils"></i>
+            
+            <p class="title is-4 has-text-white">Mesas</p>
           </a>
         </li>
         <li class="menu-item">
           <a class="menu-link" @click="goToBusinesses()">
             <i class="fas fa-briefcase"></i>
-            <p class="title is-4 has-text-white">Negócios</p>
+            <p class="title is-4 has-text-white">Pedidos</p>
           </a>
         </li>
          <li class="menu-item">
           <a class="menu-link" @click="goToContexts()">
-            <i class="fas fa-external-link-alt"></i>
-            <p class="title is-4 has-text-white">Resultados</p>
+            <i class="fas fa-users"></i>
+            <p class="title is-4 has-text-white">Clientes</p>
           </a>
         </li>
         <li class="menu-item">
           <a class="menu-link" @click="goToMovements()">
             <i class="fas fa-play-circle"></i>
-            <p class="title is-4 has-text-white">Movimentos</p>
+            <p class="title is-4 has-text-white">Frente de caixa</p>
           </a>
         </li>
-        <li class="menu-item">
-          <a class="menu-link" @click="goToContexts()">
-            <i class="fab fa-buromobelexperte"></i>
-            <p class="title is-4 has-text-white">Contextos</p>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link" @click="goToTimes()">
-            <i class="fas fa-hourglass-half"></i>
-            <p class="title is-4 has-text-white">Tempo</p>
-          </a>
-        </li>
+       
       </ul>
     </div>
   </div>
