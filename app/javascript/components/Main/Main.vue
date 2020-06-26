@@ -25,16 +25,18 @@ import 'bulma/css/bulma.css';
 import Sidebar from '../Commons/Sidebar/Sidebar';
 import Header from '../Commons/Header/Header';
 
+import ProductsList from '../Products/List';
+
 
 const componentDicionary = {
-  
+  products_list: ProductsList
 };
 
 export default {
   name: 'Main',
 
   components: {
-    Header, Sidebar
+    Header, Sidebar, ProductsList
   },
 
   data() {
