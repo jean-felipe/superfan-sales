@@ -17,6 +17,6 @@
 #  fk_rails_...  (company_id => companies.id)
 #
 class Category < ApplicationRecord
-  belongs_to :company
+  belongs_to :company, optional: true
   has_and_belongs_to_many :categories
 end
