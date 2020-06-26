@@ -41,6 +41,12 @@ export default {
       tableHeaders: ['#', 'Nome'],
       products: []
     }
+  },
+
+  methods: {
+    newProduct() {
+      window.location.href = '/products/new';
+    }
   }
 }
 </script>

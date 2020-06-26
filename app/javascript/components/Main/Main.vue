@@ -26,17 +26,18 @@ import Sidebar from '../Commons/Sidebar/Sidebar';
 import Header from '../Commons/Header/Header';
 
 import ProductsList from '../Products/List';
-
+import ProductForm from '../Products/Form';
 
 const componentDicionary = {
-  products_list: ProductsList
+  products_list: ProductsList,
+  product_form: ProductForm
 };
 
 export default {
   name: 'Main',
 
   components: {
-    Header, Sidebar, ProductsList
+    Header, Sidebar, ProductsList, ProductForm
   },
 
   data() {
