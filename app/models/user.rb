@@ -21,7 +21,7 @@
 #  reset_password_token   :string
 #  sign_in_count          :integer          default(0), not null
 #  unconfirmed_email      :string
-#  user_type              :integer          default(0)
+#  user_type              :integer          default("customer")
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -32,8 +32,14 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+  USER_TYPES = %w(customer business)
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  has_one :company
+
+  enum user_type: USER_TYPES
+
 end

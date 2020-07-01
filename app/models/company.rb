@@ -3,11 +3,14 @@
 # Table name: companies
 #
 #  id           :bigint           not null, primary key
-#  category     :integer
+#  description  :string
 #  document     :string
 #  fantasy_name :string
+#  legal_name   :string
+#  phone        :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  segment_id   :integer
 #  user_id      :bigint           not null
 #
 # Indexes

@@ -58,8 +58,8 @@ export default {
   },
 
   props: {
-    pubName: {
-      type: String,
+    user: {
+      type: Object,
     }
   },
 
@@ -94,7 +94,7 @@ export default {
   },
 
   created() {
-    this.name = this.pubName;
+    this.name = this.user.user.name;
   }
 }
 </script>

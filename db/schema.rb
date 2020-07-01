@@ -10,17 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_26_112956) do
+ActiveRecord::Schema.define(version: 2020_06_30_191151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
-    t.bigint "company_id", null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_categories_on_company_id"
   end
 
   create_table "categories_products", id: false, force: :cascade do |t|
@@ -35,11 +33,14 @@ ActiveRecord::Schema.define(version: 2020_06_26_112956) do
 
   create_table "companies", force: :cascade do |t|
     t.string "fantasy_name"
-    t.integer "category"
     t.string "document"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "segment_id"
+    t.string "description"
+    t.string "legal_name"
+    t.string "phone"
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
@@ -75,7 +76,7 @@ ActiveRecord::Schema.define(version: 2020_06_26_112956) do
     t.bigint "company_id", null: false
     t.integer "logged_user", null: false
     t.integer "payment_method", null: false
-    t.datetime "transaction_date", default: "2020-06-25 11:36:59", null: false
+    t.datetime "transaction_date", default: "2020-06-28 22:31:32", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_sales_on_company_id"
@@ -89,10 +90,8 @@ ActiveRecord::Schema.define(version: 2020_06_26_112956) do
 
   create_table "sub_categories", force: :cascade do |t|
     t.string "name"
-    t.bigint "company_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_sub_categories_on_company_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -122,10 +121,8 @@ ActiveRecord::Schema.define(version: 2020_06_26_112956) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "categories", "companies"
   add_foreign_key "companies", "users"
   add_foreign_key "products", "companies"
   add_foreign_key "sale_items", "sales"
   add_foreign_key "sales", "companies"
-  add_foreign_key "sub_categories", "companies"
 end

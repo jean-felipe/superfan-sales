@@ -2,9 +2,9 @@
 <div>
   <div class="wrapper" v-if="componentName != 'home'">
     <div class="dashboard">
-      <Sidebar :pubName="name"/>
+      <Sidebar :user="user"/>
         <div class="main-panel">
-          <Header />
+          <Header :user="user"/>
           <div class="content">
             <component :is="loadComponent" :data="componentData" />
           </div>
@@ -28,9 +28,14 @@ import Header from '../Commons/Header/Header';
 import ProductsList from '../Products/List';
 import ProductForm from '../Products/Form';
 
+import CompanyForm from '../Companies/Form';
+import ShowCompany from '../Companies/Show';
+
 const componentDicionary = {
   products_list: ProductsList,
-  product_form: ProductForm
+  product_form: ProductForm,
+  company_form: CompanyForm,
+  company_info: ShowCompany
 };
 
 export default {

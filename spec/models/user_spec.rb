@@ -21,7 +21,7 @@
 #  reset_password_token   :string
 #  sign_in_count          :integer          default(0), not null
 #  unconfirmed_email      :string
-#  user_type              :integer          default(0)
+#  user_type              :integer          default("customer")
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #

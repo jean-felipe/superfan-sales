@@ -7,7 +7,7 @@
             <div class="media">
               <div class="header-content beerconsumptions">
                 <div class="media-left">
-                  <h4 class="card-title mt-0">Criação de Produto</h4>
+                  <h4 class="card-title mt-0">Insira os dados do seu estabelecimento</h4>
                 </div>
 
                 <div>
@@ -21,34 +21,33 @@
               <form @submit.prevent="handleSubmit">
                 <div class="field is-horizontal">
                   <div class="field-body">
-                     <div class="field">
-                    <label class="label">Nome*</label>
-                    <div class="control is-expanded">
-                      <input class="input is-marginless" type="text" placeholder="Nome do negócio" 
-                        v-model="newProduct.name" required>
-                    </div>
-                  </div>
-
-                   <div class="field">
-                    <label class="label">Descrição</label>
-                    <div class="control is-expanded">
-                      <div class="is-fullwidth">
+                    <div class="field">
+                      <label class="label">Nome Comercial*</label>
+                      <div class="control is-expanded">
                         <input class="input is-marginless" type="text" placeholder="Nome do negócio" 
-                          v-model="newProduct.description" required>
-                      </div>
+                          v-model="company.legal_name" required>
+                       </div>
                     </div>
-                  </div>
+
+                    <div class="field">
+                      <label class="label">Nome Fantasia*</label>
+                      <div class="control is-expanded">
+                        <input class="input is-marginless" type="text" placeholder="Nome do negócio" 
+                          v-model="company.fantasy_name" required>
+                       </div>
+                    </div>
+
                   </div>
                 </div>
 
                <div class="field is-horizontal">
                   <div class="field-body">
                     <div class="field">
-                      <label class="label">Categoria*</label>
+                      <label class="label">Segmento*</label>
                         <div class="control is-expanded">
                           <div class="select is-fullwidth">
-                            <select name="product_type" v-model="newProduct.category_id">
-                              <option v-for="category in categories"                      
+                            <select name="product_type" v-model="company.category_id">
+                              <option v-for="category in segments"                      
                                 v-bind:key="category.id" 
                                 v-bind:value="category.id">
                                   {{ category .name }}
@@ -60,16 +59,41 @@
                     </div>
 
                    <div class="field">
-                    <label class="label">EAN</label>
+                    <label class="label">CNPJ</label>
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
                         <input class="input is-marginless" type="number" placeholder="Nome do negócio" 
-                          v-model="newProduct.ean" required>
+                          v-model="company.document" required>
                       </div>
                     </div>
                   </div>
                   </div>
                 </div>
+
+                <div class="field is-horizontal">
+                  <div class="field-body">
+                    <div class="field">
+                      <label class="label">Telefone*</label>
+                        <div class="control is-expanded">
+                           <input class="input is-marginless" type="number" placeholder="Nome do negócio" 
+                             v-model="company.phone" required>
+                        </div>
+                    </div>
+
+                     <div class="field">
+                    <label class="label">Descrição</label>
+                    <div class="control is-expanded">
+                      <div class="is-fullwidth">
+                        <input class="input is-marginless" type="text" placeholder="Nome do negócio" 
+                          v-model="company.description" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  </div>
+                </div>
+
+                
 
                 <hr />
                 <div class="field is-horizontal">
@@ -83,10 +107,10 @@
 
                 <div class="field is-grouped">
                   <div class="control" v-if="edition">
-                    <button type="submit" class="button is-link">Editar Produto</button>
+                    <button type="submit" class="button is-link">Editar Estabelecimento</button>
                   </div>
                   <div class="control" v-else>
-                    <button type="submit" class="button is-link">Criar Produto</button>
+                    <button type="submit" class="button is-link">Criar Estabelecimento</button>
                   </div>
                   <div class="control">
                     <button class="button is-link is-light">Cancelar</button>
@@ -106,47 +130,45 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
-  name: 'ProductForm',
+  name: 'Form',
 
   data() {
     return {
-      newProduct: {
-        name: '',
+      company: {
+        document: '',
         description: '',
-        category_id: '',
-        ean: '',
+        segment_id: '',
+        description: '',
+        fantasy_name: '',
+        legal_name: '',
+        phone: '',
       },
-      categories: [],
       edition: false,
+      segments: []
     }
-  },
-
-  props: {
-    data: {
-      type: Array,
-      require: true
-    },
   },
 
   methods: {
     handleSubmit() {
-      axios.post('/api/v1/products', this.newProduct)
+      axios.post('/api/v1/companies', this.company)
         .then((response) => {
           console.log(response)
         })
     }
   },
 
+  props: {
+    data: {
+      type: Array,
+    }
+  },
+
   mounted() {
-    console.log(this.data[0])
-    this.categories = this.data[0].categories
+    this.segments = this.data[0].segments
   }
+
 }
 </script>
-
-<style>
-
-</style>

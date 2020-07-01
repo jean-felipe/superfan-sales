@@ -2,7 +2,8 @@ module Api::V1
   class ProductsController < Api::BaseController
     def create
       @product = Product.new(product_params)
-
+      @product.company = current_user.company
+      
       if @product.save
         render json: @product, status: 201
       else
@@ -13,8 +14,8 @@ module Api::V1
     private
 
     def product_params
-      params.require(:product).permit(
-        :description, :ean, :is_active, :name, :categories[]
+      params.permit(
+        :description, :ean, :is_active, :name, :category_id
       )
     end
   end

@@ -19,15 +19,22 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="field is-grouped">
-              <p class="control">
-                <a class="bd-tw-button button" href="#" @click="goToAccount()">
+              <div class="notification is-warning" v-if="company == null">
+                <button class="delete"></button>
+                Você precisa criar seu Estabalecimento, <a @click="goToCreateCompany()">clique aqui</a>
+              </div>
+              <p class="control" v-else>
+                <button class="bd-tw-button button" href="" @click="goToAccount()">
                   <span class="icon">
                     <i class="fas fa-user-circle"></i>
                   </span>
-                  <span>
+                  <span v-if="user.user_type == 'customer'">
                     Sua Conta
                   </span>
-                </a>
+                  <span v-else>
+                    Seu Estabalecimento
+                  </span>
+                </button>
               </p>
               <p class="control">
                 <a class="button is-danger" href="#" @click="logout()">
@@ -51,6 +58,13 @@ import axios from 'axios';
 export default {
   name: 'Header',
 
+  data() {
+    return {
+      currentUser: {},
+      company: {}
+    }
+  },
+
   methods: {
      logout(e) {
       const csrfToken = document.querySelector("meta[name=csrf-token]").content
@@ -65,9 +79,29 @@ export default {
     },
 
     goToAccount() {
-      window.location.href = '/user';
+      console.log(this.currentUser.user.user_type)
+      if (this.currentUser.user.user_type === 'business') {
+        window.location.href = '/companies/' + this.currentUser.company.id;
+      } else {
+        window.location.href = '/users/' + this.currentUser.id;
+      }
+    },
+
+    goToCreateCompany() {
+      window.location.href = '/companies/new'
     }
 
+  },
+
+  props: {
+    user: {
+      type: Object,
+    }
+  },
+
+  mounted() {
+    this.currentUser = this.user;
+    this.company = this.user.company;
   }
 }
 </script>

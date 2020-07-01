@@ -6,10 +6,12 @@ Rails.application.routes.draw do
   }
 
   resources :products
+  resources :companies, only: [:new, :show, :edit]
 
   namespace :api do
     namespace :v1 do
       resources :products
+      resources :companies
     end
   end
 
