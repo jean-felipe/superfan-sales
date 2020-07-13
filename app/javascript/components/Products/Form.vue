@@ -60,11 +60,29 @@
                     </div>
 
                    <div class="field">
-                    <label class="label">EAN</label>
+                    
+                  </div>
+                  </div>
+                </div>
+
+                 <div class="field is-horizontal">
+                  <div class="field-body">
+                    <div class="field">
+                      <label class="label">EAN/SKU/Código de barras</label>
+                        <div class="control is-expanded">
+                          <div class="is-fullwidth">
+                        <input class="input is-marginless" type="number" placeholder="2223333" 
+                          v-model="newProduct.ean" required>
+                      </div>
+                        </div>
+                    </div>
+
+                   <div class="field">
+                    <label class="label">Preço</label>
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
-                        <input class="input is-marginless" type="number" placeholder="Nome do negócio" 
-                          v-model="newProduct.ean" required>
+                        <input class="input is-marginless" type="number" placeholder="3.99" 
+                          v-model="newProduct.price" required>
                       </div>
                     </div>
                   </div>
@@ -75,8 +93,18 @@
                 <div class="field is-horizontal">
                   <div class="field-body">
                     <div class="field">
-                      <label class="label">Imagens*</label>
+                      <h4 class="card-title mt-0">Imagens:</h4>
                       <div class="control is-expanded"></div>
+                      <input type="file" multiple @change="previewFiles">
+
+                      <hr />
+                      <p>Preview:</p>
+                      <div class="preview">
+                        <div v-for="imagerc in imagesPreview" v-bind:key="imagerc">
+                          <img :src="imagerc" class="img-preview" v-if="imagerc" />
+                        </div>
+                      </div>
+                      
                     </div>
                   </div>
                 </div>
@@ -118,9 +146,13 @@ export default {
         description: '',
         category_id: '',
         ean: '',
+        price: ''
       },
       categories: [],
+      subcategories: [],
       edition: false,
+      images: [],
+      imagesPreview: ['']
     }
   },
 
@@ -136,17 +168,67 @@ export default {
       axios.post('/api/v1/products', this.newProduct)
         .then((response) => {
           console.log(response)
+          // // this.sendImages(response.data.id)
+
+          this.$swal("Parabéns!", "Produto criado com sucesso!", "success")
+            .then(() => {
+              window.location = '/products'
+            })
         })
+    },
+
+    sendImages(id) {
+      let formData = new FormData();
+      this.images.forEach(file => {
+        formData.append('file', this.file);
+      })
+      
+
+      axios.post( '/api/v1/products/' + id + '/upload_images',
+      formData,
+      {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+      }
+    ).then(function(){
+      console.log('SUCCESS!!');
+    })
+    .catch(function(){
+      console.log('FAILURE!!');
+    });
+    },
+
+    previewFiles(event) {
+       let files = event.target.files
+       let file
+       for (var i = 0; i < files.length; i++) {
+         // obtém o item
+          file = files.item(i);
+         
+          this.images.push(file)
+          this.imagesPreview.push(URL.createObjectURL(file))
+
+       
+       }
     }
   },
 
   mounted() {
-    console.log(this.data[0])
     this.categories = this.data[0].categories
+    this.subcategories = this.data[0].sub_categories
   }
 }
 </script>
 
 <style>
+.img-preview {
+  height: 300px;
+  width: 300px;
+  margin-right: 20px;
+}
 
+.preview {
+  display: flex;
+}
 </style>

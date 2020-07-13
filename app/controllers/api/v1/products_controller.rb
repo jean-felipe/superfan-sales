@@ -11,12 +11,22 @@ module Api::V1
       end
     end
 
+    def upload_images
+      
+      # binding.pry
+      
+    end
+
     private
 
     def product_params
       params.permit(
         :description, :ean, :is_active, :name, :category_id
       )
+    end
+
+    def load_product
+      @product = Product.find(params[:id])
     end
   end
 end

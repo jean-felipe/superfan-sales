@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :products
+      resources :products do
+        post :upload_images, on: :member
+      end
       resources :companies
     end
   end

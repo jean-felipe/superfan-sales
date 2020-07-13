@@ -1,8 +1,10 @@
 class ProductsController < ApplicationController
   def index
+    @products = current_user.company.products
+
     @props = {
       component_name: 'products_list',
-      component_data: [Product.all],
+      component_data: [@products],
       user: user_info
     }
   end

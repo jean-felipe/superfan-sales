@@ -43,10 +43,20 @@ export default {
     }
   },
 
+  props: {
+    data: {
+      type: Array
+    }
+  },
+
   methods: {
     newProduct() {
       window.location.href = '/products/new';
     }
+  },
+  
+  mounted() {
+    console.log(this.data)
   }
 }
 </script>
