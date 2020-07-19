@@ -31,18 +31,26 @@ import ProductForm from '../Products/Form';
 import CompanyForm from '../Companies/Form';
 import ShowCompany from '../Companies/Show';
 
+import Checkout from '../Checkout/Checkout';
+
+import Saloon from '../../pages/Saloon/Saloon';
+import TableForm from '../../pages/Saloon/Management/TableForm';
+
 const componentDicionary = {
   products_list: ProductsList,
   product_form: ProductForm,
   company_form: CompanyForm,
-  company_info: ShowCompany
+  company_info: ShowCompany,
+  checkout: Checkout,
+  saloon: Saloon,
+  table_form: TableForm
 };
 
 export default {
   name: 'Main',
 
   components: {
-    Header, Sidebar, ProductsList, ProductForm
+    Header, Sidebar, ProductsList, ProductForm, Checkout, Saloon, TableForm
   },
 
   data() {

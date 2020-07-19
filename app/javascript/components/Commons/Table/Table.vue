@@ -75,7 +75,7 @@ export default {
   },
 
   mounted() {
-    
+    console.log(this.elements)
     
   }
   

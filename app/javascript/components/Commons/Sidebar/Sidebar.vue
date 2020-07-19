@@ -17,7 +17,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a class="menu-link" @click="goToProfiles()">
+          <a class="menu-link" @click="goToSaloon()">
             <i class="fas fa-utensils"></i>
             
             <p class="title is-4 has-text-white">Mesas</p>
@@ -36,7 +36,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a class="menu-link" @click="goToMovements()">
+          <a class="menu-link" @click="goToCheckouts()">
             <i class="fas fa-play-circle"></i>
             <p class="title is-4 has-text-white">Frente de caixa</p>
           </a>
@@ -72,16 +72,16 @@ export default {
       window.location.href = '/';
     },
 
-    goToBusinesses() {
-      window.location.href = '/businesses';
+    goToSaloon() {
+      window.location.href = '/saloon';
     },
 
     goToContexts() {
       window.location.href = '/contexts';
     },
 
-    goToMovements() {
-      window.location.href = '/movements';
+    goToCheckouts() {
+      window.location.href = '/checkouts';
     },
 
     goToProfiles() {

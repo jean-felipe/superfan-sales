@@ -90,7 +90,7 @@
                 </div>
 
                 <hr />
-                <div class="field is-horizontal">
+                <!-- <div class="field is-horizontal">
                   <div class="field-body">
                     <div class="field">
                       <h4 class="card-title mt-0">Imagens:</h4>
@@ -107,7 +107,7 @@
                       
                     </div>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="field is-grouped">
                   <div class="control" v-if="edition">

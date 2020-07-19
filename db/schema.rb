@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_30_191151) do
+ActiveRecord::Schema.define(version: 2020_07_18_180057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,33 @@ ActiveRecord::Schema.define(version: 2020_06_30_191151) do
     t.string "legal_name"
     t.string "phone"
     t.index ["user_id"], name: "index_companies_on_user_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "order_id", null: false
+    t.float "quantity"
+    t.float "price"
+    t.string "code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "code"
+    t.bigint "user_id", null: false
+    t.bigint "company_id", null: false
+    t.bigint "table_id", null: false
+    t.integer "status"
+    t.float "total_price"
+    t.string "payment_method"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_orders_on_company_id"
+    t.index ["table_id"], name: "index_orders_on_table_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -94,6 +121,16 @@ ActiveRecord::Schema.define(version: 2020_06_30_191151) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tables", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.string "name", null: false
+    t.integer "places", default: 0
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_tables_on_company_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -122,7 +159,13 @@ ActiveRecord::Schema.define(version: 2020_06_30_191151) do
   end
 
   add_foreign_key "companies", "users"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "companies"
+  add_foreign_key "orders", "tables"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "companies"
   add_foreign_key "sale_items", "sales"
   add_foreign_key "sales", "companies"
+  add_foreign_key "tables", "companies"
 end
