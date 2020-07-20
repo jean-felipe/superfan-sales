@@ -69,6 +69,12 @@
 
 <script>
 export default {
-  name: 'Checkout'
+  name: 'Checkout',
+
+  data() {
+    return {
+      
+    }
+  }
 }
 </script>

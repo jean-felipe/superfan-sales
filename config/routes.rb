@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       end
 
       resources :companies
-      resources :tables, only: [:create, :update, :destroy]
+      resources :tables, only: [:create, :update, :destroy, :show]
       
     end
   end
