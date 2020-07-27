@@ -1,6 +1,6 @@
 <template>
  <div>
-    <div class="header-content beerconsumptions">
+  <div class="header-content beerconsumptions">
     <div class="media-left">
       <p class="card-category">Gerenciamento de mesas</p>
     </div>
@@ -29,7 +29,8 @@ export default {
 
   props: {
     tables: {
-      type: Array
+      type: Array,
+      required: true
     }
   },
 

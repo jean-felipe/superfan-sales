@@ -44,7 +44,6 @@ export default {
 
   mounted() {
     this.saloonTables = this.tables
-    console.log(this.tables)
   }
 }
 </script>

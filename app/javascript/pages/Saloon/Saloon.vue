@@ -18,26 +18,24 @@
             </div>
             
             <div>
-               <div class="tabs is-toggle">
-                  <ul class="tabs-saloon">
-                    <li :class="{ 'is-active': displayAction == 'saloon' }">
-                      <a @click="displayAction = 'saloon'">
-                        <span class="icon is-small"><i class="fas fa-clipboard-list"></i></span>
-                        <span>Salão</span>
-                      </a>
-                    </li>
-                    <li :class="{ 'is-active': displayAction == 'management' }">
-                      <a @click="displayAction = 'management'">
-                        <span class="icon is-small"><i class="fas fa-chart-line"></i></span>
-                        <span>Gerenciar mesas</span>
-                      </a>
-                    </li>
-                  
-                  
-                  </ul>
-                </div>
-              <Management v-if="displayAction == 'management'" :tables="tables"/>
-              <SaloonTables v-if="displayAction == 'saloon'" :tables="tables"/>
+              <div class="tabs is-toggle">
+                <ul class="tabs-saloon">
+                  <li :class="{ 'is-active': displayAction == 'saloon' }">
+                    <a @click="displayAction = 'saloon'">
+                      <span class="icon is-small"><i class="fas fa-clipboard-list"></i></span>
+                      <span>Salão</span>
+                    </a>
+                  </li>
+                  <li :class="{ 'is-active': displayAction == 'management' }">
+                    <a @click="displayAction = 'management'">
+                      <span class="icon is-small"><i class="fas fa-chart-line"></i></span>
+                      <span>Gerenciar mesas</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <Management v-if="displayAction == 'management'" :tables="loadTables"/>
+              <SaloonTables v-if="displayAction == 'saloon'" :tables="loadTables"/>
             </div>
           </div>
         </div>
@@ -69,6 +67,12 @@ export default {
 
   mounted() {
     this.tables = this.data[0]
+  },
+
+  computed: {
+    loadTables() {
+      return this.data[0]
+    }
   }
 
 }

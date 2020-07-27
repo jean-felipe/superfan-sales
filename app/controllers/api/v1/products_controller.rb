@@ -17,6 +17,12 @@ module Api::V1
       
     end
 
+    def index
+      @products = current_user.company.products.where("name like ?", "%#{params[:filter]}%").select(:id, :name).as_json
+
+      render json: @products, status: 200
+    end
+
     private
 
     def product_params

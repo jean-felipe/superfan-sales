@@ -45,7 +45,6 @@ export default {
     this.table.status = this.info.status
     this.table.places = this.info.places
     this.table.id = this.info.id
-    console.log(this.info)
   }
 }
 </script>
