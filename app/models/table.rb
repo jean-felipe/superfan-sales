@@ -5,7 +5,7 @@
 #  id         :bigint           not null, primary key
 #  name       :string           not null
 #  places     :integer          default(0)
-#  status     :integer          default(0)
+#  status     :integer          default("active")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  company_id :bigint           not null

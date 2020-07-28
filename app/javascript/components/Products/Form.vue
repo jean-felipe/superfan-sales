@@ -89,6 +89,30 @@
                   </div>
                 </div>
 
+                <div class="field is-horizontal">
+                  <div class="field-body">
+                    <div class="field">
+                      <label class="label">Preço promocional</label>
+                        <div class="control is-expanded">
+                          <div class="is-fullwidth">
+                        <input type="checkbox" v-model="newProduct.has_discount">
+                      </div>
+                        </div>
+                    </div>
+
+                   <div class="field">
+                    <label class="label">Preço</label>
+                    <div class="control is-expanded">
+                      <div class="is-fullwidth">
+                        <input class="input is-marginless" type="number" placeholder="1.99" 
+                          v-model="newProduct.discount_price" required>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                
+
                 <hr />
                 <!-- <div class="field is-horizontal">
                   <div class="field-body">
@@ -146,7 +170,9 @@ export default {
         description: '',
         category_id: '',
         ean: '',
-        price: ''
+        price: '',
+        has_discount: false,
+        discount_price: '',
       },
       categories: [],
       subcategories: [],

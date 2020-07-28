@@ -18,7 +18,7 @@ module Api::V1
     end
 
     def index
-      @products = current_user.company.products.where("name like ?", "%#{params[:filter]}%").select(:id, :name).as_json
+      @products = current_user.company.products.where("name like ?", "%#{params[:filter]}%").select(:id, :name, :price).as_json
 
       render json: @products, status: 200
     end
@@ -27,7 +27,7 @@ module Api::V1
 
     def product_params
       params.permit(
-        :description, :ean, :is_active, :name, :category_id
+        :description, :ean, :is_active, :name, :category_id, :price, :has_discount, :discount_price
       )
     end
 

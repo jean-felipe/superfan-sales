@@ -2,15 +2,18 @@
 #
 # Table name: products
 #
-#  id          :bigint           not null, primary key
-#  description :text             not null
-#  ean         :string           not null
-#  is_active   :boolean          default(TRUE)
-#  name        :string           not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  category_id :integer          not null
-#  company_id  :bigint           not null
+#  id             :bigint           not null, primary key
+#  description    :text             not null
+#  discount_price :float
+#  ean            :string           not null
+#  has_discount   :boolean          default(FALSE)
+#  is_active      :boolean          default(TRUE)
+#  name           :string           not null
+#  price          :float
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  category_id    :integer          not null
+#  company_id     :bigint           not null
 #
 # Indexes
 #

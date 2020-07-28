@@ -14,16 +14,50 @@
       </div>
 
       <div class="order-product-input">
-        <label class="label">Inserir</label>
+        <label class="label">Produto</label>
         <input v-model="search" class="input is-marginless" />
       </div>
-      
       <div class="products-list" v-if="productList" >
-        <ul v-for="product in products" v-bind:key="product.id">
-          <li>{{ product.name }}  <input class="input is-marginless" /></li>
-        </ul>
-      </div>
+        <table class="table is-bordered is-striped">
+          <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+            <td>Ação</td>
+          </tr>
 
+          <tbody v-for="product in products" v-bind:key="product.id">
+            <tr>
+              <td>{{ product.name }}</td>
+              <td>{{ product.price }}</td>
+              <td>
+                <button class="button is-success has-magin-bottom" @click="addProduct(product)">Adicionar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <hr />
+      
+      <div v-if="selectedProducts.length > 0">
+        <table class="table is-bordered is-striped">
+          <tr>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+          </tr>
+          <tbody v-for="product in selectedProducts" v-bind:key="product.id">
+            <tr>
+              <td>{{ product.name }}</td>
+              <td>
+                <input type="number" v-model="product.quantity" class="input is-marginless quantity-input" />
+              </td>
+              <td>{{ product.price }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
       <br>
       <div>
         <button class="button is-success has-magin-bottom" @click="newTable()">Inserir Pedido</button>
@@ -43,6 +77,7 @@ export default {
       productList: false,
       products: [],
       search: '',
+      items: [],
       newItem: {
         productId: '',
         quantity: '',
@@ -71,6 +106,10 @@ export default {
           this.products = response.data
           this.productList = true
         })
+    },
+
+    addProduct(product) {
+      this.items.push({id: product.id, name: product.name, quantity: 1})
     }
   },
 
@@ -83,7 +122,20 @@ export default {
   },
 
   computed: {
-   
+    selectedProducts() {
+      return this.items
+    }
   }
 }
 </script>
+<style>
+.quantity-input {
+  width: 10% !important;
+  margin-left: 15px !important;
+}
+
+.item-quantity {
+  margin-top: 10px !important;
+
+}
+</style>
