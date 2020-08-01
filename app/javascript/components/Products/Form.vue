@@ -114,25 +114,7 @@
                 
 
                 <hr />
-                <!-- <div class="field is-horizontal">
-                  <div class="field-body">
-                    <div class="field">
-                      <h4 class="card-title mt-0">Imagens:</h4>
-                      <div class="control is-expanded"></div>
-                      <input type="file" multiple @change="previewFiles">
-
-                      <hr />
-                      <p>Preview:</p>
-                      <div class="preview">
-                        <div v-for="imagerc in imagesPreview" v-bind:key="imagerc">
-                          <img :src="imagerc" class="img-preview" v-if="imagerc" />
-                        </div>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div> -->
-
+              
                 <div class="field is-grouped">
                   <div class="control" v-if="edition">
                     <button type="submit" class="button is-link">Editar Produto</button>
@@ -209,7 +191,6 @@ export default {
         formData.append('file', this.file);
       })
       
-
       axios.post( '/api/v1/products/' + id + '/upload_images',
       formData,
       {

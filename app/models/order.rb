@@ -26,6 +26,11 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Order < ApplicationRecord
+  STATUSES = %w(initialized open cancelled finished)
   belongs_to :user
   belongs_to :company
+
+  has_many :items, class_name: "OrderItem"
+
+  enum status: STATUSES
 end

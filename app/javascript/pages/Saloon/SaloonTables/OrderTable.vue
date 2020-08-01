@@ -60,7 +60,7 @@
       
       <br>
       <div>
-        <button class="button is-success has-magin-bottom" @click="newTable()">Inserir Pedido</button>
+        <button class="button is-success has-magin-bottom" @click="newOrder()">Inserir Pedido</button>
       </div>
     </div>
   </div>
@@ -77,12 +77,11 @@ export default {
       productList: false,
       products: [],
       search: '',
-      items: [],
       newItem: {
-        productId: '',
-        quantity: '',
-        description: '',
-        identification: ''
+        items: [],
+        identification: '',
+        table_id: '',
+        id: ''
       }
     }
   },
@@ -109,7 +108,14 @@ export default {
     },
 
     addProduct(product) {
-      this.items.push({id: product.id, name: product.name, quantity: 1})
+      this.newItem.items.push({id: product.id, name: product.name, quantity: 1, price: product.price })
+    },
+
+    newOrder() {
+      axios.post('/api/v1/orders', {order: this.newItem})
+        .then((response) => {
+          console.log(response)
+        })
     }
   },
 
@@ -123,14 +129,18 @@ export default {
 
   computed: {
     selectedProducts() {
-      return this.items
+      return this.newItem.items
     }
+  },
+
+  mounted() {
+    this.newItem.table_id = this.id
   }
 }
 </script>
 <style>
 .quantity-input {
-  width: 10% !important;
+  width: 30% !important;
   margin-left: 15px !important;
 }
 
