@@ -18,6 +18,19 @@ class OrdersServices
       end
     end
 
+    def update(params, order)
+      @order = order
+
+      if params[:items].present?
+        create_items(params[:items])
+        @order.update(total_price: @order.items.sum(:price))
+      end
+
+      if params[:identification].present? && params[:identification] != @order.user.document
+        @order.user.update(document: params[:identification])
+      end
+    end
+
     private
 
     def create_items(items)

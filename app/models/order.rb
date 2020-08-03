@@ -27,8 +27,10 @@
 #
 class Order < ApplicationRecord
   STATUSES = %w(initialized open cancelled finished)
+  
   belongs_to :user
   belongs_to :company
+  belongs_to :table
 
   has_many :items, class_name: "OrderItem"
 

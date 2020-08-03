@@ -4,6 +4,7 @@
 #
 #  id                     :bigint           not null, primary key
 #  birthdate              :datetime
+#  code                   :string
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime

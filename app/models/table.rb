@@ -21,6 +21,7 @@
 class Table < ApplicationRecord
   STATUSES = %w(active inactive)
 
+  has_many :orders
   belongs_to :company
 
   enum status: STATUSES

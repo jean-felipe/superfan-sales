@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       resources :companies
       resources :tables, only: [:create, :update, :destroy, :show]
       resources :saloon, only: :index
-      resources :orders, only: :create
+      resources :orders, only: [:create, :show, :update]
       
     end
   end

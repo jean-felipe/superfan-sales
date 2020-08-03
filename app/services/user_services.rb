@@ -8,7 +8,8 @@ class UserServices
           document: identification,
           password: 'qweqwe123',
           email: "#{SecureRandom.hex(4)}@email.com",
-          name: "#{SecureRandom.hex(4)}"
+          name: "#{SecureRandom.hex(4)}",
+          code: "#{SecureRandom.hex(4)}"
         )
         
         if user.save

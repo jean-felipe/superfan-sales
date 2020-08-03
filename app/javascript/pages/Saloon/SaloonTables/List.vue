@@ -43,6 +43,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.tables)
     this.saloonTables = this.tables
   }
 }
