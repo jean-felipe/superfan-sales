@@ -35,4 +35,6 @@ class Order < ApplicationRecord
   has_many :items, class_name: "OrderItem"
 
   enum status: STATUSES
+
+  scope :actives, -> { where(status: %w(initialized open))}
 end

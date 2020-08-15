@@ -36,6 +36,9 @@ import Checkout from '../Checkout/Checkout';
 import Saloon from '../../pages/Saloon/Saloon';
 import TableForm from '../../pages/Saloon/Management/TableForm';
 
+import OrdersList from '../../pages/Orders/List';
+import ShowOrder from '../../pages/Orders/Show';
+
 const componentDicionary = {
   products_list: ProductsList,
   product_form: ProductForm,
@@ -43,14 +46,16 @@ const componentDicionary = {
   company_info: ShowCompany,
   checkout: Checkout,
   saloon: Saloon,
-  table_form: TableForm
+  table_form: TableForm,
+  orders_list: OrdersList,
+  show_order: ShowOrder
 };
 
 export default {
   name: 'Main',
 
   components: {
-    Header, Sidebar, ProductsList, ProductForm, Checkout, Saloon, TableForm
+    Header, Sidebar, ProductsList, ProductForm, Checkout, Saloon, TableForm, OrdersList, ShowOrder
   },
 
   data() {

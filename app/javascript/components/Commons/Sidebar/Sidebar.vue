@@ -24,7 +24,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a class="menu-link" @click="goToBusinesses()">
+          <a class="menu-link" @click="goToOrders()">
             <i class="fas fa-briefcase"></i>
             <p class="title is-4 has-text-white">Pedidos</p>
           </a>
@@ -76,8 +76,8 @@ export default {
       window.location.href = '/saloon';
     },
 
-    goToContexts() {
-      window.location.href = '/contexts';
+    goToOrders() {
+      window.location.href = '/orders';
     },
 
     goToCheckouts() {

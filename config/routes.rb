@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :products, only: [:new, :index]
   resources :checkouts, only: [:new, :index]
   resources :companies, only: [:new, :show, :edit]
+  resources :orders, only: [:index, :show]
 
   get '/saloon', to: 'saloon#index'
   get '/tables/new', to: 'saloon#new'
