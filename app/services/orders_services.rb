@@ -11,7 +11,7 @@ class OrdersServices
       )
 
       if @order.save
-        create_items(params[:items])
+        create_items!(params[:items])
         @order
       else
         @order.errors.messages
@@ -22,7 +22,7 @@ class OrdersServices
       @order = order
 
       if params[:items].present?
-        create_items(params[:items])
+        create_items!(params[:items])
         @order.update(total_price: @order.items.sum(:price))
       end
 
@@ -33,15 +33,22 @@ class OrdersServices
 
     private
 
-    def create_items(items)
+    def create_items!(items)
       items.each do |item|
-        OrderItem.create!(
-          code: SecureRandom.hex(6),
-          price: item[:price],
-          quantity: item[:quantity],
-          order_id: @order.id,
-          product_id: item[:id]
-        )
+        item = @order.items.find_by(product_id: item[:id])
+
+        if item.nil?
+          OrderItem.create!(
+            code: SecureRandom.hex(6),
+            price: item[:price],
+            quantity: item[:quantity],
+            order_id: @order.id,
+            product_id: item[:id]
+          )
+        else
+          item.quantity += item[:quantity]
+          item.save!
+        end
       end      
     end
   end

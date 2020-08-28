@@ -1,27 +1,41 @@
 <template>
   <div class="insert-product">
-    <div class="inputs">
-      <input type="text" v-model="search" class="input is-marginless">
-      <input type="number" v-model="product.quantity">
-      <button class="button is-success" @click="addProduct()">Inserir</button>
-    </div>
-    <div class="select-products" v-if="productList">
-      <select v-model="product.id">
-        <option v-for="product in products" v-bind:key="product.value" v-bind:value="product.id">
-          {{ product.name }} - {{ product.price }}
-        </option>
-      </select>
-    </div>
+   <div class="order-product-input">
+        <input v-model="search" placeholder="Pesquise produtos" class="input is-marginless" />
+      </div>
+      <div class="products-list" v-if="productList" >
+        <table class="table is-bordered is-striped">
+          <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <td>Ação</td>
+          </tr>
+
+          <tbody v-for="product in products" v-bind:key="product.id">
+            <tr>
+              <td>{{ product.name }}</td>
+              <td>{{ product.price }}</td>
+              <td><input type="number" v-model="product.quantity" /></td>
+              <td>
+                <button class="button is-success has-magin-bottom" @click="addProduct(product)">Adicionar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "InsertProduct",
 
   props: {
     orderId: {
-      type: String
+      type: Number
     }
   },
 
@@ -30,6 +44,7 @@ export default {
       search: '',
       products: [],
       productList: false,
+      quantity: '',
       product: {
         id: '',
         quantity: ''
@@ -47,9 +62,16 @@ export default {
     },
 
     addProduct(product) {
-      axios.patch('/api/v1/orders/' + this.orderId, this.product)
+      let item = {
+        id: product.id,
+        name: product.name,
+        quantity: product.quantity,
+        price: product.price,
+      }
+
+      axios.patch('/api/v1/orders/' + this.orderId, {order: {items: [item]}})
         .then(response => {
-          console.log(response)
+          document.location.reload(true);
         })
     },
   },
@@ -63,3 +85,9 @@ export default {
   },
 }
 </script>
+
+<style>
+.insert-product {
+  width: 400px;
+}
+</style>

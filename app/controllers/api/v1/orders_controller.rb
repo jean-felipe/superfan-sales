@@ -10,7 +10,7 @@ module Api::V1
       render json: Read::OrderTableRender.render(@order)
     end
 
-    def update
+    def update      
       render json: ::OrdersServices.update(order_params, @order), status: 200
     end
 

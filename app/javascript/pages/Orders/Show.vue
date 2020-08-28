@@ -36,7 +36,8 @@
               <section class="items-details">
                 <div class="items-details-header">
                   <h3>Items:</h3>
-                  <button class="button is-success">Adicionar</button>
+                  <InsertProduct v-if="searchProducts" :orderId="order.id"/>
+                  <button class="button is-success" @click="searchProducts = true">Adicionar</button>
                 </div>
                 <table class="table is-bordered is-striped">
                   <thead>
@@ -80,13 +81,17 @@
 </template>
 
 <script>
+import InsertProduct from '../../components/Commons/Searchs/InsertProduct';
+
 export default {
   name: "ShowOrder",
+  components: { InsertProduct },
 
   data() {
     return {
       customerHeaders: ['Nome', 'CPF', 'Código'],
       itemsHeaders: ['Nome', 'Preço', 'Quantidade'],
+      searchProducts: false,
       order: {
         number: '',
         user: {},
