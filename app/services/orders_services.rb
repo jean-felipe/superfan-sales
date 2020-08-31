@@ -11,6 +11,7 @@ class OrdersServices
       )
 
       if @order.save
+        create_client(@order.user_id, company_id)
         create_items!(params[:items])
         @order
       else
@@ -50,6 +51,10 @@ class OrdersServices
           item.save!
         end
       end      
+    end
+
+    def create_client(user_id, company_id)
+      Client.create(user_id: user_id, company_id: company_id)
     end
   end
 end

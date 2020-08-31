@@ -30,7 +30,7 @@
           </a>
         </li>
          <li class="menu-item">
-          <a class="menu-link" @click="goToContexts()">
+          <a class="menu-link" @click="goToClients()">
             <i class="fas fa-users"></i>
             <p class="title is-4 has-text-white">Clientes</p>
           </a>
@@ -84,8 +84,8 @@ export default {
       window.location.href = '/checkouts';
     },
 
-    goToProfiles() {
-      window.location.href = '/profiles';
+    goToClients() {
+      window.location.href = '/clients';
     },
 
     goToTimes() {

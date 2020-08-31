@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :checkouts, only: [:new, :index]
   resources :companies, only: [:new, :show, :edit]
   resources :orders, only: [:index, :show]
+  resources :clients, only: [:new, :index, :show, :edit]
 
   get '/saloon', to: 'saloon#index'
   get '/tables/new', to: 'saloon#new'
@@ -20,9 +21,10 @@ Rails.application.routes.draw do
       end
 
       resources :companies
-      resources :tables, only: [:create, :update, :destroy, :show]
+      resources :users, only: :index
       resources :saloon, only: :index
       resources :orders, only: [:create, :show, :update]
+      resources :tables, only: [:create, :update, :destroy, :show]
       
     end
   end

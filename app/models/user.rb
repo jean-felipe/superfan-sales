@@ -40,6 +40,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_one :company
+  has_many :clients
+  has_many :companies, through: :clients
 
   enum user_type: USER_TYPES
 
