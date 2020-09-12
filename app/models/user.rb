@@ -34,6 +34,7 @@
 #
 class User < ApplicationRecord
   USER_TYPES = %w(customer business)
+  GENDER_TYPES = %w(masculino feminino outro)
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -44,5 +45,8 @@ class User < ApplicationRecord
   has_many :companies, through: :clients
 
   enum user_type: USER_TYPES
+  enum gender: GENDER_TYPES
+
+  validates :document, uniqueness: true
 
 end

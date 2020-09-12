@@ -21,7 +21,8 @@ Rails.application.routes.draw do
       end
 
       resources :companies
-      resources :users, only: :index
+      resources :users, only: [:index, :create]
+      resources :clients, only: [:index, :create]
       resources :saloon, only: :index
       resources :orders, only: [:create, :show, :update]
       resources :tables, only: [:create, :update, :destroy, :show]

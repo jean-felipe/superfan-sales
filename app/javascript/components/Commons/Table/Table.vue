@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th v-for="header in headers" v-bind:key="header">{{ header }}</th>
-          <th>Ações</th>
+          <th v-if="hasDeleteAction || hasEditAction">Ações</th>
         </tr>
       </thead>
       <tbody v-for="element in elements" v-bind:key="element.id">
@@ -12,11 +12,11 @@
           <td v-for="key in element" v-bind:key="key">
             {{ key }}
           </td>
-          <td>
-            <button class="button is-info" @click="editElement(element.id)">
+          <td v-if="hasDeleteAction || hasEditAction">
+            <button class="button is-info" @click="editElement(element.id)" v-if="hasEditAction">
               <i class="fas fa-edit"></i>
             </button>
-            <button class="button is-danger" @click="excludeElement(element.id)">
+            <button class="button is-danger" @click="excludeElement(element.id)" v-if="hasDeleteAction">
               <i class="fas fa-trash-alt"></i>
             </button>
           </td>
@@ -43,6 +43,14 @@ export default {
     },
     url: {
       type: String
+    },
+    hasEditAction: {
+      type: Boolean,
+      default: true
+    },
+    hasDeleteAction: {
+      type: Boolean,
+      default: true
     }
   },
 

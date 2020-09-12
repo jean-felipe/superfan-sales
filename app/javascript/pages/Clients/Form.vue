@@ -34,7 +34,7 @@
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
                         <input class="input is-marginless" type="text" placeholder="080.089.098-98" 
-                          v-model="client.document" required>
+                          v-model="documentSearch" required>
                       </div>
                     </div>
                   </div>
@@ -65,10 +65,8 @@
                       <label class="label">Gênero</label>
                         <div class="control is-expanded">
                           <div class="select is-fullwidth">
-                            <select name="product_type" v-model="client.genre">
-                              <option>Masculino</option>
-                              <option>Feminino</option>
-                              <option>Outro</option>
+                            <select name="product_type" v-model="client.gender">
+                              <option v-for="gender in genders" v-bind:key="gender">{{gender}}</option>
                             </select>
                           </div>
                         </div>
@@ -79,7 +77,7 @@
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
                         <input class="input is-marginless" type="email" placeholder="email@gmail.com" 
-                          v-model="client.email" required>
+                          v-model="emailSearch" required>
                       </div>
                     </div>
                   </div>
@@ -120,10 +118,15 @@ export default {
   data() {
     return {
       edition: false,
+      emailSearch: '',
+      documentSearch: '',
+      genders: [
+        'masculino', 'feminino', 'outro'
+      ],
       client: {
         name: '',
         document: '',
-        genre: '',
+        gender: '',
         birthdate: '',
         email: ''
       }
@@ -133,27 +136,47 @@ export default {
   watch: {
     emailSearch: function(val, oldVal) {
       if(val.length > 2) {
-        this.getClientsByEmail(val)
+        this.searchClients('email', val)
       }
     },
 
     documentSearch: function(val, oldVal) {
       if(val.length > 2) {
-        this.getClientsByEmail(val)
+        this.searchClients('document', val)
       }
     }
   },
 
   methods: {
-    sendData() {
-      if(edition) {
+    handleSubmit() {
+      this.client.email = this.emailSearch
+      this.client.document = this.documentSearch
+      this.client.gender = this.client.gender.toLowerCase()
+
+
+      if(this.edition) {
         
       } else {
-        axios.post('/api/v1/users', this.client)
+        axios.post('/api/v1/clients', {client: this.client})
           .then(response => {
-            console.log(response)
+            this.$swal("Parabéns!", "Cliente cadastrado com sucesso!", "success")
+            .then(() => {
+              window.location = '/clients'
+            })
           })
       }
+    },
+
+    searchClients(type, val) {
+      axios.get(`/api/v1/clients?filter[${type}]=` + val)
+        .then(response => {
+          console.log(response)
+          if (response.data.user) {
+            this.client = response.data.user
+            this.emailSearch = response.data.user.email
+            this.documentSearch = response.data.user.document
+          }
+        })
     }
   }
 }
