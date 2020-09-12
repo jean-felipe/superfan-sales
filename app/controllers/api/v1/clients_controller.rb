@@ -37,8 +37,9 @@ module Api::V1
 
     def load_user_by_email
       @user = User.find_by(email: params.dig('client', 'email'))
-      @user.nil?
-      @user = User.find_by(document: params.dig('client', 'document'))
+      if @user.nil?
+        @user = User.find_by(document: params.dig('client', 'document'))
+      end
     end
 
     def render_object(object, status)
