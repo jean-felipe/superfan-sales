@@ -20,7 +20,7 @@
             </div>
             
             <div>
-              <Table :headers="tableHeaders" :elements="clients" url="/clients"/>
+              <Table :headers="tableHeaders" :elements="clients" url="/clients" :hasDeleteAction="hasDeleteAction" :hasEditAction="hasEditAction"/>
             </div>
           </div>
         </div>
@@ -39,6 +39,8 @@ export default {
   data() {
     return {
       clients: [],
+      hasDeleteAction: false,
+      hasEditAction: false,
       tableHeaders: [
         "#", "Código", "Nome", "E-mail", "Documento", "Genero"
       ]
