@@ -12,7 +12,7 @@
                 </div>
 
                 <div>
-                  <button class="button is-success" @click="newProduct()">Novo Pedido</button>
+                  <button class="button is-success" @click="newOrder()">Novo Pedido</button>
                 </div>
               </div>
             </div>
@@ -76,8 +76,8 @@ export default {
   },
 
   methods: {
-    newProduct() {
-      window.location.href = '/products/new';
+    newOrder() {
+      window.location.href = '/orders/new';
     },
     editOrder(id) {
       window.location = '/orders/' + id

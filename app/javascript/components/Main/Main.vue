@@ -38,6 +38,7 @@ import TableForm from '../../pages/Saloon/Management/TableForm';
 
 import OrdersList from '../../pages/Orders/List';
 import ShowOrder from '../../pages/Orders/Show';
+import OrderForm from '../../pages/Orders/Form';
 
 import ClientsList from '../../pages/Clients/List';
 import ClientForm from '../../pages/Clients/Form';
@@ -52,8 +53,9 @@ const componentDicionary = {
   table_form: TableForm,
   orders_list: OrdersList,
   show_order: ShowOrder,
+  order_form: OrderForm,
   clients_list: ClientsList,
-  client_form: ClientForm
+  client_form: ClientForm,
 };
 
 export default {
@@ -61,7 +63,7 @@ export default {
 
   components: {
     Header, Sidebar, ProductsList, ProductForm, Checkout, Saloon, TableForm, OrdersList, ShowOrder, ClientsList,
-    ClientForm
+    ClientForm, OrderForm
   },
 
   data() {

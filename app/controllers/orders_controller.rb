@@ -11,6 +11,14 @@ class OrdersController < ApplicationController
     }
   end
 
+  def new
+    @props = {
+      component_name: 'order_form',
+      component_data: [],
+      user: user_info
+    }
+  end
+
   def show
     @props = {
       component_name: 'show_order',
