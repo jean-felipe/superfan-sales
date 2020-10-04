@@ -23,6 +23,7 @@
 #
 class Company < ApplicationRecord
   belongs_to :user
+  belongs_to :segment
 
   has_many :products
   has_many :tables

@@ -13,7 +13,7 @@
 #  document               :string           default(""), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  gender                 :integer          default(0)
+#  gender                 :integer          default("masculino")
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
 #  name                   :string           default(""), not null

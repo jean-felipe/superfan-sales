@@ -5,55 +5,28 @@
         <!-- <img src="../../../images/logo.png" alt="logo contexts"> -->
       </a>
       <hr class="logo-hr">
-        <p class="has-text-white logo-title">{{name}}</p>
+        <p class="has-text-white logo-title">{{company.legal_name}}</p>
       <hr class="logo-hr">
     </div>
     <div class="sidebarWrapper">
-      <ul class="menu">
-        <li class="menu-item">
-          <a class="menu-link" @click="goToProducts()">
-            <i class="fas fa-boxes"></i>
-            <p class="title is-4 has-text-white">Produtos</p>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link" @click="goToSaloon()">
-            <i class="fas fa-utensils"></i>
-            
-            <p class="title is-4 has-text-white">Mesas</p>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link" @click="goToOrders()">
-            <i class="fas fa-briefcase"></i>
-            <p class="title is-4 has-text-white">Pedidos</p>
-          </a>
-        </li>
-         <li class="menu-item">
-          <a class="menu-link" @click="goToClients()">
-            <i class="fas fa-users"></i>
-            <p class="title is-4 has-text-white">Clientes</p>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link" @click="goToCheckouts()">
-            <i class="fas fa-play-circle"></i>
-            <p class="title is-4 has-text-white">Frente de caixa</p>
-          </a>
-        </li>
-       
-      </ul>
+      <RestaurantLinks v-if="company.segment === 'Restaurantes'"/>
+      <MarketLinks v-if="company.segment === 'Mercados'"/>
     </div>
   </div>
 </template>
 
 <script>
+import RestaurantLinks from './RestaurantLinks';
+import MarketLinks from './MarketLinks';
+
 export default {
   name: 'Sidebar',
+  components: { RestaurantLinks, MarketLinks},
 
   data() {
     return {
-      name: ''
+      name: '',
+      company: {}
     }
   },
 
@@ -95,6 +68,7 @@ export default {
 
   created() {
     this.name = this.user.user.name;
+    this.company = this.user.company
   }
 }
 </script>

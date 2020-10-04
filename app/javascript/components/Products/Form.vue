@@ -105,7 +105,7 @@
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
                         <input class="input is-marginless" type="number" placeholder="1.99" 
-                          v-model="newProduct.discount_price" required>
+                          v-model="newProduct.discount_price">
                       </div>
                     </div>
                   </div>
