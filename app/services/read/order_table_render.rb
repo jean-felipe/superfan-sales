@@ -6,7 +6,7 @@ module Read
           id: order.id,
           order_number: order.code,
           status: order.status,
-          table_name: order.table.name,
+          table_name: order.table&.name,
           total_price: order.total_price,
           user: {
             name: order.user.name,

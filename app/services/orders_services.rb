@@ -5,7 +5,7 @@ class OrdersServices
         code: SecureRandom.hex(4),
         status: 'initialized',
         total_price: params[:items].map {|o| o[:price].nil? ? 0 : o[:price] }.inject(0, :+),
-        table_id: params[:table_id],
+        table_id: params[:table_id].nil? ? 1 : params[:table_id],
         company_id: company_id,
         user_id: UserServices.load_or_create(params[:identification]).id
       )
@@ -36,9 +36,10 @@ class OrdersServices
 
     def create_items!(items)
       items.each do |item|
-        item = @order.items.find_by(product_id: item[:id])
-
-        if item.nil?
+        existing_item = @order.items.find_by(product_id: item[:id])
+        
+        binding.pry
+        if existing_item.nil?
           OrderItem.create!(
             code: SecureRandom.hex(6),
             price: item[:price],

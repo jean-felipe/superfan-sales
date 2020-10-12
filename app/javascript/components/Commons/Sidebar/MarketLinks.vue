@@ -1,32 +1,38 @@
 <template>
- <ul class="menu">
-        <li class="menu-item">
-          <a class="menu-link" @click="goToProducts()">
-            <i class="fas fa-boxes"></i>
-            <p class="title is-4 has-text-white">Estoque</p>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link" @click="goToOrders()">
-            <i class="fas fa-clipboard-list"></i>
-            
-            <p class="title is-4 has-text-white">Pedidos</p>
-          </a>
-        </li>
-         <li class="menu-item">
-          <a class="menu-link" @click="goToClients()">
-            <i class="fas fa-users"></i>
-            <p class="title is-4 has-text-white">Clientes</p>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a class="menu-link" @click="goToCheckouts()">
-            <i class="fas fa-play-circle"></i>
-            <p class="title is-4 has-text-white">Frente de caixa</p>
-          </a>
-        </li>
-       
-      </ul>
+  <ul class="menu">
+    <li class="menu-item">
+      <a class="menu-link" @click="goToProducts()">
+        <i class="fas fa-boxes"></i>
+        <p class="title is-4 has-text-white">Produtos</p>
+      </a>
+    </li>
+    <li class="menu-item">
+      <a class="menu-link" @click="goToStock()">
+        <i class="fas fa-boxes"></i>
+        <p class="title is-4 has-text-white">Estoque</p>
+      </a>
+    </li>
+    <li class="menu-item">
+      <a class="menu-link" @click="goToOrders()">
+        <i class="fas fa-clipboard-list"></i>
+        
+        <p class="title is-4 has-text-white">Pedidos</p>
+      </a>
+    </li>
+      <li class="menu-item">
+      <a class="menu-link" @click="goToClients()">
+        <i class="fas fa-users"></i>
+        <p class="title is-4 has-text-white">Clientes</p>
+      </a>
+    </li>
+    <li class="menu-item">
+      <a class="menu-link" @click="goToCheckouts()">
+        <i class="fas fa-play-circle"></i>
+        <p class="title is-4 has-text-white">Frente de caixa</p>
+      </a>
+    </li>
+    
+  </ul>
 </template>
 
 <script>
@@ -41,7 +47,11 @@ export default {
 
   methods: {
     goToProducts() {
-      window.location.href = '/stock';
+      window.location.href = '/products';
+    },
+
+    goToStock() {
+      window.location.href = '/stocks';
     },
 
     goToHome() {
