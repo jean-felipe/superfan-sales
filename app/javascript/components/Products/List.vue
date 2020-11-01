@@ -38,7 +38,7 @@ export default {
 
   data() {
     return {
-      tableHeaders: ['#', 'Nome'],
+      tableHeaders: ['#', 'Nome', 'Descrição', 'Preço', 'Estoque'],
       products: []
     }
   },
@@ -57,6 +57,7 @@ export default {
   
   mounted() {
     console.log(this.data)
+    this.products = this.data[0]
   }
 }
 </script>

@@ -88,7 +88,7 @@ export default {
   },
 
   created() {
-    this.name = this.user.email;
+    this.name = this.user.user.email;
   },
 
   computed: {

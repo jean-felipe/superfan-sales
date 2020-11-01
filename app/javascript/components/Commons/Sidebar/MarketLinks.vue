@@ -7,12 +7,6 @@
       </a>
     </li>
     <li class="menu-item">
-      <a class="menu-link" @click="goToStock()">
-        <i class="fas fa-boxes"></i>
-        <p class="title is-4 has-text-white">Estoque</p>
-      </a>
-    </li>
-    <li class="menu-item">
       <a class="menu-link" @click="goToOrders()">
         <i class="fas fa-clipboard-list"></i>
         
@@ -70,10 +64,6 @@ export default {
       window.location.href = '/clients';
     },
   },
-
-  created() {
-    this.name = this.user.user.name;
-  }
 }
 </script>
 

@@ -90,25 +90,20 @@
                 </div>
 
                 <div class="field is-horizontal">
-                  <div class="field-body">
-                    <div class="field">
-                      <label class="label">Preço promocional</label>
-                        <div class="control is-expanded">
-                          <div class="is-fullwidth">
-                        <input type="checkbox" v-model="newProduct.has_discount">
-                      </div>
-                        </div>
-                    </div>
-
-                   <div class="field">
-                    <label class="label">Preço</label>
+                  <div class="field">
+                    <label class="label">Quantidade em estoque (unidades)</label>
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
-                        <input class="input is-marginless" type="number" placeholder="1.99" 
-                          v-model="newProduct.discount_price">
+                        <input class="input is-marginless" type="number" placeholder="20" 
+                          v-model="newProduct.quantity">
                       </div>
                     </div>
                   </div>
+                  <div class="field-body">
+                    <div class="field">
+                      
+                    </div>
+
                   </div>
                 </div>
                 
@@ -148,13 +143,14 @@ export default {
   data() {
     return {
       newProduct: {
+        id: '',
         name: '',
         description: '',
         category_id: '',
         ean: '',
         price: '',
         has_discount: false,
-        discount_price: '',
+        quantity: '',
       },
       categories: [],
       subcategories: [],
@@ -173,7 +169,16 @@ export default {
 
   methods: {
     handleSubmit() {
-      axios.post('/api/v1/products', this.newProduct)
+      if (this.edition) {
+        axios.patch('/api/v1/products/' + this.newProduct.id, this.newProduct)
+          .then((response) => {
+            this.$swal("Parabéns!", "Produto editado com sucesso!", "success")
+              .then(() => {
+                window.location = '/products'
+              })
+          })
+      } else {
+        axios.post('/api/v1/products', this.newProduct)
         .then((response) => {
           console.log(response)
           // // this.sendImages(response.data.id)
@@ -183,6 +188,8 @@ export default {
               window.location = '/products'
             })
         })
+      }
+     
     },
 
     sendImages(id) {
@@ -222,6 +229,11 @@ export default {
   },
 
   mounted() {
+    if (this.data[0].product) {
+      this.newProduct = this.data[0].product
+      this.edition = true
+    }
+
     this.categories = this.data[0].categories
     this.subcategories = this.data[0].sub_categories
   }

@@ -1,5 +1,7 @@
 module Api::V1
   class ProductsController < Api::BaseController
+    before_action :load_product, only: :update
+    
     def create
       @product = Product.new(product_params)
       @product.company = current_user.company
@@ -11,10 +13,12 @@ module Api::V1
       end
     end
 
-    def upload_images
-      
-      # binding.pry
-      
+    def update
+      if @product.update(product_params)
+        render json: @product, status: 200
+      else
+        render json: @product.errors.messages
+      end
     end
 
     def index
@@ -27,7 +31,7 @@ module Api::V1
 
     def product_params
       params.permit(
-        :description, :ean, :is_active, :name, :category_id, :price, :has_discount, :discount_price
+        :description, :ean, :is_active, :name, :category_id, :price, :has_discount, :discount_price, :quantity, :id
       )
     end
 
