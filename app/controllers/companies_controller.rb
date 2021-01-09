@@ -10,15 +10,15 @@ class CompaniesController < ApplicationController
   def show
     @props = {
       component_name: 'company_info',
-      component_data: [current_user.company],
+      component_data: [company_info],
       user: user_info
     }
   end
 
   def edit
     @props = {
-      component_name: 'company_edition',
-      component_data: [current_user.company],
+      component_name: 'company_form',
+      component_data: [{company: company_info, segments: Segment.select(:id, :name).as_json}],
       user: user_info
     }
   end

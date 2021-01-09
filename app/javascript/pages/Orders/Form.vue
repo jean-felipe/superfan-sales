@@ -80,7 +80,7 @@
                 </div>
                 
                 
-                <div v-if="selectedProducts.length > 0">
+              <div v-if="selectedProducts.length > 0">
                 <hr />
                   <table class="table is-bordered is-striped">
                     <tr>
@@ -101,17 +101,52 @@
                   <h3>Total: R${{ newOrder.items.reduce((total, obj) => (obj.price * obj.quantity) + total, 0) }}</h3>
                 </div>
                 <hr />
+
+                <div class="field" v-if="payment">
+                  <div v-for="(payment, index) in paymentMethodsSelected" :key="index + '-methods'">
+                    <div class="field is-horizontal">
+                      <div class="field-body">
+                      <div class="field">
+                      <label class="label">Tipo</label>
+                      <div class="control is-expanded">
+                        <div class="select is-fullwidth">
+                          <select name="product_type" v-model="payment.name">
+                            <option v-for="method in paymentMethods"                      
+                              v-bind:key="method + '-name'" 
+                              v-bind:value="method">
+                                {{ method }}
+                            </option>
+                          </select>
+                        
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <label class="label">Valor</label>
+                      <div class="control is-expanded">
+                        <input class="input is-marginless" type="number" 
+                          v-model="payment.value" min="0" required>
+                      </div>
+                    </div>
+
+                    <a @click="addPaymentMethods()" class="button is-sucess">+</a>
+                    </div>
+                  </div>
+                </div>
+                </div>
               
                 <div class="field is-grouped">
                   <div class="control" v-if="edition">
                     <button type="submit" class="button is-link">Editar Produto</button>
                   </div>
                   <div class="control" v-else>
-                    <button type="submit" class="button is-link" @click="handleSubmit">Criar Produto</button>
+                    <button type="submit" class="button is-link" @click="handleSubmit">Criar Pedido</button>
+                    <button class="button is-success" @click="payment = true">Pagar</button>
+                    <button class="button is-danger">Cancelar</button>
+                    
                   </div>
-                  <div class="control">
-                    <button class="button is-link is-light">Cancelar</button>
-                  </div>
+                 
                 </div>
             </div>
             
@@ -139,12 +174,16 @@ export default {
         identification: '',
         checkout_date: '',
         items: [],
-        totalPrice: ''
+        totalPrice: '',
+        payment_methods: ''
       },
       searchProduct: [],
       products: [],
+      paymentMethods: ['Débito', 'Crédito', 'Dinheiro'],
       productList: false,
-      edition: false
+      edition: false,
+      payment: false,
+      paymentMethodsSelected: [],
     }
   },
 
@@ -163,7 +202,11 @@ export default {
     },
     selectedProducts: function() {
 
-    }
+    },
+
+    paymentMethodsSelected() {
+      this.blockRemoval = this.paymentMethodsSelected.length <= 1
+    },
     
   },
 
@@ -197,6 +240,19 @@ export default {
         })
     },
 
+    addPaymentMethods() {
+      let checkEmptyLines = this.paymentMethodsSelected.filter(line => line.value === null)
+      
+      if (checkEmptyLines.length >= 1 && this.paymentMethodsSelected.length > 0) {
+        return
+      } 
+
+      this.paymentMethodsSelected.push({
+        name: null,
+        value: null,
+      })       
+    },
+
     addProduct(product) {
       this.newOrder.items.push({id: product.id, name: product.name, quantity: 1, price: product.price })
     },
@@ -207,6 +263,7 @@ export default {
   mounted() {
     // this.categories = this.data[0].categories
     // this.subcategories = this.data[0].sub_categories
+    this.addPaymentMethods()
   }
 }
 </script>

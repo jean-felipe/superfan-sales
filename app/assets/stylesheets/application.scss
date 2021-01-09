@@ -13,3 +13,35 @@
  *= require_tree .
  *= require_self
  */
+
+.signup-container .signup-form input[type="text"], .signup-container .signup-form input[type="password"],
+.signup-container .signup-form input[type="number"], .signup-container .signup-form input[type="email"] {
+    border-radius: 3px;
+    border: none;
+    color: #333333;
+    font-size: 16px;
+    height: 16px;
+    margin-bottom: 5px;
+    padding: 13px 12px;
+    width: 100%;
+}
+
+.signup-container .signup-form .form-control {
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.09);
+    box-shadow: 0 1px 0px 0px rgba(0, 0, 0, 0.09) inset;
+    color: #FFFFFF;
+  }
+
+  .signup-container .signup-form .btn-register {
+    background-color: #00BBFF;
+    border-color: #00BBFF;
+    border-width: 0;
+    color: #FFFFFF;
+    display: block;
+    margin: 0 auto;
+    padding: 15px 50px;
+    text-transform: uppercase;
+    width: 80%;
+    margin-top: 20px;
+}

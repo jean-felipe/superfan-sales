@@ -7,7 +7,8 @@
             <div class="media">
               <div class="header-content beerconsumptions">
                 <div class="media-left">
-                  <h4 class="card-title mt-0">Insira os dados do seu estabelecimento</h4>
+                  <h4 class="card-title mt-0" v-if="edition">Seu estabelecimento</h4>
+                  <h4 class="card-title mt-0" v-else>Insira os dados do seu estabelecimento</h4>
                 </div>
 
                 <div>
@@ -46,7 +47,7 @@
                       <label class="label">Segmento*</label>
                         <div class="control is-expanded">
                           <div class="select is-fullwidth">
-                            <select name="product_type" v-model="company.category_id">
+                            <select name="product_type" v-model="company.segment_id">
                               <option v-for="category in segments"                      
                                 v-bind:key="category.id" 
                                 v-bind:value="category.id">
@@ -153,10 +154,30 @@ export default {
 
   methods: {
     handleSubmit() {
-      axios.post('/api/v1/companies', this.company)
-        .then((response) => {
-          console.log(response)
-        })
+      if(this.edition) {
+        axios.patch('/api/v1/companies/' + this.company.id, this.company)
+          .then(() => {
+            this.$swal("Parabéns!", "Estabelecimento atualizado com sucesso", "success")
+              .then(() => {
+                window.location = '/companies/' + this.company.id
+              })
+          })
+          .catch(() => {
+            this.$swal("Ops!", "Houve um erro, confira os dados e tente novamente", "error")
+          })
+      } else {
+        axios.post('/api/v1/companies', this.company)
+          .then((response) => {
+            this.$swal("Parabéns!", "Loja Cadastrada com sucesso", "success")
+              .then(() => {
+                window.location = '/products'
+              })
+          .catch(() => {
+            this.$swal("Ops!", "Houve um erro, confira os dados e tente novamente", "error")
+          })
+       })
+      }
+
     }
   },
 
@@ -168,6 +189,10 @@ export default {
 
   mounted() {
     this.segments = this.data[0].segments
+    if(this.data[0].company) {
+      this.company = this.data[0].company
+      this.edition = true
+    }
   }
 
 }

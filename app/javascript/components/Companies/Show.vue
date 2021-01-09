@@ -20,24 +20,29 @@
                 <table class="table is-bordered is-striped">
                   <thead>
                     <tr>
-                      <th>#</th>
                       <th>Data de Criação</th>
                       <th>Nome Fantasia</th>
                       <th>Nome Comercial</th>
                       <th>Telefone</th>
                       <th>Segmento</th>
                       <th>Descrição</th>
+                      <th>Ações</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>{{ company.id }}</td>
                       <td>{{ company.created_at }}</td>
                       <td>{{ company.fantasy_name }}</td>
                       <td>{{ company.legal_name }}</td>
                       <td>{{ company.phone }}</td>
-                      <td>{{ company.segment_id }}</td>
+                      <td>{{ company.segment }}</td>
                       <td>{{ company.description }}</td>
+                      <td>
+                        <button class="button is-info" @click="editElement(company.id)">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                      </td>
+
                     </tr>
                   </tbody>
                 </table>
@@ -71,6 +76,12 @@ export default {
     data: {
       type: Array
     }
+  },
+
+  methods: {
+    editElement(id) {
+      window.location =  '/companies/' + id + '/edit'
+    },
   },
 
   mounted() {

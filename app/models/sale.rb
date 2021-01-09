@@ -5,7 +5,7 @@
 #  id               :bigint           not null, primary key
 #  logged_user      :integer          not null
 #  payment_method   :integer          not null
-#  transaction_date :datetime         default(Sun, 01 Nov 2020 13:37:28 UTC +00:00), not null
+#  transaction_date :datetime         default(Sat, 09 Jan 2021 18:55:46.141351000 UTC +00:00), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  company_id       :bigint           not null

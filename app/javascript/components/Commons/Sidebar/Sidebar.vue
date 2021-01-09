@@ -5,7 +5,7 @@
         <!-- <img src="../../../images/logo.png" alt="logo contexts"> -->
       </a>
       <hr class="logo-hr">
-        <p class="has-text-white logo-title">{{company.legal_name}}</p>
+        <p class="has-text-white logo-title">{{company.legal_name || ''}}</p>
       <hr class="logo-hr">
     </div>
     <div class="sidebarWrapper">
@@ -26,7 +26,9 @@ export default {
   data() {
     return {
       name: '',
-      company: {}
+      company: {
+        legal_name: ''
+      }
     }
   },
 
@@ -68,7 +70,12 @@ export default {
 
   created() {
     this.name = this.user.user.name;
-    this.company = this.user.company
+    if(this.user.company) {
+      this.company = this.user.company;
+    } else {
+      this.company.legal_name = 'Nossa';
+      this.company.segment = 'Mercados';
+    }
   }
 }
 </script>

@@ -79,12 +79,7 @@ export default {
     },
 
     goToAccount() {
-      console.log(this.currentUser.user.user_type)
-      if (this.currentUser.user.user_type === 'business') {
-        window.location.href = '/companies/' + this.currentUser.company.id;
-      } else {
-        window.location.href = '/users/' + this.currentUser.id;
-      }
+      window.location.href = '/companies/' + this.currentUser.company.id;
     },
 
     goToCreateCompany() {
