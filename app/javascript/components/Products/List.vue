@@ -12,13 +12,17 @@
                 </div>
 
                 <div>
+                  <button class="button is-success" @click="showModal = true">
+                    <span>Importação</span>
+                    <span class="icon"><i class="fas fa-download"></i></span>
+                  </button>
                   <button class="button is-success" @click="newProduct()">Novo Produto</button>
                 </div>
               </div>
             </div>
             <div class="card-body">
             </div>
-            
+
             <div>
               <Table :headers="tableHeaders" :elements="products" url="/products"/>
             </div>
@@ -26,20 +30,24 @@
         </div>
       </div>
     </div>
+
+    <ImportationModal v-if="showModal" @close="showModal = false"/>
   </div>
 </template>
 
 <script>
-import Table from '../Commons/Table/Table'
+import Table from '../Commons/Table/Table';
+import ImportationModal from './ImportationModal';
 
 export default {
   name: 'ProductsList',
-  components: { Table },
+  components: { Table, ImportationModal },
 
   data() {
     return {
       tableHeaders: ['#', 'Nome', 'Descrição', 'Preço', 'Estoque'],
-      products: []
+      products: [],
+      showModal: false,
     }
   },
 
@@ -54,7 +62,7 @@ export default {
       window.location.href = '/products/new';
     }
   },
-  
+
   mounted() {
     console.log(this.data)
     this.products = this.data[0]

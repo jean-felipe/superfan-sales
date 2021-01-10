@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_01_184654) do
+ActiveRecord::Schema.define(version: 2021_01_09_233826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,8 @@ ActiveRecord::Schema.define(version: 2020_11_01_184654) do
     t.boolean "has_discount", default: false
     t.float "discount_price"
     t.integer "quantity", default: 0
+    t.float "measure"
+    t.integer "measure_unit", default: 0
     t.index ["company_id"], name: "index_products_on_company_id"
   end
 

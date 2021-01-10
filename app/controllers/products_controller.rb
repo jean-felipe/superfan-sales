@@ -3,10 +3,10 @@ class ProductsController < ApplicationController
 
   def index
     @products = current_user.company.products.map do |product|
-      { 
-        id: product.id, 
-        name: product.name, 
-        description: product.description, 
+      {
+        id: product.id,
+        name: product.name,
+        description: product.description,
         price: product.price,
         quantity: product.quantity
       }
@@ -20,12 +20,12 @@ class ProductsController < ApplicationController
   end
 
   def new
-    
     values = {
       categories: Category.select(:id, :name).as_json,
-      sub_categories: SubCategory.select(:id, :name).as_json
+      sub_categories: SubCategory.select(:id, :name).as_json,
+      unities: Product::UNITIES.map {|un| {unit: un, name: Product.human_enum_name(:measure_unities, un)}}
     }
-    
+
     @props = {
       component_name: 'product_form',
       component_data: [values],
@@ -37,10 +37,11 @@ class ProductsController < ApplicationController
     values = {
       categories: Category.select(:id, :name).as_json,
       sub_categories: SubCategory.select(:id, :name).as_json,
+      unities: Product::UNITIES.map {|un| {unit: un, name: Product.human_enum_name(:measure_unities, un)}},
       product: @product,
       edition: true
     }
-    
+
     @props = {
       component_name: 'product_form',
       component_data: [values],

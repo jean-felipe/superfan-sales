@@ -8,6 +8,8 @@
 #  ean            :string           not null
 #  has_discount   :boolean          default(FALSE)
 #  is_active      :boolean          default(TRUE)
+#  measure        :float
+#  measure_unit   :integer          default(0)
 #  name           :string           not null
 #  price          :float
 #  quantity       :integer          default(0)

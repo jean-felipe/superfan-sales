@@ -8,6 +8,8 @@
 #  ean            :string           not null
 #  has_discount   :boolean          default(FALSE)
 #  is_active      :boolean          default(TRUE)
+#  measure        :float
+#  measure_unit   :integer          default(0)
 #  name           :string           not null
 #  price          :float
 #  quantity       :integer          default(0)
@@ -25,7 +27,11 @@
 #  fk_rails_...  (company_id => companies.id)
 #
 class Product < ApplicationRecord
+  UNITIES = %w(grams kg liters unit)
+
   belongs_to :company
   has_and_belongs_to_many :sub_categories
   has_and_belongs_to_many :categories
+
+  enum measure_unit: UNITIES
 end

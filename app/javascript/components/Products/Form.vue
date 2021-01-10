@@ -11,7 +11,7 @@
                 </div>
 
                 <div>
-                  
+
                 </div>
               </div>
             </div>
@@ -24,18 +24,26 @@
                      <div class="field">
                     <label class="label">Nome*</label>
                     <div class="control is-expanded">
-                      <input class="input is-marginless" type="text" placeholder="Nome do negócio" 
+                      <input class="input is-marginless" type="text" placeholder="Nome do negócio"
                         v-model="newProduct.name" required>
                     </div>
                   </div>
 
                    <div class="field">
-                    <label class="label">Descrição</label>
-                    <div class="control is-expanded">
-                      <div class="is-fullwidth">
-                        <input class="input is-marginless" type="text" placeholder="Nome do negócio" 
-                          v-model="newProduct.description" required>
-                      </div>
+                      <div class="field">
+                      <label class="label">Categoria*</label>
+                        <div class="control is-expanded">
+                          <div class="select is-fullwidth">
+                            <select name="product_type" v-model="newProduct.category_id">
+                              <option v-for="category in categories"
+                                v-bind:key="category.id"
+                                v-bind:value="category.id">
+                                  {{ category .name }}
+                              </option>
+
+                            </select>
+                          </div>
+                        </div>
                     </div>
                   </div>
                   </div>
@@ -44,23 +52,29 @@
                <div class="field is-horizontal">
                   <div class="field-body">
                     <div class="field">
-                      <label class="label">Categoria*</label>
-                        <div class="control is-expanded">
+                      <label class="label">Unidade de medida</label>
+                      <div class="control is-expanded">
                           <div class="select is-fullwidth">
-                            <select name="product_type" v-model="newProduct.category_id">
-                              <option v-for="category in categories"                      
-                                v-bind:key="category.id" 
-                                v-bind:value="category.id">
-                                  {{ category .name }}
+                            <select name="product_type" v-model="newProduct.measure_unit">
+                              <option v-for="unit in unities"
+                                v-bind:key="unit"
+                                v-bind:value="unit.unit">
+                                  {{ unit.name }}
                               </option>
-                              
+
                             </select>
                           </div>
                         </div>
                     </div>
 
                    <div class="field">
-                    
+                    <label class="label">Quantidade por unidade</label>
+                    <div class="control is-expanded">
+                      <div class="is-fullwidth">
+                        <input class="input is-marginless" type="number" placeholder="1.3"
+                          v-model="newProduct.measure">
+                      </div>
+                    </div>
                   </div>
                   </div>
                 </div>
@@ -71,17 +85,17 @@
                       <label class="label">EAN/SKU/Código de barras</label>
                         <div class="control is-expanded">
                           <div class="is-fullwidth">
-                        <input class="input is-marginless" type="number" placeholder="2223333" 
+                        <input class="input is-marginless" type="number" placeholder="2223333"
                           v-model="newProduct.ean" required>
                       </div>
                         </div>
                     </div>
 
                    <div class="field">
-                    <label class="label">Preço</label>
+                    <label class="label">Preço Unitário</label>
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
-                        <input class="input is-marginless" type="number" placeholder="3.99" 
+                        <input class="input is-marginless" type="number" placeholder="3.99"
                           v-model="newProduct.price" required>
                       </div>
                     </div>
@@ -94,22 +108,28 @@
                     <label class="label">Quantidade em estoque (unidades)</label>
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
-                        <input class="input is-marginless" type="number" placeholder="20" 
+                        <input class="input is-marginless" type="number" placeholder="20"
                           v-model="newProduct.quantity">
                       </div>
                     </div>
                   </div>
                   <div class="field-body">
                     <div class="field">
-                      
+
                     </div>
 
                   </div>
                 </div>
-                
+                  <label class="label">Descrição</label>
+                    <div class="control is-expanded">
+                      <div class="is-fullwidth">
+                        <input class="input is-marginless" type="text" placeholder="Nome do negócio"
+                          v-model="newProduct.description" required>
+                      </div>
+                    </div>
 
                 <hr />
-              
+
                 <div class="field is-grouped">
                   <div class="control" v-if="edition">
                     <button type="submit" class="button is-link">Editar Produto</button>
@@ -123,9 +143,9 @@
                 </div>
               </form>
             </div>
-            
+
             <div>
-              
+
             </div>
           </div>
         </div>
@@ -151,10 +171,13 @@ export default {
         price: '',
         has_discount: false,
         quantity: '',
+        measure_unit: '',
+        measure: '',
       },
       categories: [],
       subcategories: [],
       edition: false,
+      unities: [],
       images: [],
       imagesPreview: ['']
     }
@@ -189,7 +212,7 @@ export default {
             })
         })
       }
-     
+
     },
 
     sendImages(id) {
@@ -197,7 +220,7 @@ export default {
       this.images.forEach(file => {
         formData.append('file', this.file);
       })
-      
+
       axios.post( '/api/v1/products/' + id + '/upload_images',
       formData,
       {
@@ -219,11 +242,11 @@ export default {
        for (var i = 0; i < files.length; i++) {
          // obtém o item
           file = files.item(i);
-         
+
           this.images.push(file)
           this.imagesPreview.push(URL.createObjectURL(file))
 
-       
+
        }
     }
   },
@@ -236,6 +259,7 @@ export default {
 
     this.categories = this.data[0].categories
     this.subcategories = this.data[0].sub_categories
+    this.unities = this.data[0].unities
   }
 }
 </script>
