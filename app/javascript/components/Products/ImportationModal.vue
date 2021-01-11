@@ -10,6 +10,13 @@
           <section class="modal-card-body">
             <input class="input is-hovered" type="file" ref="file"
               placeholder="Hovered input" @change="handleFileUpload()">
+
+              <div class="errors-section" v-if="hasError">
+                <div v-for="error in errors" v-bind:key="error">
+                  <span>Produto: {{error.line.name}} - {{error.line.ean}}</span>
+                  <span>Erro: {{error.error}}</span>
+                </div>
+              </div>
           </section>
           <footer class="modal-card-foot">
             <button class="button is-success" @click="submitFile()">Importar</button>
@@ -29,7 +36,9 @@ export default {
 
   data() {
     return {
-      file: ''
+      file: '',
+      hasError: false,
+      errorsArray: []
     }
   },
 
@@ -37,18 +46,25 @@ export default {
     handleFileUpload() {
      this.file = this.$refs.file.files[0];
     },
+
     submitFile() {
       let formData = new FormData();
       formData.append('file', this.file);
       let headers =  { headers: { 'Content-Type': 'multipart/form-data'} }
 
-      axios.post('/import-products', formData, headers)
-        .then(function() {
-         console.log('SUCCESS!!');
+      axios.post('/api/v1/import-products', formData, headers)
+        .then(function(response) {
+          console.log(response)
+          if(response.data.errors.length > 0) {
+            this.errorsArray = response.data
+            this.hasError = true
+          } else {
+            this.$swal("Parabéns!", "Produtos importados com sucesso!", "success")
+              .then(() => {
+                window.location = '/products'
+              })
+          }
         })
-        .catch(function(){
-          console.log('FAILURE!!');
-        });
     }
   }
 }

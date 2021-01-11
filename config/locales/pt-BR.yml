@@ -20,6 +20,7 @@ pt-BR:
       kg: Kilo
       liters: Litros
       unit: Unidade
+      ml: Mls
   plan:
     plan_types:
       custom: Customizado

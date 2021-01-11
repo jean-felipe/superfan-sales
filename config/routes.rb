@@ -27,6 +27,8 @@ Rails.application.routes.draw do
       resources :orders, only: [:create, :show, :update]
       resources :tables, only: [:create, :update, :destroy, :show]
       
+      post '/import-products', to: 'importations#products'
+
     end
   end
 

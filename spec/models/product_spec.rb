@@ -9,13 +9,12 @@
 #  has_discount   :boolean          default(FALSE)
 #  is_active      :boolean          default(TRUE)
 #  measure        :float
-#  measure_unit   :integer          default(0)
+#  measure_unit   :integer          default("grams")
 #  name           :string           not null
 #  price          :float
 #  quantity       :integer          default(0)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  category_id    :integer          not null
 #  company_id     :bigint           not null
 #
 # Indexes
