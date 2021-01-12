@@ -8,6 +8,9 @@ pt-BR:
       manager: Gerente
       admin: Administrador
       api: API
+    statuses:
+      incomplete: Incompleto
+      complete: Completo
   company:
     sdescription: Descrição
     document: CNPJ

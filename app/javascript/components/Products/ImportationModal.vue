@@ -54,16 +54,16 @@ export default {
 
       axios.post('/api/v1/import-products', formData, headers)
         .then(function(response) {
-          console.log(response)
-          if(response.data.errors.length > 0) {
-            this.errorsArray = response.data
-            this.hasError = true
-          } else {
-            this.$swal("Parabéns!", "Produtos importados com sucesso!", "success")
-              .then(() => {
-                window.location = '/products'
-              })
-          }
+          this.$swal("Parabéns!", "Produtos importados com sucesso!", "success")
+            .then(() => {
+              window.location = '/products'
+            })
+        })
+        .catch(() => {
+          this.$swal("Que pena!", "Houve um problema na importação", "error")
+            .then(() => {
+              window.location = '/products'
+            })
         })
     }
   }

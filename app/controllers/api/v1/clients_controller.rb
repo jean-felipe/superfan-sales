@@ -2,7 +2,7 @@ module Api::V1
   class ClientsController < Api::BaseController
     before_action :load_user_by_email, only: :create
 
-    def create      
+    def create
       if @user.present?
         if @user.update(clients_params)
           create_client(@user)
@@ -11,7 +11,7 @@ module Api::V1
           render_object(@user.errors.messages, 422)
         end
       else
-        @client = User.new(clients_params)
+        @client = Customers::Create.instantiate_foo_customer(User.new(clients_params))
 
         if @client.save
           create_client(@client)

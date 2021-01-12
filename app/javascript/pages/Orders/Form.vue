@@ -8,11 +8,16 @@
               <div class="header-content beerconsumptions">
                 <div class="media-left">
                   <h4 class="card-title mt-0">Nova compra</h4>
+                  <p>
+                    <input type="radio" value="nome" v-model="userType"> Nome
+                    <input type="radio" value="cpf" v-model="userType"> CPF
+                    <input type="radio" value="code" v-model="userType"> Código
+                  </p>
                   <span></span>
                 </div>
 
                 <div>
-                  
+
                 </div>
               </div>
             </div>
@@ -21,19 +26,19 @@
 
                 <div class="field is-horizontal">
                   <div class="field-body">
-                     <div class="field">
-                    <label class="label">Cliente(CPF)</label>
-                    <div class="control is-expanded">
-                      <input class="input is-marginless" type="text" placeholder="Nome do negócio" 
-                        v-model="newOrder.identification" required>
-                    </div>
+                    <div class="field">
+                      <label class="label">Cliente ({{userType}})</label>
+                      <div class="control is-expanded">
+                        <input class="input is-marginless" type="text" placeholder="Documento do cliente"
+                          v-model="newOrder.identification" v-mask="'###.###.###-##'" required>
+                      </div>
                   </div>
 
                   <div class="field">
                     <label class="label">Data</label>
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
-                        <input class="input is-marginless" type="date" placeholder="Nome do negócio" 
+                        <input class="input is-marginless" type="date" placeholder="Nome do negócio"
                           v-model="newOrder.checkout_date" required>
                       </div>
                     </div>
@@ -47,14 +52,14 @@
                       <label class="label">Produto</label>
                         <div class="control is-expanded">
                           <div class="is-fullwidth">
-                        <input class="input is-marginless" type="text" placeholder="2223333" 
+                        <input class="input is-marginless" type="text" placeholder="2223333"
                           v-model="searchProduct" required>
                            </div>
                         </div>
                     </div>
 
                    <div class="field">
-                    
+
                   </div>
                   </div>
                 </div>
@@ -78,8 +83,8 @@
                     </tbody>
                   </table>
                 </div>
-                
-                
+
+
               <div v-if="selectedProducts.length > 0">
                 <hr />
                   <table class="table is-bordered is-striped">
@@ -111,13 +116,13 @@
                       <div class="control is-expanded">
                         <div class="select is-fullwidth">
                           <select name="product_type" v-model="payment.name">
-                            <option v-for="method in paymentMethods"                      
-                              v-bind:key="method + '-name'" 
+                            <option v-for="method in paymentMethods"
+                              v-bind:key="method + '-name'"
                               v-bind:value="method">
                                 {{ method }}
                             </option>
                           </select>
-                        
+
                         </div>
                       </div>
                     </div>
@@ -125,7 +130,7 @@
                     <div class="field">
                       <label class="label">Valor</label>
                       <div class="control is-expanded">
-                        <input class="input is-marginless" type="number" 
+                        <input class="input is-marginless" type="number"
                           v-model="payment.value" min="0" required>
                       </div>
                     </div>
@@ -135,7 +140,7 @@
                   </div>
                 </div>
                 </div>
-              
+
                 <div class="field is-grouped">
                   <div class="control" v-if="edition">
                     <button type="submit" class="button is-link">Editar Produto</button>
@@ -144,14 +149,14 @@
                     <button type="submit" class="button is-link" @click="handleSubmit">Criar Pedido</button>
                     <button class="button is-success" @click="payment = true">Pagar</button>
                     <button class="button is-danger">Cancelar</button>
-                    
+
                   </div>
-                 
+
                 </div>
             </div>
-            
+
             <div>
-              
+
             </div>
           </div>
         </div>
@@ -184,6 +189,7 @@ export default {
       edition: false,
       payment: false,
       paymentMethodsSelected: [],
+      userType: '',
     }
   },
 
@@ -207,7 +213,7 @@ export default {
     paymentMethodsSelected() {
       this.blockRemoval = this.paymentMethodsSelected.length <= 1
     },
-    
+
   },
 
   computed: {
@@ -242,22 +248,22 @@ export default {
 
     addPaymentMethods() {
       let checkEmptyLines = this.paymentMethodsSelected.filter(line => line.value === null)
-      
+
       if (checkEmptyLines.length >= 1 && this.paymentMethodsSelected.length > 0) {
         return
-      } 
+      }
 
       this.paymentMethodsSelected.push({
         name: null,
         value: null,
-      })       
+      })
     },
 
     addProduct(product) {
       this.newOrder.items.push({id: product.id, name: product.name, quantity: 1, price: product.price })
     },
 
-   
+
   },
 
   mounted() {

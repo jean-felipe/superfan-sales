@@ -6,7 +6,7 @@ module Api::V1
       if errors.empty?
         render json: "sucess"
       else
-        render json: { errors: errors }
+        render json: { errors: errors }, status: 422
       end
     end
   end

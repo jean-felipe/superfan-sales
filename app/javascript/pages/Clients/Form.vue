@@ -11,7 +11,7 @@
                 </div>
 
                 <div>
-                  
+
                 </div>
               </div>
             </div>
@@ -24,7 +24,7 @@
                      <div class="field">
                     <label class="label">Nome*</label>
                     <div class="control is-expanded">
-                      <input class="input is-marginless" type="text" placeholder="Marcelo Diniz" 
+                      <input class="input is-marginless" type="text" placeholder="Marcelo Diniz"
                         v-model="client.name" required>
                     </div>
                   </div>
@@ -33,8 +33,8 @@
                     <label class="label">CPF</label>
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
-                        <input class="input is-marginless" type="text" placeholder="080.089.098-98" 
-                          v-model="documentSearch" required>
+                        <input class="input is-marginless" type="text" placeholder="080.089.098-98"
+                          v-model="documentSearch" v-mask="'###.###.###-##'" required>
                       </div>
                     </div>
                   </div>
@@ -47,14 +47,14 @@
                       <label class="label">Data de Nascimento</label>
                         <div class="control is-expanded">
                           <div class="is-fullwidth">
-                            <input class="input is-marginless" type="date" placeholder="Nome do negócio" 
+                            <input class="input is-marginless" type="date" placeholder="Nome do negócio"
                           v-model="client.birthdate" required>
                       </div>
                         </div>
                     </div>
 
                    <div class="field">
-                    
+
                   </div>
                   </div>
                 </div>
@@ -76,7 +76,7 @@
                     <label class="label">Email</label>
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
-                        <input class="input is-marginless" type="email" placeholder="email@gmail.com" 
+                        <input class="input is-marginless" type="email" placeholder="email@gmail.com"
                           v-model="emailSearch" required>
                       </div>
                     </div>
@@ -85,7 +85,7 @@
                 </div>
 
                 <hr />
-              
+
                 <div class="field is-grouped">
                   <div class="control" v-if="edition">
                     <button type="submit" class="button is-link">Editar cliente</button>
@@ -94,14 +94,14 @@
                     <button type="submit" class="button is-link">Criar cliente</button>
                   </div>
                   <div class="control">
-                    <button class="button is-link is-light">Cancelar</button>
+                    <button class="button is-link is-light" @click="cancelButton">Cancelar</button>
                   </div>
                 </div>
               </form>
             </div>
-            
+
             <div>
-              
+
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@ export default {
 
 
       if(this.edition) {
-        
+
       } else {
         axios.post('/api/v1/clients', {client: this.client})
           .then(response => {
@@ -164,19 +164,25 @@ export default {
               window.location = '/clients'
             })
           })
+          .catch((response) => {
+            console.log(response)
+          })
       }
     },
 
     searchClients(type, val) {
       axios.get(`/api/v1/clients?filter[${type}]=` + val)
         .then(response => {
-          console.log(response)
           if (response.data.user) {
             this.client = response.data.user
             this.emailSearch = response.data.user.email
             this.documentSearch = response.data.user.document
           }
         })
+    },
+
+    cancelButton() {
+      window.location = '/clients'
     }
   }
 }
