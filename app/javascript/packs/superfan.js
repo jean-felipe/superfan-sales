@@ -3,6 +3,8 @@ import humps from 'humps';
 import VueSwal from 'vue-swal'
 import VueTheMask from 'vue-the-mask'
 
+import VueMoment from 'vue-moment'
+
 import Main from '../components/Main/Main.vue';
 // import ActionCableVue from 'actioncable-vue';
 // import "../assets/scss/index.scss";
@@ -18,6 +20,7 @@ const parseData = (prop) => {
 
 Vue.use(VueSwal)
 Vue.use(VueTheMask)
+Vue.use(VueMoment)
 // Vue.use(ActionCableVue, {
 //   debug: true,
 //   debugLevel: 'error',

@@ -38,8 +38,7 @@
                     <label class="label">Data</label>
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
-                        <input class="input is-marginless" type="date" placeholder="Nome do negócio"
-                          v-model="newOrder.checkout_date" required>
+                        <input type="date"  class="input is-marginless" v-model="date" />
                       </div>
                     </div>
                   </div>
@@ -168,10 +167,11 @@
 <script>
 import axios from 'axios'
 import moment from 'moment'
-
+import Datepicker from 'vuejs-datepicker';
 
 export default {
   name: 'OrderForm',
+  components: { Datepicker },
 
   data() {
     return {
@@ -189,7 +189,8 @@ export default {
       edition: false,
       payment: false,
       paymentMethodsSelected: [],
-      userType: '',
+      userType: 'CPF',
+      date: moment().format("DD/MM/YYYY")
     }
   },
 
@@ -263,6 +264,9 @@ export default {
       this.newOrder.items.push({id: product.id, name: product.name, quantity: 1, price: product.price })
     },
 
+    customFormatter(date) {
+      return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+    }
 
   },
 
