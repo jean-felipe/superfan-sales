@@ -34,5 +34,5 @@ class Product < ApplicationRecord
 
   enum measure_unit: UNITIES
 
-  validates :ean, uniqueness: true
+  validates :ean, uniqueness: { scope: :name }
 end

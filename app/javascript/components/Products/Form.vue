@@ -85,7 +85,7 @@
                       <label class="label">EAN/SKU/Código de barras</label>
                         <div class="control is-expanded">
                           <div class="is-fullwidth">
-                        <input class="input is-marginless" type="number" placeholder="2223333"
+                        <input class="input is-marginless" type="text" placeholder="2223333"
                           v-model="newProduct.ean" required>
                       </div>
                         </div>
@@ -254,6 +254,7 @@ export default {
   mounted() {
     if (this.data[0].product) {
       this.newProduct = this.data[0].product
+      this.newProduct.category_id = this.data[0].product_category
       this.edition = true
     }
 

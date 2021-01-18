@@ -2,19 +2,11 @@ class ProductsController < ApplicationController
   before_action :load_product, only: [:edit]
 
   def index
-    @products = current_user.company.products.map do |product|
-      {
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        quantity: product.quantity
-      }
-    end
-
+    @products = current_user.company.products
+    
     @props = {
       component_name: 'products_list',
-      component_data: [@products],
+      component_data: [list_response],
       user: user_info
     }
   end
@@ -39,6 +31,7 @@ class ProductsController < ApplicationController
       sub_categories: SubCategory.select(:id, :name).as_json,
       unities: Product::UNITIES.map {|un| {unit: un, name: Product.human_enum_name(:measure_unities, un)}},
       product: @product,
+      product_category: @product.categories.first.id,
       edition: true
     }
 
@@ -53,5 +46,23 @@ class ProductsController < ApplicationController
 
   def load_product
     @product = Product.find(params[:id])
+  end
+
+  def list_response
+    
+    
+    {
+      pages: @products.count / 10,
+      current_page: params[:page].to_i || 1,
+      products: @products.limit(10).page(params[:page]).map do |product|
+        {
+          id: product.id,
+          name: product.name,
+          description: product.description,
+          price: 'R$ ' + product.price.to_s,
+          quantity: product.quantity
+        }
+      end
+    }
   end
 end

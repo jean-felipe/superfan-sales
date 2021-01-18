@@ -22,7 +22,9 @@ module Api::V1
     end
 
     def index
-      @products = current_user.company.products.where("name like ?", "%#{params[:filter]}%").select(:id, :name, :price).as_json
+      @products = current_user.company.products
+        .where("name like ?", "%#{params[:filter]}%")
+        .select(params[:fields].split(',')).as_json
 
       render json: @products, status: 200
     end

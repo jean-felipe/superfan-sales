@@ -1,6 +1,6 @@
 module Api::V1
   class CompaniesController < Api::BaseController
-    before_action :load_company
+    before_action :load_company, only: :update
 
     def create
       @company = Company.new(company_params)
