@@ -49,11 +49,10 @@
                   <tbody v-for="item in order.items" v-bind:key="item.id">
                     <tr>
                       <td>{{ item.product }}</td>
-                      <td>R$ {{ item.price }}</td>
-                      <td>{{ item.quantity }}</td>
+                      <td>R$ <input type="number" class="form-control order-show" v-model="item.price" /></td>
+                      <td><input type="number" class="form-control order-show" v-model="item.quantity" /></td>
                       <td>
                         <button class="button is-danger">Remover</button>
-                        <button class="button is-success">Alterar Preço</button>
                       </td>
                     </tr>
                   </tbody>
@@ -62,7 +61,7 @@
 
               <section class="total-price">
                 <br>
-                <h3>Total: R$ {{order.total_price}},00</h3>
+                <h3>Total: R$ {{ calc_total_price }}</h3>
               </section>
 
               <section class="payment">
@@ -92,6 +91,7 @@ export default {
       customerHeaders: ['Nome', 'CPF', 'Código'],
       itemsHeaders: ['Nome', 'Preço', 'Quantidade'],
       searchProducts: false,
+      total_price: 0,
       order: {
         number: '',
         user: {},
@@ -106,8 +106,18 @@ export default {
     }
   },
 
+  computed: {
+    calc_total_price() {
+      let prices = []
+      this.order.items.map((item) => {
+        prices.push(item.quantity * item.price)
+      })
+
+      return prices.reduce((accum,item) => accum + item)
+    }
+  },
+
   mounted() {
-    console.log(this.data)
     this.order = this.data[0]
   }
 }
@@ -118,5 +128,9 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
+}
+
+.order-show {
+  width: 100px;
 }
 </style>

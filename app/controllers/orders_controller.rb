@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :load_order, only: :show
 
   def index
-    @orders = current_company.orders.actives.map { |o| Read::OrderTableRender.render(o) }
+    @orders = current_company.orders.payed.order(created_at: :desc).map { |o| Read::OrderTableRender.render(o) }
 
     @props = {
       component_name: 'orders_list',

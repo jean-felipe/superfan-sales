@@ -12,7 +12,7 @@ pt-BR:
       incomplete: Incompleto
       complete: Completo
   company:
-    sdescription: Descrição
+    description: Descrição
     document: CNPJ
     fantasy_name: Nome Fantasia
     legal_name: Nome Legal
@@ -24,6 +24,18 @@ pt-BR:
       liters: Litros
       unit: Unidade
       ml: Mls
+  order:
+    statuses:
+      payed: Pago
+      initialized: Iniciada
+      open: Aberta
+      cancelled: Cancelada
+  order_payment:
+    payment_types:
+      debit: Débito
+      credit: Crédito
+      money: Dinheiro
+      pix: Pix
   plan:
     plan_types:
       custom: Customizado

@@ -54,7 +54,7 @@ export default {
 
   methods: {
     getProducts(word) {
-      axios.get('/api/v1/products?filter=' + word )
+      axios.get('/api/v1/products?filter=' + word + '&fields=id,name,price,quantity' )
         .then(response => {
           this.products = response.data
           this.productList = true

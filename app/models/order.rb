@@ -24,13 +24,14 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Order < ApplicationRecord
-  STATUSES = %w(initialized open cancelled finished)
+  STATUSES = %w(initialized open cancelled payed)
   
   belongs_to :user
   belongs_to :company
   belongs_to :table, optional: true
 
   has_many :items, class_name: "OrderItem"
+  has_many :payments, class_name: "OrderPayment"
 
   enum status: STATUSES
 

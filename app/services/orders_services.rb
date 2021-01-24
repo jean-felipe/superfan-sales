@@ -1,9 +1,9 @@
 class OrdersServices
   class << self
-    def create(params, company_id)
+    def create(params, company_id, type)
       @order = Order.new(
         code: SecureRandom.hex(4),
-        status: 'initialized',
+        status: load_initial_state(type),
         total_price: params[:items].map {|o| o[:price].nil? ? 0 : o[:price] }.inject(0, :+),
         table_id: params[:table_id].nil? ? 1 : params[:table_id],
         company_id: company_id,
@@ -13,6 +13,7 @@ class OrdersServices
       if @order.save
         create_client(@order.user_id, company_id)
         create_items!(params[:items])
+        create_payments(params[:payment_methods])
         @order
       else
         @order.errors.messages
@@ -37,8 +38,7 @@ class OrdersServices
     def create_items!(items)
       items.each do |item|
         existing_item = @order.items.find_by(product_id: item[:id])
-        
-        binding.pry
+
         if existing_item.nil?
           OrderItem.create!(
             code: SecureRandom.hex(6),
@@ -48,14 +48,39 @@ class OrdersServices
             product_id: item[:id]
           )
         else
-          item.quantity += item[:quantity]
-          item.save!
+          existing_item.quantity += item[:quantity]
+          existing_item.save!
         end
-      end      
+      end
     end
 
     def create_client(user_id, company_id)
       Client.create(user_id: user_id, company_id: company_id)
+    end
+
+    def create_payments(payments)
+      payments.each do |payment|
+        OrderPayment.create!(
+          payment_type: load_payment_type(payment[:name]),
+          value: payment[:value],
+          order: @order
+        )
+      end
+    end
+
+    def load_initial_state(type)
+      case type
+      when 'Mercados' then 'payed'
+      when 'Restaurantes' then 'initialized'
+      end
+    end
+
+    def load_payment_type(type)
+      case type
+      when 'Crédito' then 'credit'
+      when 'Débito' then 'debit'
+      when 'Dinheiro' then 'money'
+      end
     end
   end
 end

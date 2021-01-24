@@ -91,6 +91,7 @@
                       <th>Nome</th>
                       <th>Quantidade</th>
                       <th>Preço</th>
+                      <th>Ações</th>
                     </tr>
                     <tbody v-for="product in selectedProducts" v-bind:key="product.id">
                       <tr>
@@ -98,7 +99,10 @@
                         <td>
                           <input type="number" v-model="product.quantity" class="input is-marginless quantity-input" />
                         </td>
-                        <td>{{ product.price }}</td>
+                        <td>R$ {{ product.price }}</td>
+                        <td>
+                          <button class="button is-danger" @click="removeProduct(product)">Remover</button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -107,6 +111,7 @@
                 <hr />
 
                 <div class="field" v-if="payment">
+                  <h3>Pagamento</h3>
                   <div v-for="(payment, index) in paymentMethodsSelected" :key="index + '-methods'">
                     <div class="field is-horizontal">
                       <div class="field-body">
@@ -134,7 +139,11 @@
                       </div>
                     </div>
 
-                    <a @click="addPaymentMethods()" class="button is-sucess">+</a>
+                    <a @click="addPaymentMethods()" class="button is-sucess has-margin">
+                      <span class="icon is-large">
+                        <i class="fas fa-plus"></i>
+                      </span>
+                    </a>
                     </div>
                   </div>
                 </div>
@@ -145,8 +154,8 @@
                     <button type="submit" class="button is-link">Editar Produto</button>
                   </div>
                   <div class="control" v-else>
-                    <button type="submit" class="button is-link" @click="handleSubmit">Criar Pedido</button>
-                    <button class="button is-success" @click="payment = true">Pagar</button>
+                    <!-- <button type="submit" class="button is-link" @click="handleSubmit">Criar Pedido</button> -->
+                    <button class="button is-success" @click="handleSubmit">Pagar</button>
                     <button class="button is-danger">Cancelar</button>
 
                   </div>
@@ -179,15 +188,15 @@ export default {
         identification: '',
         checkout_date: '',
         items: [],
-        totalPrice: '',
-        payment_methods: ''
+        totalPrice: 0,
+        payment_methods: []
       },
       searchProduct: [],
       products: [],
       paymentMethods: ['Débito', 'Crédito', 'Dinheiro'],
       productList: false,
       edition: false,
-      payment: false,
+      payment: true,
       paymentMethodsSelected: [],
       userType: 'CPF',
       date: moment().format("DD/MM/YYYY")
@@ -227,20 +236,30 @@ export default {
   methods: {
     handleSubmit() {
       this.newOrder.totalPrice = this.newOrder.items.reduce((total, obj) => (obj.price * obj.quantity) + total, 0)
-      axios.post('/api/v1/orders', {order: this.newOrder})
-        .then((response) => {
-          console.log(response)
-          // // this.sendImages(response.data.id)
+      this.newOrder.payment_methods = this.paymentMethodsSelected
 
-          this.$swal("Parabéns!", "Produto criado com sucesso!", "success")
-            .then(() => {
-              window.location = '/orders'
-            })
-        })
+      let total_payed = this.newOrder.payment_methods.reduce((total, obj) => parseInt(obj.value) + total, 0)
+
+      if(this.paymentMethodsSelected[0].name == null) {
+        this.$swal("Ainda não!", "Selecione pelo menos um pagamento!", "error")
+      } else if(total_payed < this.newOrder.totalPrice) {
+        this.$swal("Ainda não!", "O total pago precisa ser igual ou maior ao preço devido!", "error")
+      } else {
+        axios.post('/api/v1/orders', {order: this.newOrder})
+          .then((response) => {
+            console.log(response)
+            // // this.sendImages(response.data.id)
+
+            this.$swal("Parabéns!", "Pedido criado com sucesso!", "success")
+              .then(() => {
+                window.location = '/orders'
+              })
+          })
+      }
     },
 
     getProducts(word) {
-      axios.get('/api/v1/products?filter=' + word )
+      axios.get('/api/v1/products?filter=' + word + '&fields=id,name,quantity,price' )
         .then(response => {
           this.products = response.data
           this.productList = true
@@ -266,6 +285,11 @@ export default {
 
     customFormatter(date) {
       return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+    },
+
+    removeProduct(product) {
+      let index = this.newOrder.items.indexOf(product)
+      this.newOrder.items.splice(index, 1)
     }
 
   },
@@ -287,5 +311,9 @@ export default {
 
 .preview {
   display: flex;
+}
+
+.has-margin {
+  margin-top: auto;
 }
 </style>

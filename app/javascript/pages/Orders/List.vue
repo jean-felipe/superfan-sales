@@ -32,10 +32,11 @@
                     <td>
                       {{ order.order_number }}
                     </td>
-                    <td>{{ order.table_name }}</td>
                     <td>{{ order.status }}</td>
                     <td>R$ {{ order.total_price }}</td>
                     <td>{{ order.user.name || order.user.document || order.user.code }}</td>
+                    <td>{{ order.payments.map((pay) => pay.name).join(',')}}</td>
+                    <td>{{ order.created_at }}</td>
                     <td>  
                       <button class="button is-info" @click="editOrder(order.id)">
                         <i class="fas fa-edit"></i>
@@ -64,7 +65,7 @@ export default {
 
   data() {
     return {
-      headers: ['#', 'Mesa', 'Status', 'Preço Total', 'Cliente'],
+      headers: ['#', 'Status', 'Preço Total', 'Cliente', 'Meio de pagamento', 'Data'],
       orders: []
     }
   },
