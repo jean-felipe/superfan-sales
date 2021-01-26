@@ -19,12 +19,12 @@
         <p class="title is-4 has-text-white">Clientes</p>
       </a>
     </li>
-    <li class="menu-item">
+    <!-- <li class="menu-item">
       <a class="menu-link" @click="goToCheckouts()">
         <i class="fas fa-play-circle"></i>
         <p class="title is-4 has-text-white">Frente de caixa</p>
       </a>
-    </li>
+    </li> -->
     
   </ul>
 </template>
