@@ -40,7 +40,7 @@ export default {
     return {
       clients: [],
       hasDeleteAction: false,
-      hasEditAction: false,
+      hasEditAction: true,
       tableHeaders: [
         "#", "Código", "Nome", "E-mail", "Documento", "Genero"
       ]

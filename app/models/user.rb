@@ -49,6 +49,6 @@ class User < ApplicationRecord
   enum user_type: USER_TYPES
   enum gender: GENDER_TYPES
 
-  validates :document, uniqueness: true
+  validates :document, :code, :email, uniqueness: true
 
 end

@@ -33,7 +33,10 @@
                     <label class="label">CPF</label>
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
-                        <input class="input is-marginless" type="text" placeholder="080.089.098-98"
+                        <input class="input is-marginless" v-if="edition" type="text" placeholder="080.089.098-98"
+                          v-model="client.document" v-mask="'###.###.###-##'" required>
+                        
+                        <input class="input is-marginless" v-else type="text" placeholder="080.089.098-98"
                           v-model="documentSearch" v-mask="'###.###.###-##'" required>
                       </div>
                     </div>
@@ -76,7 +79,9 @@
                     <label class="label">Email</label>
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
-                        <input class="input is-marginless" type="email" placeholder="email@gmail.com"
+                        <input class="input is-marginless" v-if="edition" type="email" placeholder="email@gmail.com"
+                          v-model="client.email" required>
+                        <input class="input is-marginless" v-else type="email" placeholder="email@gmail.com"
                           v-model="emailSearch" required>
                       </div>
                     </div>
@@ -88,7 +93,7 @@
 
                 <div class="field is-grouped">
                   <div class="control" v-if="edition">
-                    <button type="submit" class="button is-link">Editar cliente</button>
+                    <button type="submit" class="button is-link" @click="handleSubmit">Editar cliente</button>
                   </div>
                   <div class="control" v-else>
                     <button type="submit" class="button is-link">Criar cliente</button>
@@ -124,12 +129,19 @@ export default {
         'masculino', 'feminino', 'outro'
       ],
       client: {
+        id: '',
         name: '',
         document: '',
         gender: '',
         birthdate: '',
         email: ''
       }
+    }
+  },
+
+  props: {
+    data: {
+      type: Array
     }
   },
 
@@ -149,14 +161,22 @@ export default {
 
   methods: {
     handleSubmit() {
-      this.client.email = this.emailSearch
-      this.client.document = this.documentSearch
-      this.client.gender = this.client.gender.toLowerCase()
-
-
       if(this.edition) {
-
+        axios.patch('/api/v1/clients/' + this.client.id, {client: this.client})
+          .then(response => {
+            this.$swal("Parabéns!", "Cliente atualizado com sucesso!", "success")
+            .then(() => {
+              window.location = '/clients'
+            })
+          })
+          .catch((response) => {
+            console.log(response)
+          })
       } else {
+        this.client.email = this.emailSearch
+        this.client.document = this.documentSearch
+        this.client.gender = this.client.gender.toLowerCase()
+        
         axios.post('/api/v1/clients', {client: this.client})
           .then(response => {
             this.$swal("Parabéns!", "Cliente cadastrado com sucesso!", "success")
@@ -183,6 +203,14 @@ export default {
 
     cancelButton() {
       window.location = '/clients'
+    }
+  },
+
+  mounted() {
+    console.log(this.data[0])
+    if(this.data[0].edit) {
+      this.edition = true
+      this.client = this.data[0].client
     }
   }
 }

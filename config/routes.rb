@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
       resources :companies
       resources :users, only: [:index, :create]
-      resources :clients, only: [:index, :create]
+      resources :clients, only: [:index, :create, :update]
       resources :saloon, only: :index
       resources :orders, only: [:create, :show, :update]
       resources :tables, only: [:create, :update, :destroy, :show]

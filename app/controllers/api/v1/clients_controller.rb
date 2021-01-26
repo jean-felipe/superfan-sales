@@ -1,17 +1,17 @@
 module Api::V1
   class ClientsController < Api::BaseController
-    before_action :load_user_by_email, only: :create
+    before_action :load_user_by_email, only: [:create, :update]
 
     def create
       if @user.present?
-        if @user.update(clients_params)
+        if @user.update(client_params)
           create_client(@user)
           render_object(@user, 200)
         else
           render_object(@user.errors.messages, 422)
         end
       else
-        @client = Customers::Create.instantiate_foo_customer(User.new(clients_params))
+        @client = Customers::Create.instantiate_foo_customer(User.new(client_params))
 
         if @client.save
           create_client(@client)
@@ -22,6 +22,14 @@ module Api::V1
       end
     end
 
+    def update
+      if @user.update(client_params)
+        render json: @user
+      else
+        render json: @user.errors.messages, status: 422
+      end
+    end
+
     def index
       @clients = ClientsServices.search(params[:filter])
       render_object(@clients, 200)
@@ -29,7 +37,7 @@ module Api::V1
 
     private
 
-    def clients_params
+    def client_params
       params.require(:client).permit(
         :name, :email, :document, :gender, :birthdate
       )
