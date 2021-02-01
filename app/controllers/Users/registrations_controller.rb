@@ -10,9 +10,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    build_resource(sign_up_params)
+    resource.document = SecureRandom.hex(4)
+    resource.code = SecureRandom.hex(4)
+    resource.save
+    redirect_to root_path
+  end
 
   # GET /resource/edit
   # def edit
