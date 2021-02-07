@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   get '/saloon', to: 'saloon#index'
   get '/tables/new', to: 'saloon#new'
+  get '/daily-report', to: 'companies#daily_report'
 
   namespace :api do
     namespace :v1 do
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
       resources :tables, only: [:create, :update, :destroy, :show]
       
       post '/import-products', to: 'importations#products'
+      get '/daily-report', to: 'reports#daily_report'
 
     end
   end

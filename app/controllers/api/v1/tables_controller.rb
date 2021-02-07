@@ -1,6 +1,6 @@
 module Api::V1
   class TablesController < Api::BaseController
-    before_action :load_table
+    before_action :load_table, only: :show
 
     def create
       @table = Table.new(table_params)

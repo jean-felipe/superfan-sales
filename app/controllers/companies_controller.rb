@@ -22,4 +22,12 @@ class CompaniesController < ApplicationController
       user: user_info
     }
   end
+
+  def daily_report
+    @props = {
+      component_name: 'daily_report',
+      component_data: [],
+      user: user_info
+    }
+  end
 end

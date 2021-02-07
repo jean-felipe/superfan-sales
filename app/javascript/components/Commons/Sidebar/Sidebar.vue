@@ -11,6 +11,7 @@
     <div class="sidebarWrapper">
       <RestaurantLinks v-if="company.segment === 'Restaurantes'"/>
       <MarketLinks v-if="company.segment === 'Mercados'"/>
+      <CommonLinks />
     </div>
   </div>
 </template>
@@ -18,10 +19,11 @@
 <script>
 import RestaurantLinks from './RestaurantLinks';
 import MarketLinks from './MarketLinks';
+import CommonLinks from './CommonLinks';
 
 export default {
   name: 'Sidebar',
-  components: { RestaurantLinks, MarketLinks},
+  components: { RestaurantLinks, MarketLinks, CommonLinks },
 
   data() {
     return {
@@ -65,6 +67,10 @@ export default {
 
     goToTimes() {
       window.location.href = '/times';
+    },
+    
+    goToClientsRnaking() {
+      window.location.href = '/ranking'
     }
   },
 

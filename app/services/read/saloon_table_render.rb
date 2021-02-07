@@ -8,9 +8,9 @@ module Read
           places: table.places,
           status: table.active? ? 'Ocupada' : 'Livre',
           created_at: table.created_at.strftime('%d/%m/%y'),
-          orders: table.orders.map do |order|
-            OrderTableRender.render(order)
-          end
+          # orders: table.orders.map do |order|
+          #   OrderTableRender.render(order)
+          # end
         }
       end
 
