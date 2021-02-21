@@ -60,7 +60,7 @@ class OrdersServices
       Client.create(user_id: user_id, company_id: company_id)
     end
 
-    def create_payments(payments)
+    def create_payments(payments, company_id)
       payments.each do |payment|
         OrderPayment.create!(
           payment_type: load_payment_type(payment[:name]),
