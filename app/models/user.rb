@@ -41,10 +41,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
   has_one :company
   has_many :clients
   has_many :companies, through: :clients
+  has_many :sales, class_name: 'Order'
+  has_many :items, through: :sales
 
   enum user_type: USER_TYPES
   enum gender: GENDER_TYPES

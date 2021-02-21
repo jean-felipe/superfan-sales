@@ -13,7 +13,8 @@ class OrdersServices
       if @order.save
         create_client(@order.user_id, company_id)
         create_items!(params[:items])
-        create_payments(params[:payment_methods])
+        create_payments(params[:payment_methods], company_id)
+        @order.update(total_price: @order.items.sum(:total_price))
         @order
       else
         @order.errors.messages
@@ -25,7 +26,7 @@ class OrdersServices
 
       if params[:items].present?
         create_items!(params[:items])
-        @order.update(total_price: @order.items.sum(:price))
+        @order.update(total_price: @order.items.sum(:total_price))
       end
 
       if params[:identification].present? && params[:identification] != @order.user.document
@@ -45,7 +46,8 @@ class OrdersServices
             price: item[:price],
             quantity: item[:quantity],
             order_id: @order.id,
-            product_id: item[:id]
+            product_id: item[:id],
+            total_price: item[:price].to_i * item[:quantity].to_i
           )
         else
           existing_item.quantity += item[:quantity]
@@ -63,6 +65,7 @@ class OrdersServices
         OrderPayment.create!(
           payment_type: load_payment_type(payment[:name]),
           value: payment[:value],
+          company_id: company_id,
           order: @order
         )
       end

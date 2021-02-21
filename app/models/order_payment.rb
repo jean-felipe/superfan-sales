@@ -4,10 +4,11 @@
 #
 #  id             :bigint           not null, primary key
 #  payer_document :string
-#  payment_type   :integer          default(0)
+#  payment_type   :integer          default("debit")
 #  value          :decimal(, )
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  company_id     :bigint
 #  order_id       :bigint           not null
 #
 # Indexes
@@ -21,6 +22,8 @@
 class OrderPayment < ApplicationRecord
   TYPES = %w(debit credit money pix)
   belongs_to :order
+
+  has_one :company, through: :order
 
   enum payment_type: TYPES
 end

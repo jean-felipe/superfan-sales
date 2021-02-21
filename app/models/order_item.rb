@@ -2,14 +2,15 @@
 #
 # Table name: order_items
 #
-#  id         :bigint           not null, primary key
-#  code       :string
-#  price      :float
-#  quantity   :float
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  order_id   :bigint           not null
-#  product_id :bigint           not null
+#  id          :bigint           not null, primary key
+#  code        :string
+#  price       :float
+#  quantity    :float
+#  total_price :float
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  order_id    :bigint           not null
+#  product_id  :bigint           not null
 #
 # Indexes
 #

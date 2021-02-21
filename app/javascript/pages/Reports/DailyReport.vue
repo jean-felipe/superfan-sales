@@ -21,6 +21,52 @@
                   <th>Faturamento total:</th>
                   <td>R$ {{report.total_billing}}</td>
                 </tr>
+                 <tr>
+                  <th>Vendas totais</th>
+                  <td>{{report.total_sales}}</td>
+                </tr>
+                <tr>
+                  <th>Faturamento por Meios de pagamento</th>
+                  <td>
+                    <table class="table is-bordered">
+                      <thead>
+                        <th>Nome</th>
+                        <th>Total</th>
+                      </thead>
+                      <tbody v-for="(payment, index) in report.total_billing_by_payment_types" v-bind:key="index + payment.name">
+                        <tr>
+                          <td>
+                            {{payment.name}}
+                          </td>
+                          <td>
+                            R$ {{payment.value}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Total de vendas por Meios de pagamento</th>
+                  <td>
+                    <table class="table is-bordered">
+                      <thead>
+                        <th>Nome</th>
+                        <th>Total</th>
+                      </thead>
+                      <tbody v-for="(payment, index) in report.total_by_payment_types" v-bind:key="index + payment.name">
+                        <tr>
+                          <td>
+                            {{payment.name}}
+                          </td>
+                          <td>
+                            {{payment.value}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
                 <tr>
                   <th>Faturamento por produtos</th>
                   <td>
@@ -66,10 +112,6 @@
                       </tbody>
                     </table>
                   </td>
-                </tr>
-                <tr>
-                  <th>Vendas totais</th>
-                  <td>{{report.total_sales}}</td>
                 </tr>
                 <tr>
                   <th>Total de produtos vendidos</th>
