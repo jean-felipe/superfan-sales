@@ -27,7 +27,7 @@ module Reports
 				sales.each do |sale|
 					sale.products.uniq.map do |product|
 						products << {
-							product: product.name,
+							name: product.name,
 							billing: sale.items.where(product_id: product.id).count
 						}
 					end
@@ -43,7 +43,7 @@ module Reports
 				sales.each do |sale|
 					sale.products.uniq.map do |product|
 						products << {
-							product: product.name,
+							name: product.name,
 							billing: sale.items.where(product_id: product.id).sum(:price).round(2)
 						}
 					end
