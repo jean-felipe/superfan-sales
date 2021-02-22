@@ -73,7 +73,7 @@
 
                     <tbody v-for="product in products" v-bind:key="product.id">
                       <tr>
-                        <td>{{ product.name }}</td>
+                        <td>{{ product.name }} - {{ product.description }}</td>
                         <td>{{ product.price }}</td>
                         <td>
                           <button class="button is-success has-magin-bottom" @click="addProduct(product)">Adicionar</button>
@@ -95,7 +95,7 @@
                     </tr>
                     <tbody v-for="product in selectedProducts" v-bind:key="product.id">
                       <tr>
-                        <td>{{ product.name }}</td>
+                        <td>{{ product.name }} - {{ product.description }}</td>
                         <td>
                           <input type="number" v-model="product.quantity" class="input is-marginless quantity-input" />
                         </td>
@@ -259,7 +259,7 @@ export default {
     },
 
     getProducts(word) {
-      axios.get('/api/v1/products?filter=' + word + '&fields=id,name,quantity,price' )
+      axios.get('/api/v1/products?filter=' + word + '&fields=id,name,quantity,price,description' )
         .then(response => {
           this.products = response.data
           this.productList = true
@@ -280,7 +280,11 @@ export default {
     },
 
     addProduct(product) {
-      this.newOrder.items.push({id: product.id, name: product.name, quantity: 1, price: product.price })
+      this.newOrder.items.push({
+        id: product.id, name: product.name, quantity: product.quantity,
+        price: product.price,
+        description: product.description
+      })
     },
 
     customFormatter(date) {

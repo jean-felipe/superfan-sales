@@ -29,8 +29,9 @@ module Reports
 				product_ids = OrderItem.where('created_at BETWEEN ? AND ?', start_date, end_date).pluck(:product_id).uniq
 
 				product_ids.map do |id|
+					product = company.products.find(id)
 					products << {
-						name: company.products.find(id).name,
+						name: product.name + ' - ' + product.description,
 						billing: Order.includes(:items)
 							.where('orders.created_at BETWEEN ? AND ?', start_date, end_date)
 							.where(items: { product_id: id })
@@ -46,8 +47,9 @@ module Reports
 				product_ids = OrderItem.where('created_at BETWEEN ? AND ?', start_date, end_date).pluck(:product_id).uniq
 
 				product_ids.map do |id|
+					product = company.products.find(id)
 					products << {
-						name: company.products.find(id).name,
+						name: product.name + ' - ' + product.description,
 						billing: Order.includes(:items)
 							.where('orders.created_at BETWEEN ? AND ?', start_date, end_date)
 							.where(items: { product_id: id })
