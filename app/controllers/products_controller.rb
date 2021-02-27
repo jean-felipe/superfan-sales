@@ -2,8 +2,8 @@ class ProductsController < ApplicationController
   before_action :load_product, only: [:edit]
 
   def index
-    @products = current_user.company.products
-    
+    @products = current_user.company.products.order(:id)
+
     @props = {
       component_name: 'products_list',
       component_data: [list_response],
@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
       sub_categories: SubCategory.select(:id, :name).as_json,
       unities: Product::UNITIES.map {|un| {unit: un, name: Product.human_enum_name(:measure_unities, un)}},
       product: @product,
-      product_category: @product.categories.first.id,
+      product_category: @product.categories&.first&.id,
       edition: true
     }
 
@@ -49,8 +49,6 @@ class ProductsController < ApplicationController
   end
 
   def list_response
-    
-    
     {
       pages: @products.count / 10,
       current_page: params[:page].to_i || 1,

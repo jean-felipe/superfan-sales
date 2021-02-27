@@ -96,7 +96,7 @@
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
                         <input class="input is-marginless" type="number" placeholder="3.99"
-                          v-model="newProduct.price" required>
+                          v-model="newProduct.price" min="0" value="0" step=".01" required>
                       </div>
                     </div>
                   </div>
@@ -109,7 +109,7 @@
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
                         <input class="input is-marginless" type="number" placeholder="20"
-                          v-model="newProduct.quantity">
+                          v-model="newProduct.quantity" min="0" value="0" step=".01">
                       </div>
                     </div>
                   </div>
