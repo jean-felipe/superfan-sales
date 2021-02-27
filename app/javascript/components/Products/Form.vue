@@ -72,7 +72,7 @@
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
                         <input class="input is-marginless" type="number" placeholder="1.3"
-                          v-model="newProduct.measure">
+                          v-model="newProduct.measure" min="0" value="0" step=".01">
                       </div>
                     </div>
                   </div>
