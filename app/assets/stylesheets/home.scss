@@ -92,6 +92,12 @@ input[type=submit]:hover {
   align-content: center;
 }
 
+.login-container {
+  width: 500px;
+  margin: auto;
+  margin-top: 30px
+}
+
 .signup-container {
   position: relative;
   background-color: #ffffff;
@@ -105,6 +111,7 @@ input[type=submit]:hover {
   width: 70%;
   margin: auto;
   padding: 40px;
+  margin-top: 40px;
 }
 
 .signup-container .signup-form input[type="text"], .signup-container .signup-form input[type="password"],

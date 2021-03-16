@@ -11,7 +11,7 @@
                 </div>
 
                 <div>
-                  <!-- <button class="button is-success" @click="newOrder()">Novo Pedido</button> -->
+                  Filtar por data: <Datepicker v-model="date" />
                 </div>
               </div>
             </div>
@@ -149,14 +149,17 @@
 
 <script>
 import axios from 'axios';
+import Datepicker from 'vuejs-datepicker';
 
 export default {
   name: 'DailyReport',
+  components: { Datepicker },
 
   data() {
     return {
       headers: ['#', 'Status', 'Preço Total', 'Cliente', 'Meio de pagamento', 'Data'],
-      report: {}
+      report: {},
+      date: ''
     }
   },
 
