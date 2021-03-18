@@ -20,6 +20,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  role                   :integer          default("client")
 #  sign_in_count          :integer          default(0), not null
 #  status                 :integer          default(0)
 #  unconfirmed_email      :string
@@ -37,6 +38,7 @@ class User < ApplicationRecord
   USER_TYPES = %w(customer business)
   GENDER_TYPES = %w(masculino feminino outro)
   STATES = %w(incomplete complete)
+  ROLES = %w(client manager admin)
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -50,6 +52,7 @@ class User < ApplicationRecord
 
   enum user_type: USER_TYPES
   enum gender: GENDER_TYPES
+  enum role: ROLES
 
   validates :document, :code, :email, uniqueness: true
 

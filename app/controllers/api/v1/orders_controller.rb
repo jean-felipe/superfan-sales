@@ -18,7 +18,7 @@ module Api::V1
 
     def order_params
       params.require(:order).permit(
-        :id, :identification, :description, :table_id, :items => [:id, :name, :quantity, :price],
+        :id, :identification, :description, :delivery_type, :table_id, :items => [:id, :name, :quantity, :price],
         :payment_methods => [:name, :value]
       )
     end

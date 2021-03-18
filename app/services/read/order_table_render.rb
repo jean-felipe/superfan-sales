@@ -8,6 +8,7 @@ module Read
           status: Order.human_enum_name(:status, order.status),
           table_name: order.table&.name,
           total_price: order.total_price,
+          delivery_type: Order.human_enum_name(:delivery_type, order.delivery_type),
           created_at: order.created_at.strftime("%d/%m/%Y %H:%M"),
           user: {
             name: order.user.name,

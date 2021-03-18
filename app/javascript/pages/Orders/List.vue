@@ -18,7 +18,7 @@
             </div>
             <div class="card-body">
             </div>
-            
+
             <div>
                <table class="table is-bordered is-striped">
                 <thead>
@@ -36,8 +36,9 @@
                     <td>R$ {{ order.total_price }}</td>
                     <td>{{ order.user.name || order.user.document || order.user.code }}</td>
                     <td>{{ order.payments.map((pay) => pay.name).join(',')}}</td>
+                    <td>{{ order.delivery_type }}</td>
                     <td>{{ order.created_at }}</td>
-                    <td>  
+                    <td>
                       <button class="button is-info" @click="editOrder(order.id)">
                         <i class="fas fa-edit"></i>
                       </button>
@@ -65,7 +66,7 @@ export default {
 
   data() {
     return {
-      headers: ['#', 'Status', 'Preço Total', 'Cliente', 'Meio de pagamento', 'Data'],
+      headers: ['#', 'Status', 'Preço Total', 'Cliente', 'Meio de pagamento', 'Tipo de entrega', 'Data'],
       orders: []
     }
   },
@@ -87,7 +88,7 @@ export default {
 
     },
   },
-  
+
   mounted() {
     this.orders = this.data[0]
   }

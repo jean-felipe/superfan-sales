@@ -7,6 +7,7 @@ class OrdersServices
         total_price: params[:items].map {|o| o[:price].nil? ? 0 : o[:price] }.inject(0, :+),
         table_id: params[:table_id].nil? ? 1 : params[:table_id],
         company_id: company_id,
+        delivery_type: load_delivery_type(params[:delivery_type]),
         user_id: UserServices.load_or_create(params[:identification]).id
       )
 
@@ -83,6 +84,14 @@ class OrdersServices
       when 'Crédito' then 'credit'
       when 'Débito' then 'debit'
       when 'Dinheiro' then 'money'
+      end
+    end
+
+    def load_delivery_type(type)
+      case type
+      when 'Entrega' then 'delivery'
+      when 'Retirada' then 'grab'
+      when 'Consumo no local' then 'local'
       end
     end
   end

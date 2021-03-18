@@ -4,6 +4,7 @@
 #
 #  id             :bigint           not null, primary key
 #  code           :string
+#  delivery_type  :integer          default(0)
 #  payment_method :string
 #  status         :integer
 #  total_price    :float
@@ -25,6 +26,7 @@
 #
 class Order < ApplicationRecord
   STATUSES = %w(initialized open cancelled payed)
+  DTYPES = %w(not_registred grab delivery local)
 
   belongs_to :user
   belongs_to :company
@@ -35,6 +37,7 @@ class Order < ApplicationRecord
   has_many :products, through: :items
 
   enum status: STATUSES
+  enum delivery_type: DTYPES
 
   scope :actives, -> { where(status: %w(initialized open))}
 end

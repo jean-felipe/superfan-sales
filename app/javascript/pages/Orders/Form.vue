@@ -58,8 +58,20 @@
                     </div>
 
                    <div class="field">
+                      <label class="label">Entrega</label>
+                      <div class="control is-expanded">
+                        <div class="select is-fullwidth">
+                          <select name="delivery_type" v-model="newOrder.delivery_type">
+                            <option v-for="type in deliveryTypes"
+                              v-bind:key="type + '-name'"
+                              v-bind:value="type">
+                                {{ type }}
+                            </option>
+                          </select>
 
-                  </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -189,11 +201,13 @@ export default {
         checkout_date: '',
         items: [],
         totalPrice: 0,
-        payment_methods: []
+        payment_methods: [],
+        delivery_type: 'Retirada'
       },
       searchProduct: [],
       products: [],
       paymentMethods: ['Débito', 'Crédito', 'Dinheiro'],
+      deliveryTypes: ['Entrega', 'Retirada', 'Consumo no local'],
       productList: false,
       edition: false,
       payment: true,
