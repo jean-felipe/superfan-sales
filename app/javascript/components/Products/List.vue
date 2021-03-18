@@ -22,7 +22,7 @@
 
                   <div class="field">
                     <p class="control has-icons-left has-icons-right">
-                      <input type="search" class="input is-marginless" v-model="searchTerm"/>
+                      <input type="search" class="input is-marginless" placeholder="Pesquisa" v-model="searchTerm"/>
                       <span class="icon is-small is-left">
                         <i class="fas fa-search"></i>
                       </span>

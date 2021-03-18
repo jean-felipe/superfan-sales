@@ -10,9 +10,9 @@
                   <h4 class="card-title mt-0">Resumo diário</h4>
                 </div>
 
-                <div>
+                <!-- <div>
                   Filtar por data: <Datepicker v-model="date" />
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="card-body">

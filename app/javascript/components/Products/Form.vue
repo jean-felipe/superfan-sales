@@ -24,7 +24,7 @@
                      <div class="field">
                     <label class="label">Nome*</label>
                     <div class="control is-expanded">
-                      <input class="input is-marginless" type="text" placeholder="Nome do negócio"
+                      <input class="input is-marginless" type="text" placeholder="Nome do produto"
                         v-model="newProduct.name" required>
                     </div>
                   </div>
