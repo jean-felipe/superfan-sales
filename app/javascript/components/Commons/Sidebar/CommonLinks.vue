@@ -5,7 +5,13 @@
         <i class="fas fa-calendar-check"></i>
         <p class="title is-4 has-text-white">Resumo do dia</p>
       </a>
-    </li>    
+    </li>
+    <li class="menu-item" v-id="user.role == 'admin'">
+      <a class="menu-link" @click="goToAdminClients()">
+        <i class="fas fa-user-cog"></i>
+        <p class="title is-4 has-text-white">Administrativo</p>
+      </a>
+    </li>
   </ul>
 </template>
 
@@ -19,35 +25,25 @@ export default {
     }
   },
 
+  props: {
+    user: {
+      type: Object,
+    }
+  },
+
   methods: {
     goToDailyReport() {
       window.location.href = '/daily-report';
     },
 
-    goToStock() {
-      window.location.href = '/stocks';
-    },
-
-    goToHome() {
-      window.location.href = '/';
-    },
-
-    goToOrders() {
-      window.location.href = '/orders';
-    },
-
-    goToCheckouts() {
-      window.location.href = '/checkouts';
-    },
-
-    goToClients() {
-      window.location.href = '/clients';
+    goToAdminClients() {
+      window.location.href = '/admin';
     },
   },
 }
 </script>
 
 <style>
-  
+
 
 </style>

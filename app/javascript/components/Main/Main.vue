@@ -45,6 +45,8 @@ import ClientForm from '../../pages/Clients/Form';
 
 import DailyReport from '../../pages/Reports/DailyReport';
 
+import AdminClientList from '../../pages/Admin/List';
+
 const componentDicionary = {
   products_list: ProductsList,
   product_form: ProductForm,
@@ -58,7 +60,8 @@ const componentDicionary = {
   order_form: OrderForm,
   clients_list: ClientsList,
   client_form: ClientForm,
-  daily_report: DailyReport
+  daily_report: DailyReport,
+  admin_clients: AdminClientList
 };
 
 export default {
@@ -66,7 +69,7 @@ export default {
 
   components: {
     Header, Sidebar, ProductsList, ProductForm, Checkout, Saloon, TableForm, OrdersList, ShowOrder, ClientsList,
-    ClientForm, OrderForm, DailyReport
+    ClientForm, OrderForm, DailyReport, AdminClientList
   },
 
   data() {

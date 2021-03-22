@@ -11,7 +11,7 @@
     <div class="sidebarWrapper">
       <RestaurantLinks v-if="company.segment === 'Restaurantes'"/>
       <MarketLinks v-if="company.segment === 'Mercados'"/>
-      <CommonLinks />
+      <CommonLinks :user="user" />
     </div>
   </div>
 </template>
@@ -68,7 +68,7 @@ export default {
     goToTimes() {
       window.location.href = '/times';
     },
-    
+
     goToClientsRnaking() {
       window.location.href = '/ranking'
     }

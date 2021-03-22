@@ -8,7 +8,7 @@
               <div class="header-content beerconsumptions">
                 <div class="media-left">
                   <h4 class="card-title mt-0">Clientes</h4>
-                  <p class="card-category">Gerenciamento de produtos</p>
+                  <p class="card-category">Gerenciamento dos Clientes</p>
                 </div>
 
                 <div>
@@ -18,7 +18,7 @@
             </div>
             <div class="card-body">
             </div>
-            
+
             <div>
               <Table :headers="tableHeaders" :elements="clients" url="/clients" :hasDeleteAction="hasDeleteAction" :hasEditAction="hasEditAction"/>
             </div>

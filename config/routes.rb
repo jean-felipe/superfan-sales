@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :companies, only: [:new, :show, :edit]
   resources :orders, only: [:index, :show, :new]
   resources :clients, only: [:new, :index, :show, :edit]
+  resources :admin, only: [:new, :index, :show, :edit]
 
   get '/saloon', to: 'saloon#index'
   get '/tables/new', to: 'saloon#new'
@@ -27,9 +28,12 @@ Rails.application.routes.draw do
       resources :saloon, only: :index
       resources :orders, only: [:create, :show, :update]
       resources :tables, only: [:create, :update, :destroy, :show]
-      
+
       post '/import-products', to: 'importations#products'
       get '/daily-report', to: 'reports#daily_report'
+
+      get 'admin/clients', to: 'admin#clients'
+      get 'admin/company/:id', to: 'admin#company'
 
     end
   end

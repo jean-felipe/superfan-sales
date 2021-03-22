@@ -15,6 +15,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.document = SecureRandom.hex(4)
     resource.code = SecureRandom.hex(4)
     resource.save
+    UserMailer.with(user: @user).welcome.deliver_now
+    UserMailer.with(user: @user).new_user.deliver_now
     redirect_to root_path
   end
 
