@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :load_product, only: [:edit]
+  before_action :check_company
 
   def index
     @products = current_user.company.products.order(:id)

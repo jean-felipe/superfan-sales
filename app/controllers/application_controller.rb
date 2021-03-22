@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
     current_user.company
   end
 
+  def check_company
+    redirect_to root_path if current_user.company.nil?
+  end
+
   def user_info
     {
       user: current_user,

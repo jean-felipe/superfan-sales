@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   before_action :load_client, only: :edit
+  before_action :check_company
 
   def index
     @props = {

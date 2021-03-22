@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :load_order, only: :show
+  before_action :check_company
 
   def index
     @orders = current_company.orders.payed.order(created_at: :desc).map { |o| Read::OrderTableRender.render(o) }
