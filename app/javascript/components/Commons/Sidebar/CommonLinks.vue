@@ -6,7 +6,7 @@
         <p class="title is-4 has-text-white">Resumo do dia</p>
       </a>
     </li>
-    <li class="menu-item" v-id="user.role == 'admin'">
+    <li class="menu-item" v-if="user.role == 'admin'">
       <a class="menu-link" @click="goToAdminClients()">
         <i class="fas fa-user-cog"></i>
         <p class="title is-4 has-text-white">Administrativo</p>
