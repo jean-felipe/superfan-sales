@@ -30,22 +30,30 @@
                   </div>
 
                    <div class="field">
-                      <div class="field">
-                      <label class="label">Categoria*</label>
-                        <div class="control is-expanded">
-                          <div class="select is-fullwidth">
-                            <select name="product_type" v-model="newProduct.category_id">
-                              <option v-for="category in categories"
-                                v-bind:key="category.id"
-                                v-bind:value="category.id">
-                                  {{ category .name }}
-                              </option>
+                        <div class="field">
+                        <label class="label">Categoria*</label>
+                          <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                              <select name="product_type" v-model="newProduct.category_id">
+                                <option v-for="category in categories"
+                                  v-bind:key="category.id"
+                                  v-bind:value="category.id">
+                                    {{ category.name | capitalize }}
+                                </option>
 
-                            </select>
-                          </div>
-                        </div>
-                    </div>
+                              </select>
+                            </div>
+                      </div>
+                     </div>
+
                   </div>
+                   <div class="botao-mais-e-menos">
+                      <a @click="showCategoryFormModal = true" class="button">
+                        <span class="icon is-large">
+                          <i class="fas fa-plus"></i>
+                        </span>
+                      </a>
+                    </div>
                   </div>
                 </div>
 
@@ -151,14 +159,17 @@
         </div>
       </div>
     </div>
+    <CategoryFormModal v-if="showCategoryFormModal" @close="showCategoryFormModal = false"/>
  </div>
 </template>
 
 <script>
+import CategoryFormModal from './CategoryFormModal';
 import axios from 'axios'
 
 export default {
   name: 'ProductForm',
+  components: { CategoryFormModal },
 
   data() {
     return {
@@ -179,7 +190,8 @@ export default {
       edition: false,
       unities: [],
       images: [],
-      imagesPreview: ['']
+      imagesPreview: [''],
+      showCategoryFormModal: false,
     }
   },
 
@@ -274,5 +286,9 @@ export default {
 
 .preview {
   display: flex;
+}
+
+.botao-mais-e-menos a {
+  margin-top: 30px
 }
 </style>

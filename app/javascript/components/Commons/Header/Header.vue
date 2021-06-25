@@ -66,7 +66,7 @@ export default {
   },
 
   methods: {
-     logout(e) {
+    logout(e) {
       const csrfToken = document.querySelector("meta[name=csrf-token]").content
       axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
       axios.delete('/users/sign_out')

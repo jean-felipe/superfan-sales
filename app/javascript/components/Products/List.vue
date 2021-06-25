@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <ImportationModal v-if="showModal" @close="showModal = false"/>
+    <!-- <ImportationModal v-if="showModal" @close="showModal = false"/> -->
   </div>
 </template>
 

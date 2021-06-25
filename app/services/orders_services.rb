@@ -8,7 +8,7 @@ class OrdersServices
         table_id: params[:table_id].nil? ? 1 : params[:table_id],
         company_id: company_id,
         delivery_type: load_delivery_type(params[:delivery_type]),
-        user_id: UserServices.load_or_create(params[:identification]).id
+        user_id: UserServices.load_or_create(params[:identification], params[:identification_type]).id
       )
 
       if @order.save

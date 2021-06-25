@@ -9,9 +9,9 @@
                 <div class="media-left">
                   <h4 class="card-title mt-0">Nova compra</h4>
                   <p>
-                    <input type="radio" value="nome" v-model="userType"> Nome
-                    <input type="radio" value="cpf" v-model="userType"> CPF
-                    <input type="radio" value="code" v-model="userType"> Código
+                    <input type="radio" value="nome" v-model="newOrder.identification_type"> Nome
+                    <input type="radio" value="cpf" v-model="newOrder.identification_type"> CPF
+                    <input type="radio" value="code" v-model="newOrder.identification_type"> Código
                   </p>
                   <span></span>
                 </div>
@@ -27,10 +27,13 @@
                 <div class="field is-horizontal">
                   <div class="field-body">
                     <div class="field">
-                      <label class="label">Cliente ({{userType}})</label>
+                      <label class="label">Cliente ({{newOrder.identification_type}})</label>
                       <div class="control is-expanded">
-                        <input class="input is-marginless" type="text" placeholder="Documento do cliente"
+                        <input class="input is-marginless" type="text" v-if="newOrder.identification_type == 'cpf'" placeholder="Documento do cliente"
                           v-model="newOrder.identification" v-mask="'###.###.###-##'" required>
+
+                        <input class="input is-marginless" type="text" v-if="newOrder.identification_type == 'nome'" placeholder="Documento do cliente"
+                          v-model="newOrder.identification" required>
                       </div>
                   </div>
 
@@ -202,7 +205,8 @@ export default {
         items: [],
         totalPrice: 0,
         payment_methods: [],
-        delivery_type: 'Retirada'
+        delivery_type: 'Retirada',
+        identification_type: 'nome',
       },
       searchProduct: [],
       products: [],
@@ -212,7 +216,6 @@ export default {
       edition: false,
       payment: true,
       paymentMethodsSelected: [],
-      userType: 'CPF',
       date: moment().format("DD/MM/YYYY")
     }
   },

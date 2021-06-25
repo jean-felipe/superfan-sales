@@ -3,6 +3,9 @@ module Api::V1
     before_action :load_order, only: [:show, :update]
 
     def create
+
+      binding.pry
+
       render json: ::OrdersServices.create(order_params, current_company.id, current_company.segment.name), status: 201
     end
 
@@ -18,7 +21,7 @@ module Api::V1
 
     def order_params
       params.require(:order).permit(
-        :id, :identification, :description, :delivery_type, :table_id, :items => [:id, :name, :quantity, :price],
+        :id, :identification, :description, :identification_type, :checkout_date, :delivery_type, :table_id, :items => [:id, :name, :quantity, :price],
         :payment_methods => [:name, :value]
       )
     end

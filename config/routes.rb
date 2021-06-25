@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       resources :saloon, only: :index
       resources :orders, only: [:create, :show, :update]
       resources :tables, only: [:create, :update, :destroy, :show]
+      resources :categories, only: :create
 
       post '/import-products', to: 'importations#products'
       get '/daily-report', to: 'reports#daily_report'

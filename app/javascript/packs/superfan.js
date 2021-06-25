@@ -27,6 +27,12 @@ Vue.use(VueMoment)
 //   connectionUrl: 'ws://3.20.18.9//cable'
 // });
 
+Vue.filter('capitalize', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+})
+
 
 const init = () => {
   const element = document.getElementById('dashboard');
