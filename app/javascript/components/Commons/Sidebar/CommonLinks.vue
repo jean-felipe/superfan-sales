@@ -6,6 +6,12 @@
         <p class="title is-4 has-text-white">Resumo do dia</p>
       </a>
     </li>
+    <li class="menu-item">
+      <a class="menu-link" @click="goToAccount()">
+        <i class="fas fa-home"></i>
+        <p class="title is-4 has-text-white">Seu Estabalecimento</p>
+      </a>
+    </li>
     <li class="menu-item" v-if="user.user.role === 'admin'">
       <a class="menu-link" @click="goToAdminClients()">
         <i class="fas fa-user-cog"></i>
@@ -21,7 +27,9 @@ export default {
 
   data() {
     return {
-      name: ''
+      name: '',
+      currentUser: {},
+      company: {}
     }
   },
 
@@ -39,7 +47,16 @@ export default {
     goToAdminClients() {
       window.location.href = '/admin';
     },
+
+     goToAccount() {
+      window.location.href = '/companies/' + this.currentUser.company.id;
+    },
   },
+
+  mounted() {
+    this.currentUser = this.user;
+    this.company = this.user.company;
+  }
 }
 </script>
 

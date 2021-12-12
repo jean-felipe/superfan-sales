@@ -15,8 +15,16 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if user_signed_in? %>
+      <div class="actions">
+        <%= link_to(destroy_user_session_path, method: :delete, class: 'button is-danger') do %>
+            <span class="icon">
+                <i class="fas fa-sign-in-alt"></i>
+            </span>
+          <span>Sair</span>
+        <% end %>
+      </div>
+    <% end %>
 
     <%= yield %>
   </body>

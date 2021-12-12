@@ -14,6 +14,15 @@
  *= require_self
  */
 
+ .actions a {
+  float: right
+}
+
+.actions {
+  display: flex;
+  justify-content: end;
+}
+
 .signup-container .signup-form input[type="text"], .signup-container .signup-form input[type="password"],
 .signup-container .signup-form input[type="number"], .signup-container .signup-form input[type="email"] {
     border-radius: 3px;

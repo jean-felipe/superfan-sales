@@ -23,27 +23,6 @@
                 <button class="delete"></button>
                 Você precisa criar seu Estabalecimento, <a @click="goToCreateCompany()">clique aqui</a>
               </div>
-              <p class="control" v-else>
-                <button class="bd-tw-button button" href="" @click="goToAccount()">
-                  <span class="icon">
-                    <i class="fas fa-user-circle"></i>
-                  </span>
-                  <span v-if="user.user_type == 'customer'">
-                    Sua Conta
-                  </span>
-                  <span v-else>
-                    Seu Estabalecimento
-                  </span>
-                </button>
-              </p>
-              <p class="control">
-                <a class="button is-danger" href="#" @click="logout()">
-                  <span class="icon">
-                    <i class="fas fa-sign-in-alt"></i>
-                  </span>
-                  <span>Sair</span>
-                </a>
-              </p>
             </div>
           </div>
         </div>
@@ -76,10 +55,6 @@ export default {
 
     goToHome() {
       window.location.href = '/';
-    },
-
-    goToAccount() {
-      window.location.href = '/companies/' + this.currentUser.company.id;
     },
 
     goToCreateCompany() {
