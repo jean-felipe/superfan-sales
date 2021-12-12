@@ -19,7 +19,7 @@ module Importations
           product.measure_unit = map_measure_unit(param['measure_unit'])
           product.ean = map_ean(param['ean'])
           product.company = company
-          product.categories << Category.find_or_create_by(name: param['category'])
+          product.categories << Category.find_or_create_by(name: param['category'].downcase)
 
           if product.save
             next

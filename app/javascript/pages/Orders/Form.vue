@@ -32,7 +32,9 @@
                         <input class="input is-marginless" type="text" v-if="newOrder.identification_type == 'cpf'" placeholder="Documento do cliente"
                           v-model="newOrder.identification" v-mask="'###.###.###-##'" required>
 
-                        <input class="input is-marginless" type="text" v-if="newOrder.identification_type == 'nome'" placeholder="Documento do cliente"
+                        <input class="input is-marginless" type="text" v-if="newOrder.identification_type == 'nome'" placeholder="Nome do cliente"
+                          v-model="newOrder.identification" required>
+                        <input class="input is-marginless" type="text" v-if="newOrder.identification_type == 'code'" placeholder="Código do cliente"
                           v-model="newOrder.identification" required>
                       </div>
                   </div>
@@ -210,7 +212,7 @@ export default {
       },
       searchProduct: [],
       products: [],
-      paymentMethods: ['Débito', 'Crédito', 'Dinheiro'],
+      paymentMethods: ['Débito', 'Crédito', 'Dinheiro', 'Pix'],
       deliveryTypes: ['Entrega', 'Retirada', 'Consumo no local'],
       productList: false,
       edition: false,

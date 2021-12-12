@@ -84,6 +84,7 @@ class OrdersServices
       when 'Crédito' then 'credit'
       when 'Débito' then 'debit'
       when 'Dinheiro' then 'money'
+      when 'Pix' then 'pix'
       end
     end
 

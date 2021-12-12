@@ -4,7 +4,7 @@
 #
 #  id             :bigint           not null, primary key
 #  code           :string
-#  delivery_type  :integer          default(0)
+#  delivery_type  :integer          default("not_registred")
 #  payment_method :string
 #  status         :integer
 #  total_price    :float
