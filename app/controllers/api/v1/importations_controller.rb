@@ -3,7 +3,7 @@ module Api::V1
     def products
       errors = Importations::Product.import(params[:file].tempfile, current_company)
 
-      if errors.empty?
+      if errors.nil? || errors.empty?
         render json: "sucess"
       else
         render json: { errors: errors }, status: 422

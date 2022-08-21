@@ -1,24 +1,11 @@
-# README
+# SuperFan - Sales
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Development
 
-Things you may want to cover:
+Requirements:
+- Ruby 3.0.0
+- Nodejs 13.14.4
 
-* Ruby version
+** Take care when updating gems or installing new versions.
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
