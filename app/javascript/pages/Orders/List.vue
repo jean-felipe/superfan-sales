@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import Table from '../../components/Commons/Table/Table'
+import Table from '../../components/Commons/Table/Table.vue'
 
 export default {
   name: 'OrdersList',

@@ -22,6 +22,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'CategoryFormModal',
@@ -38,7 +39,7 @@ export default {
     submitForm() {
       axios.post('/api/v1/categories', this.newCategory)
         .then(() => {
-          this.$swal("Parabéns!", "Categoria cadastrada com sucesso!", "success")
+          Swal.fire("Parabéns!", "Categoria cadastrada com sucesso!", "success")
             .then(() => {
               window.location = '/products/new'
             })

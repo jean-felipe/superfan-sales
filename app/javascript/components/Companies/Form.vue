@@ -132,6 +132,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'Form',
@@ -157,23 +158,23 @@ export default {
       if(this.edition) {
         axios.patch('/api/v1/companies/' + this.company.id, this.company)
           .then(() => {
-            this.$swal("Parabéns!", "Estabelecimento atualizado com sucesso", "success")
+            Swal.fire("Parabéns!", "Estabelecimento atualizado com sucesso", "success")
               .then(() => {
                 window.location = '/companies/' + this.company.id
               })
           })
           .catch(() => {
-            this.$swal("Ops!", "Houve um erro, confira os dados e tente novamente", "error")
+            Swal.fire("Ops!", "Houve um erro, confira os dados e tente novamente", "error")
           })
       } else {
         axios.post('/api/v1/companies', this.company)
           .then((response) => {
-            this.$swal("Parabéns!", "Loja Cadastrada com sucesso", "success")
+            Swal.fire("Parabéns!", "Loja Cadastrada com sucesso", "success")
               .then(() => {
                 window.location = '/products'
               })
           .catch(() => {
-            this.$swal("Ops!", "Houve um erro, confira os dados e tente novamente", "error")
+            Swal.fire("Ops!", "Houve um erro, confira os dados e tente novamente", "error")
           })
        })
       }

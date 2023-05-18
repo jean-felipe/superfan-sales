@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import InsertProduct from '../../components/Commons/Searchs/InsertProduct';
+import InsertProduct from '../../components/Commons/Searchs/InsertProduct.vue';
 
 export default {
   name: "ShowOrder",

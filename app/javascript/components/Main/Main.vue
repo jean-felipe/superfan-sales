@@ -1,51 +1,51 @@
 <template>
-<div>
-  <div class="wrapper" v-if="componentName != 'home'">
-    <div class="dashboard">
-      <Sidebar :user="user"/>
+  <div>
+    <div class="wrapper" v-if="componentName != 'home'">
+      <div class="dashboard">
+        <Sidebar :user="user" />
         <div class="main-panel">
-          <Header :user="user"/>
+          <Header :user="user" />
           <div class="content">
             <component :is="loadComponent" :data="componentData" />
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="home" v-else>
+      <component :is="loadComponent" :data="componentData" />
     </div>
   </div>
-
-  <div class="home" v-else>
-    <component :is="loadComponent" :data="componentData" />
-  </div>
-</div>
 </template>
 
 <script>
-import 'bulma/css/bulma.css';
+import "bulma/css/bulma.css";
 // import 'bulma-o-steps/bulma-steps.css';
 
-import Sidebar from '../Commons/Sidebar/Sidebar';
-import Header from '../Commons/Header/Header';
+import Sidebar from "../Commons/Sidebar/Sidebar.vue";
+import Header from "../Commons/Header/Header.vue";
 
-import ProductsList from '../Products/List';
-import ProductForm from '../Products/Form';
+import ProductsList from "../Products/List.vue";
+import ProductForm from "../Products/Form.vue";
 
-import CompanyForm from '../Companies/Form';
-import ShowCompany from '../Companies/Show';
+import CompanyForm from "../Companies/Form.vue";
+import ShowCompany from "../Companies/Show.vue";
 
-import Checkout from '../Checkout/Checkout';
+import Checkout from "../Checkout/Checkout.vue";
 
-import Saloon from '../../pages/Saloon/Saloon';
-import TableForm from '../../pages/Saloon/Management/TableForm';
+import Saloon from "../../pages/Saloon/Saloon.vue";
+import TableForm from "../../pages/Saloon/Management/TableForm.vue";
 
-import OrdersList from '../../pages/Orders/List';
-import ShowOrder from '../../pages/Orders/Show';
-import OrderForm from '../../pages/Orders/Form';
+import OrdersList from "../../pages/Orders/List.vue";
+import ShowOrder from "../../pages/Orders/Show.vue";
+import OrderForm from "../../pages/Orders/Form.vue";
 
-import ClientsList from '../../pages/Clients/List';
-import ClientForm from '../../pages/Clients/Form';
+import ClientsList from "../../pages/Clients/List.vue";
+import ClientForm from "../../pages/Clients/Form.vue";
 
-import DailyReport from '../../pages/Reports/DailyReport';
+import DailyReport from "../../pages/Reports/DailyReport.vue";
 
-import AdminClientList from '../../pages/Admin/List';
+import AdminClientList from "../../pages/Admin/List.vue";
 
 const componentDicionary = {
   products_list: ProductsList,
@@ -61,22 +61,34 @@ const componentDicionary = {
   clients_list: ClientsList,
   client_form: ClientForm,
   daily_report: DailyReport,
-  admin_clients: AdminClientList
+  admin_clients: AdminClientList,
 };
 
 export default {
-  name: 'Main',
+  name: "Main",
 
   components: {
-    Header, Sidebar, ProductsList, ProductForm, Checkout, Saloon, TableForm, OrdersList, ShowOrder, ClientsList,
-    ClientForm, OrderForm, DailyReport, AdminClientList
+    Header,
+    Sidebar,
+    ProductsList,
+    ProductForm,
+    Checkout,
+    Saloon,
+    TableForm,
+    OrdersList,
+    ShowOrder,
+    ClientsList,
+    ClientForm,
+    OrderForm,
+    DailyReport,
+    AdminClientList,
   },
 
   data() {
     return {
-      name: '',
+      name: "",
       setup: false,
-    }
+    };
   },
 
   props: {
@@ -90,41 +102,42 @@ export default {
     user: {
       type: Object,
       required: true,
-    }
+    },
   },
 
-  created() {
+  mounted() {
     this.name = this.user.user.email;
+
+    console.log('aqui')
   },
 
   computed: {
     loadComponent() {
-      return componentDicionary[this.componentName]
-    }
-  }
-}
+      return componentDicionary[this.componentName];
+    },
+  },
+};
 </script>
 
 <style>
-  .main-panel {
-    position: relative;
-    float: right;
-    width: calc(100% - 260px);
-    transition: .33s,cubic-bezier(.685,.0473,.346,1);
-  }
-
-  .content {
-    width: 100%;
-    /* padding-right: 15px; */
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  .main-panel>.content {
-    margin-top: 80px;
-    padding: 30px 15px;
-    min-height: calc(100vh - 123px);
+.main-panel {
+  position: relative;
+  float: right;
+  width: calc(100% - 260px);
+  transition: 0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1);
 }
 
+.content {
+  width: 100%;
+  /* padding-right: 15px; */
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.main-panel > .content {
+  margin-top: 80px;
+  padding: 30px 15px;
+  min-height: calc(100vh - 123px);
+}
 </style>

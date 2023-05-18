@@ -28,6 +28,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'Table',
@@ -60,7 +61,7 @@ export default {
     },
 
     excludeElement(id) {
-      this.$swal({
+      Swal.fire({
         title: "Confirma exclusão?",
         text: "Se excluir não será possivel recuperar os dados desse produto!",
         icon: "warning",

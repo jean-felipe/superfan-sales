@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import RestaurantLinks from './RestaurantLinks';
-import MarketLinks from './MarketLinks';
-import CommonLinks from './CommonLinks';
+import RestaurantLinks from './RestaurantLinks.vue';
+import MarketLinks from './MarketLinks.vue';
+import CommonLinks from './CommonLinks.vue';
 
 export default {
   name: 'Sidebar',

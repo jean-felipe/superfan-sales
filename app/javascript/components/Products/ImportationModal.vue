@@ -30,6 +30,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'ImportationModal',
@@ -54,13 +55,13 @@ export default {
 
       axios.post('/api/v1/import-products', formData, headers)
         .then(function(response) {
-          this.$swal("Parabéns!", "Produtos importados com sucesso!", "success")
+          Swal.fire("Parabéns!", "Produtos importados com sucesso!", "success")
             .then(() => {
               window.location = '/products'
             })
         })
         .catch(() => {
-          this.$swal("Que pena!", "Houve um problema na importação", "error")
+          Swal.fire("Que pena!", "Houve um problema na importação", "error")
             .then(() => {
               window.location = '/products'
             })

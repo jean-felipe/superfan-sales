@@ -50,8 +50,7 @@
                       <label class="label">Data de Nascimento</label>
                         <div class="control is-expanded">
                           <div class="is-fullwidth">
-                            <input class="input is-marginless" type="date" placeholder="Nome do negócio"
-                          v-model="client.birthdate" required>
+                            <input class="input is-marginless" type="date" v-model="client.birthdate" required>
                       </div>
                         </div>
                     </div>
@@ -116,9 +115,12 @@
 </template>
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import {mask} from 'vue-the-mask'
 
 export default {
   name: "ClientForm",
+  directives: {mask},
 
   data() {
     return {
@@ -164,7 +166,7 @@ export default {
       if(this.edition) {
         axios.patch('/api/v1/clients/' + this.client.id, {client: this.client})
           .then(response => {
-            this.$swal("Parabéns!", "Cliente atualizado com sucesso!", "success")
+            Swal.fire("Parabéns!", "Cliente atualizado com sucesso!", "success")
             .then(() => {
               window.location = '/clients'
             })
@@ -179,7 +181,7 @@ export default {
         
         axios.post('/api/v1/clients', {client: this.client})
           .then(response => {
-            this.$swal("Parabéns!", "Cliente cadastrado com sucesso!", "success")
+            Swal.fire("Parabéns!", "Cliente cadastrado com sucesso!", "success")
             .then(() => {
               window.location = '/clients'
             })

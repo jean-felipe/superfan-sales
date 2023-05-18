@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import SaloonTables from '../Saloon/SaloonTables/List';
-import Management from '../Saloon/Management/SaloonManagement';
+import SaloonTables from '../Saloon/SaloonTables/List.vue';
+import Management from '../Saloon/Management/SaloonManagement.vue';
 
 export default {
   name: "Saloon",

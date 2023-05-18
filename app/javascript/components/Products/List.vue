@@ -49,9 +49,9 @@
 </template>
 
 <script>
-import Table from '../Commons/Table/Table';
-import Pagination from '../Commons/Table/Pagination';
-import ImportationModal from './ImportationModal';
+import Table from '../Commons/Table/Table.vue';
+import Pagination from '../Commons/Table/Pagination.vue';
+import ImportationModal from './ImportationModal.vue';
 import axios from 'axios';
 
 export default {

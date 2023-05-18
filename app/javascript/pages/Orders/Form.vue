@@ -194,6 +194,7 @@
 import axios from 'axios'
 import moment from 'moment'
 import Datepicker from 'vuejs-datepicker';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'OrderForm',
@@ -260,16 +261,16 @@ export default {
       let total_payed = this.newOrder.payment_methods.reduce((total, obj) => parseInt(obj.value) + total, 0)
 
       if(this.paymentMethodsSelected[0].name == null) {
-        this.$swal("Ainda não!", "Selecione pelo menos um pagamento!", "error")
+        Swal.fire("Ainda não!", "Selecione pelo menos um pagamento!", "error")
       } else if(total_payed < this.newOrder.totalPrice) {
-        this.$swal("Ainda não!", "O total pago precisa ser igual ou maior ao preço devido!", "error")
+        Swal.fire("Ainda não!", "O total pago precisa ser igual ou maior ao preço devido!", "error")
       } else {
         axios.post('/api/v1/orders', {order: this.newOrder})
           .then((response) => {
             console.log(response)
             // // this.sendImages(response.data.id)
 
-            this.$swal("Parabéns!", "Pedido criado com sucesso!", "success")
+            Swal.fire("Parabéns!", "Pedido criado com sucesso!", "success")
               .then(() => {
                 window.location = '/orders'
               })

@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Table from  './SaloonTable';
-import OrderTable from './OrderTable';
+import Table from  './SaloonTable.vue';
+import OrderTable from './OrderTable.vue';
 
 export default {
   name: 'ListSaloonTables',

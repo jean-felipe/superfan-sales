@@ -80,7 +80,7 @@
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
                         <input class="input is-marginless" type="number" placeholder="1.3"
-                          v-model="newProduct.measure" min="0" value="0" step=".01">
+                          v-model="newProduct.measure" min="0" step=".01">
                       </div>
                     </div>
                   </div>
@@ -104,7 +104,7 @@
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
                         <input class="input is-marginless" type="number" placeholder="3.99"
-                          v-model="newProduct.price" min="0" value="0" step=".01" required>
+                          v-model="newProduct.price" min="0" step=".01" required>
                       </div>
                     </div>
                   </div>
@@ -117,7 +117,7 @@
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
                         <input class="input is-marginless" type="number" placeholder="20"
-                          v-model="newProduct.quantity" min="0" value="0" step=".01">
+                          v-model="newProduct.quantity" min="0" step=".01">
                       </div>
                     </div>
                   </div>
@@ -164,8 +164,9 @@
 </template>
 
 <script>
-import CategoryFormModal from './CategoryFormModal';
+import CategoryFormModal from './CategoryFormModal.vue';
 import axios from 'axios'
+import Swal from 'sweetalert2';
 
 export default {
   name: 'ProductForm',
@@ -207,7 +208,7 @@ export default {
       if (this.edition) {
         axios.patch('/api/v1/products/' + this.newProduct.id, this.newProduct)
           .then((response) => {
-            this.$swal("Parabéns!", "Produto editado com sucesso!", "success")
+            Swal.fire("Parabéns!", "Produto editado com sucesso!", "success")
               .then(() => {
                 window.location = '/products'
               })
@@ -218,7 +219,7 @@ export default {
           console.log(response)
           // // this.sendImages(response.data.id)
 
-          this.$swal("Parabéns!", "Produto criado com sucesso!", "success")
+          Swal.fire("Parabéns!", "Produto criado com sucesso!", "success")
             .then(() => {
               window.location = '/products'
             })
