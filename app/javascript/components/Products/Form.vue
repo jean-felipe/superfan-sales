@@ -38,7 +38,7 @@
                                 <option v-for="category in categories"
                                   v-bind:key="category.id"
                                   v-bind:value="category.id">
-                                    {{ category.name | capitalize }}
+                                    {{ category.name }}
                                 </option>
 
                               </select>

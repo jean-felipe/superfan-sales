@@ -76,8 +76,8 @@
                     <div class="field">
                       <label class="label">Telefone*</label>
                         <div class="control is-expanded">
-                           <input class="input is-marginless" type="number" placeholder="Nome do negócio" 
-                             v-model="company.phone" required>
+                           <input class="input is-marginless" type="text" placeholder="Nome do negócio"
+                             v-model="company.phone" v-mask="'(##) # ####-####'" required>
                         </div>
                     </div>
 
@@ -133,9 +133,11 @@
 <script>
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import {mask} from 'vue-the-mask'
 
 export default {
   name: 'Form',
+  directives: {mask},
 
   data() {
     return {
