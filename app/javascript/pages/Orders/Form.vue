@@ -112,9 +112,19 @@
                     </tr>
                     <tbody v-for="product in selectedProducts" v-bind:key="product.id">
                       <tr>
-                        <td>{{ product.name }} - {{ product.description }}</td>
+                        <td>{{ product.name }} - {{ product.description }} {{ product.product_type }}</td>
                         <td>
                           <input type="number" v-model="product.quantity" class="input is-marginless quantity-input" />
+
+                          <div class="service-configuration" v-if="product.product_type === 'service'">
+                            <table class="table is-bordered is-striped">
+                              <tr>
+                                <th>Pagamento recorrente</th>
+                                <th>Enviar cobranca</th>
+                              </tr>
+                            </table>
+                          </div>
+                          <div v-else></div>
                         </td>
                         <td>R$ {{ product.price }}</td>
                         <td>
@@ -279,7 +289,7 @@ export default {
     },
 
     getProducts(word) {
-      axios.get('/api/v1/products?filter=' + word + '&fields=id,name,price,description' )
+      axios.get('/api/v1/products?filter=' + word + '&fields=id,name,price,description,product_type' )
         .then(response => {
           this.products = response.data
           this.productList = true
@@ -302,7 +312,7 @@ export default {
     addProduct(product) {
       this.newOrder.items.push({
         id: product.id, name: product.name, quantity: product.quantity,
-        price: product.price,
+        price: product.price, product_type: product.product_type,
         description: product.description
       })
     },

@@ -10,7 +10,7 @@
     </div>
     <div class="sidebarWrapper">
       <RestaurantLinks v-if="company.segment === 'Restaurantes'"/>
-      <MarketLinks v-if="company.segment === 'Mercados'"/>
+      <MarketLinks v-else/>
       <CommonLinks :user="user" />
     </div>
   </div>

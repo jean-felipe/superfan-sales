@@ -5,6 +5,7 @@ module Api::V1
     def create
       @product = Product.new(product_params)
       @product.company = current_user.company
+      @product.category_ids << product_params[:category_id]
 
       if @product.save
         render json: @product, status: 201
@@ -34,7 +35,7 @@ module Api::V1
     def product_params
       params.require(:product).permit(
         :description, :ean, :is_active, :name, :category_id, :price, :has_discount, :discount_price,
-        :quantity, :id, :measure, :measure_unit
+        :quantity, :id, :measure, :measure_unit, :duration, :duration_quantity
       )
     end
 

@@ -13,11 +13,14 @@
             {{ key }}
           </td>
           <td v-if="hasDeleteAction || hasEditAction">
-            <button class="button is-info" @click="editElement(element.id)" v-if="hasEditAction">
+            <button class="button is-info mr-2" @click="editElement(element.id)" v-if="hasEditAction">
               <i class="fas fa-edit"></i>
             </button>
-            <button class="button is-danger" @click="excludeElement(element.id)" v-if="hasDeleteAction">
+            <button class="button is-danger mr-2" @click="excludeElement(element.id)" v-if="hasDeleteAction">
               <i class="fas fa-trash-alt"></i>
+            </button>
+            <button class="button is-info" @click="configElement(element.id)" v-if="hasConfigAction">
+              <i class="fas fa-cog"></i>
             </button>
           </td>
         </tr>
@@ -52,12 +55,20 @@ export default {
     hasDeleteAction: {
       type: Boolean,
       default: true
+    },
+    hasConfigAction: {
+      type: Boolean,
+      default: true
     }
   },
 
   methods: {
     editElement(id) {
       window.location = this.url + '/' + id + '/edit'
+    },
+
+    configElement(id) {
+      window.location = this.url + '/' + id + '/config'
     },
 
     excludeElement(id) {
@@ -85,9 +96,9 @@ export default {
 
   mounted() {
     console.log(this.elements)
-    
+
   }
-  
+
 }
 </script>
 

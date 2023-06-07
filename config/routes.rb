@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :products, only: [:new, :index, :edit]
+  resources :products, only: [:new, :index, :edit] do
+    get '/config', to: 'service_definitions#config'
+  end
+
   resources :checkouts, only: [:new, :index]
   resources :companies, only: [:new, :show, :edit]
   resources :orders, only: [:index, :show, :new]

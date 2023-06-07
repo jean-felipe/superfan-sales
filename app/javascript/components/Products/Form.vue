@@ -56,8 +56,37 @@
                     </div>
                   </div>
                 </div>
+                 <div class="field is-horizontal" v-if="newProduct.category_id == 5">
+                    <div class="field-body">
+                      <div class="field">
+                        <label class="label">Duracao</label>
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                              <select name="product_type" v-model="newProduct.duration">
+                                <option v-for="unit in serviceDurationOptions"
+                                  v-bind:key="unit"
+                                  v-bind:value="unit">
+                                    {{ unit }}
+                                </option>
 
-               <div class="field is-horizontal">
+                              </select>
+                            </div>
+                          </div>
+                      </div>
+
+                    <div class="field">
+                      <label class="label">Duracao quantidade</label>
+                      <div class="control is-expanded">
+                        <div class="is-fullwidth">
+                          <input class="input is-marginless" type="number" v-model="newProduct.duration_quantity"
+                            placeholder="3" min="0" step=".01" require>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+
+               <div class="field is-horizontal" v-else>
                   <div class="field-body">
                     <div class="field">
                       <label class="label">Unidade de medida</label>
@@ -131,7 +160,7 @@
                   <label class="label">Descrição</label>
                     <div class="control is-expanded">
                       <div class="is-fullwidth">
-                        <input class="input is-marginless" type="text" placeholder="Nome do negócio"
+                        <input class="input is-marginless" type="text" placeholder="Esse produto e feito por xxx"
                           v-model="newProduct.description" required>
                       </div>
                     </div>
@@ -185,6 +214,8 @@ export default {
         quantity: '',
         measure_unit: '',
         measure: '',
+        duration: '',
+        duration_quantity: '',
       },
       categories: [],
       subcategories: [],
@@ -193,6 +224,7 @@ export default {
       images: [],
       imagesPreview: [''],
       showCategoryFormModal: false,
+      serviceDurationOptions: ['Hora', 'Dia', 'Semana', 'Mes'],
     }
   },
 

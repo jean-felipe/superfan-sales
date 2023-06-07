@@ -24,6 +24,7 @@ pt-BR:
       liters: Litros
       unit: Unidade
       ml: Mls
+      time: Tempo
   order:
     statuses:
       payed: Pago
