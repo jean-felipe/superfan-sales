@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   }
 
   resources :products, only: [:new, :index, :edit] do
-    get '/config', to: 'service_definitions#config'
+    get '/config', to: 'service_definitions#product_config'
   end
 
   resources :checkouts, only: [:new, :index]

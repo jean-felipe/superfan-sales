@@ -1,10 +1,10 @@
 class ServiceDefinitionsController < ApplicationController
-  before_action :load_product, only: :config
+  before_action :load_product
 
   def index
   end
 
-  def config
+  def product_config
     @product = Product.find(params[:product_id])
 
     @props = {
@@ -39,7 +39,6 @@ class ServiceDefinitionsController < ApplicationController
   private
 
   def load_product
-    binding.pry
     @product = Product.find(params[:product_id])
   end
 end

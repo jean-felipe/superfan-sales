@@ -131,7 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_122736) do
     t.bigint "company_id", null: false
     t.integer "logged_user", null: false
     t.integer "payment_method", null: false
-    t.datetime "transaction_date", precision: nil, default: "2023-05-27 11:54:27", null: false
+    t.datetime "transaction_date", precision: nil, default: "2021-12-12 09:20:36", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_sales_on_company_id"

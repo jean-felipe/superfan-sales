@@ -46,6 +46,7 @@ import ClientForm from "../../pages/Clients/Form.vue";
 import DailyReport from "../../pages/Reports/DailyReport.vue";
 
 import AdminClientList from "../../pages/Admin/List.vue";
+import ServiceDefinition from "../Products/ServiceDefinition.vue";
 
 const componentDicionary = {
   products_list: ProductsList,
@@ -62,26 +63,28 @@ const componentDicionary = {
   client_form: ClientForm,
   daily_report: DailyReport,
   admin_clients: AdminClientList,
+  product_service_definition: ServiceDefinition,
 };
 
 export default {
   name: "Main",
 
   components: {
-    Header,
-    Sidebar,
-    ProductsList,
-    ProductForm,
-    Checkout,
-    Saloon,
-    TableForm,
-    OrdersList,
-    ShowOrder,
-    ClientsList,
-    ClientForm,
-    OrderForm,
-    DailyReport,
     AdminClientList,
+    Checkout,
+    ClientForm,
+    ClientsList,
+    DailyReport,
+    Header,
+    OrderForm,
+    OrdersList,
+    ProductForm,
+    ProductsList,
+    Saloon,
+    ServiceDefinition,
+    ShowOrder,
+    Sidebar,
+    TableForm,
   },
 
   data() {
@@ -108,7 +111,7 @@ export default {
   mounted() {
     this.name = this.user.user.email;
 
-    console.log('aqui')
+    console.log("aqui");
   },
 
   computed: {

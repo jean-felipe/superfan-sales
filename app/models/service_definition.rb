@@ -5,7 +5,7 @@
 #  id          :bigint           not null, primary key
 #  code        :string
 #  definitions :jsonb
-#  status      :integer          default(0)
+#  status      :integer          default("active")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  product_id  :bigint           not null
