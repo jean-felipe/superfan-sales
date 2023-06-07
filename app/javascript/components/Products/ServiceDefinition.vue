@@ -8,6 +8,9 @@
       action_path="books/new"
       :has_input_search="false">
 
+      <div class="form">
+        <h3>Teste</h3>
+      </div>
 
     </Panel>
   </div>
@@ -16,6 +19,8 @@
 import Panel from "../Commons/Panel/Panel.vue"
 export default {
   name: 'ServiceDefinition',
+
+  components: { Panel },
 
   data() {
     return {

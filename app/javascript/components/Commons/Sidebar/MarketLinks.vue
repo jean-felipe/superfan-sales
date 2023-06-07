@@ -9,8 +9,15 @@
     <li class="menu-item">
       <a class="menu-link" @click="goToOrders()">
         <i class="fas fa-clipboard-list"></i>
-        
+
         <p class="title is-4 has-text-white">Pedidos</p>
+      </a>
+    </li>
+    <li class="menu-item">
+      <a class="menu-link" @click="goToOrders()">
+        <i class="fas fa-clipboard-list"></i>
+
+        <p class="title is-4 has-text-white">Serviços</p>
       </a>
     </li>
       <li class="menu-item">
@@ -25,7 +32,7 @@
         <p class="title is-4 has-text-white">Frente de caixa</p>
       </a>
     </li> -->
-    
+
   </ul>
 </template>
 
@@ -68,6 +75,6 @@ export default {
 </script>
 
 <style>
-  
+
 
 </style>
