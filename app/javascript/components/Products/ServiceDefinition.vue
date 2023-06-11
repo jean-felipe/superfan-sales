@@ -9,7 +9,15 @@
       :has_input_search="false">
 
       <div class="form">
-        <h3>Teste</h3>
+        <div class="field">
+            <label class="label">Duracao quantidade</label>
+          <div class="control is-expanded">
+            <div class="is-fullwidth">
+              <input class="input is-marginless" type="number" v-model="newProduct.duration_quantity"
+                placeholder="3" min="0" step=".01" require>
+            </div>
+          </div>
+        </div>
       </div>
 
     </Panel>
@@ -25,6 +33,12 @@ export default {
   data() {
     return {
       productConfigs: {
+        registrationRequired: false,
+        registrationPrice: 0,
+        subscription: false,
+        subscriptionPrice: 0,na
+        subscriptionPaymentDay: 1,
+        notifyPaymentDay: false,
 
       }
     }

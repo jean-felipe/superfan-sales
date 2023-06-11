@@ -23,13 +23,41 @@
                 <button class="delete"></button>
                 Você precisa criar seu Estabalecimento, <a @click="goToCreateCompany()">clique aqui</a>
               </div>
+
+              <div>
+                <p class="control">
+                <button class="bd-tw-button button">
+                  <span class="icon">
+                    <i class=“fas fa-bell”></i>
+                  </span>
+                </button>
+              </p>
+              <p class="control">
+                <a class="bd-tw-button button">
+                  <span class="icon">
+                    <i class=“fas fa-user-circle”></i>
+                  </span>
+                  <span>
+                    Account
+                  </span>
+                </a>
+              </p>
+              <p class="control">
+                <a class="button is-danger">
+                  <span class=“icon”>
+                    <i class=“fas fa-sign-in-alt”></i>
+                  </span>
+                  <span>Log out</span>
+                </a>
+              </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </nav>
-</template>
+</template>-
 
 <script>
 import axios from 'axios';
@@ -70,6 +98,7 @@ export default {
   },
 
   mounted() {
+    console.log('aqowieuqoiwueoqiweu')
     this.currentUser = this.user;
     this.company = this.user.company;
   }

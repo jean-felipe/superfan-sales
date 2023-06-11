@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
     values = {
       categories: Category.select(:id, :name).order(:name).as_json,
       sub_categories: SubCategory.select(:id, :name).as_json,
-      unities: Product::UNITIES.map {|un| {unit: un, name: Product.human_enum_name(:measure_unities, un)}}
+      unities: Product::UNITIES.map { |un| { unit: un, name: Product.human_enum_name(:measure_unities, un) } }
     }
 
     @props = {
@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
     values = {
       categories: Category.select(:id, :name).as_json,
       sub_categories: SubCategory.select(:id, :name).as_json,
-      unities: Product::UNITIES.map {|un| {unit: un, name: Product.human_enum_name(:measure_unities, un)}},
+      unities: Product::UNITIES.map { |un| { unit: un, name: Product.human_enum_name(:measure_unities, un) } },
       product: @product,
       product_category: @product.categories&.first&.id,
       edition: true
