@@ -28,14 +28,14 @@
                 <p class="control">
                 <button class="bd-tw-button button">
                   <span class="icon">
-                    <i class=“fas fa-bell”></i>
+                    <i class="fas fa-bell"></i>
                   </span>
                 </button>
               </p>
               <p class="control">
                 <a class="bd-tw-button button">
                   <span class="icon">
-                    <i class=“fas fa-user-circle”></i>
+                    <i class="fas fa-user-circle"></i>
                   </span>
                   <span>
                     Account
@@ -44,8 +44,8 @@
               </p>
               <p class="control">
                 <a class="button is-danger">
-                  <span class=“icon”>
-                    <i class=“fas fa-sign-in-alt”></i>
+                  <span class="icon">
+                    <i class="fas fa-sign-in-alt"></i>
                   </span>
                   <span>Log out</span>
                 </a>

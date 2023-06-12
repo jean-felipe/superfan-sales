@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   get '/tables/new', to: 'saloon#new'
   get '/daily-report', to: 'companies#daily_report'
 
+  get '/services', to: 'service_definitions#index'
+  get '/services/:product_id', to: 'service_definitions#show'
+  get '/services/:product_id/new', to: 'service_definitions#new'
+
   namespace :api do
     namespace :v1 do
       resources :products do

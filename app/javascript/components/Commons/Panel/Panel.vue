@@ -11,9 +11,9 @@
           <div></div>
           <div class="navbar-end">
             <div class="navbar-item">
-            <button v-if="has_action_button" :href="action_path" class="button is-success new-button">
+            <a v-if="has_action_button" :href="action_path" class="button is-success new-button">
               {{ button_action_label }}
-            </button>
+            </a>
 
             <button v-if="has_second_action_button" :href="second_action_path" class="button is-success new-button">
               {{ second_button_action_label }}

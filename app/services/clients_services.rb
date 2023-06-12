@@ -8,11 +8,11 @@ class ClientsServices
       end
     end
 
-    def search(params)
+    def search(company, params)
       if params[:document]
-        handle_response(User.where("document like ?", params[:document]).first)
+        handle_response(company.users.where("document like ?", "%#{params[:document]}%").first)
       else
-        handle_response(User.where("email like ?", params[:email]).first)
+        handle_response(company.users.where("email like ?", "%#{params[:email]}%").first)
       end
     end
 
@@ -32,7 +32,7 @@ class ClientsServices
       }
     end
 
-    def verify_client(company_id, user_id)      
+    def verify_client(company_id, user_id)
       @client = Client.find_by(company_id: company_id , user_id: user_id)
     end
   end

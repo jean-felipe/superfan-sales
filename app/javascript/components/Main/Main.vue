@@ -46,7 +46,10 @@ import ClientForm from "../../pages/Clients/Form.vue";
 import DailyReport from "../../pages/Reports/DailyReport.vue";
 
 import AdminClientList from "../../pages/Admin/List.vue";
-import ServiceDefinition from "../Products/ServiceDefinition.vue";
+
+import ServicesList from "../../pages/Services/List.vue";
+import SubscriptionsList from "../../pages/Services/Subscriptions.vue";
+import SubscriptionForm from "../../pages/Services/SubscriptionForm.vue";
 
 const componentDicionary = {
   products_list: ProductsList,
@@ -63,7 +66,9 @@ const componentDicionary = {
   client_form: ClientForm,
   daily_report: DailyReport,
   admin_clients: AdminClientList,
-  product_service_definition: ServiceDefinition,
+  services_list: ServicesList,
+  subscriptions_list: SubscriptionsList,
+  subscription_form: SubscriptionForm,
 };
 
 export default {
@@ -81,7 +86,9 @@ export default {
     ProductForm,
     ProductsList,
     Saloon,
-    ServiceDefinition,
+    ServicesList,
+    SubscriptionsList,
+    SubscriptionForm,
     ShowOrder,
     Sidebar,
     TableForm,

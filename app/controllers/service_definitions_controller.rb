@@ -1,8 +1,8 @@
 class ServiceDefinitionsController < ApplicationController
-  before_action :load_product
+  before_action :load_product, except: [:create, :index]
 
   def index
-    @products = current_user.company.products.service
+    @services = current_user.company.products.service
 
     @props = {
       component_name: 'services_list',
@@ -22,6 +22,12 @@ class ServiceDefinitionsController < ApplicationController
   end
 
   def new
+
+    @props = {
+      component_name: 'subscription_form',
+      component_data: { product: @product },
+      user: user_info
+    }
   end
 
   def edit
@@ -43,6 +49,16 @@ class ServiceDefinitionsController < ApplicationController
   def delete
   end
 
+  def show
+    @subscriptions = @product.subscriptions.includes(:client, :product)
+
+    @props = {
+      component_name: 'subscriptions_list',
+      component_data: [subscriptions_list],
+      user: user_info
+    }
+  end
+
   private
 
   def load_product
@@ -51,15 +67,33 @@ class ServiceDefinitionsController < ApplicationController
 
   def list_response
     {
-      pages: @products.count / 10,
+      pages: @services.count / 10,
       current_page: params[:page].to_i || 1,
-      products: @products.limit(10).page(params[:page]).map do |product|
+      services: @services.limit(10).page(params[:page]).map do |service|
         {
-          id: product.id,
-          name: product.name,
-          description: product.description,
-          price: 'R$ ' + product.price.to_s,
-          quantity: product.quantity
+          id: service.id,
+          name: service.name,
+          description: service.description,
+          price: 'R$ ' + service.price.to_s,
+          quantity: service.quantity
+        }
+      end
+    }
+  end
+
+  def subscriptions_list
+    {
+      pages: @subscriptions.count / 10,
+      current_page: params[:page].to_i || 1,
+      product_name: @product.name,
+      product_id: @product.id,
+      subscriptions: @subscriptions.limit(10).page(params[:page]).map do |sub|
+        {
+          id: sub.id,
+          client_name: sub.client.name,
+          start_at: sub.start_at.strftime("%d/%m/%Y"),
+          end_at: sub.end_at.strftime("%d/%m/%Y"),
+          status: sub.status
         }
       end
     }

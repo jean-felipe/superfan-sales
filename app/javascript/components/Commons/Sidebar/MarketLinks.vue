@@ -14,7 +14,7 @@
       </a>
     </li>
     <li class="menu-item">
-      <a class="menu-link" @click="goToOrders()">
+      <a class="menu-link" @click="goToServices()">
         <i class="fas fa-clipboard-list"></i>
 
         <p class="title is-4 has-text-white">Serviços</p>
@@ -65,6 +65,10 @@ export default {
 
     goToCheckouts() {
       window.location.href = '/checkouts';
+    },
+
+    goToServices() {
+      window.location.href = '/services';
     },
 
     goToClients() {

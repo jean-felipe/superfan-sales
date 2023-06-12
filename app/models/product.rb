@@ -36,6 +36,8 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :sub_categories
   has_and_belongs_to_many :categories
 
+  has_many :subscriptions
+
   has_one :service_definition
 
   enum measure_unit: UNITIES

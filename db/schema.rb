@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_122736) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_12_004839) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -131,7 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_122736) do
     t.bigint "company_id", null: false
     t.integer "logged_user", null: false
     t.integer "payment_method", null: false
-    t.datetime "transaction_date", precision: nil, default: "2021-12-12 09:20:36", null: false
+    t.datetime "transaction_date", precision: nil, default: "2023-05-27 11:54:27", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_sales_on_company_id"
@@ -157,6 +157,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_122736) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "start_at", null: false
+    t.datetime "end_at", null: false
+    t.boolean "start_payment"
+    t.date "pay_at", null: false
+    t.jsonb "additional_details", default: {}
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_subscriptions_on_client_id"
+    t.index ["product_id"], name: "index_subscriptions_on_product_id"
   end
 
   create_table "tables", force: :cascade do |t|
@@ -211,5 +226,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_122736) do
   add_foreign_key "sale_items", "sales"
   add_foreign_key "sales", "companies"
   add_foreign_key "service_definitions", "products"
+  add_foreign_key "subscriptions", "clients"
+  add_foreign_key "subscriptions", "products"
   add_foreign_key "tables", "companies"
 end

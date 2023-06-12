@@ -31,7 +31,7 @@ module Api::V1
     end
 
     def index
-      @clients = ClientsServices.search(params[:filter])
+      @clients = ClientsServices.search(current_user.company, params[:filter])
       render_object(@clients, 200)
     end
 
