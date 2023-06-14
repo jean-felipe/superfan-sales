@@ -190,7 +190,7 @@ export default {
               })
           })
       } else {
-        axios.post('/api/v1/subscriptions', this.newSubscription)
+        axios.post('/api/v1/subscriptions', {subscription: this.newSubscription})
         .then((response) => {
           console.log(response)
           // // this.sendImages(response.data.id)
@@ -212,18 +212,23 @@ export default {
     },
 
     addCustomer(customer) {
+      console.log('customer', customer)
       this.newSubscription.client_id = customer.id
       this.searchCustomer = customer.document
     }
   },
 
   mounted() {
-    if (this.data[0].subscription) {
-      this.newSubscription = this.data[0].subscription
-      this.edition = true
+    if (this.edition) {
+      if (this.data[0].subscription) {
+        this.newSubscription = this.data[0].subscription
+        this.edition = true
+      }
     }
 
-    this.newSubscription.product_id = this.data[0].product.id
+    console.log(this.data[0])
+
+    this.newSubscription.product_id = this.data.product.id
   }
 }
 </script>

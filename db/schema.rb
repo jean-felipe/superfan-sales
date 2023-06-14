@@ -162,15 +162,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_004839) do
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "client_id", null: false
     t.bigint "product_id", null: false
+    t.bigint "company_id", null: false
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
     t.boolean "start_payment"
-    t.date "pay_at", null: false
+    t.integer "pay_at", null: false
     t.jsonb "additional_details", default: {}
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_subscriptions_on_client_id"
+    t.index ["company_id"], name: "index_subscriptions_on_company_id"
     t.index ["product_id"], name: "index_subscriptions_on_product_id"
   end
 
@@ -227,6 +229,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_004839) do
   add_foreign_key "sales", "companies"
   add_foreign_key "service_definitions", "products"
   add_foreign_key "subscriptions", "clients"
+  add_foreign_key "subscriptions", "companies"
   add_foreign_key "subscriptions", "products"
   add_foreign_key "tables", "companies"
 end

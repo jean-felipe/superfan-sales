@@ -38,6 +38,8 @@ Rails.application.routes.draw do
       resources :categories, only: :create
 
       post '/import-products', to: 'importations#products'
+      post '/subscriptions', to: 'subscriptions#create'
+
       get '/daily-report', to: 'reports#daily_report'
 
       get 'admin/clients', to: 'admin#clients'

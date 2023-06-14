@@ -22,7 +22,6 @@ class ServiceDefinitionsController < ApplicationController
   end
 
   def new
-
     @props = {
       component_name: 'subscription_form',
       component_data: { product: @product },

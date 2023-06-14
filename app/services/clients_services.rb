@@ -23,11 +23,12 @@ class ClientsServices
 
       {
         user: {
+          id: user.id,
           name: user.name,
           email: user.email,
           gender: user.gender,
           document: user.document,
-          birthdate: user.birthdate.strftime('%Y-%m-%d'),
+          birthdate: user.birthdate.strftime('%Y-%m-%d')
         }
       }
     end

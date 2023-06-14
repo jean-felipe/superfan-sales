@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       subscriptions: [],
-      tableHeaders: ['#', 'Nome', 'Data Ini', 'Data Fim', 'Status'],
+      tableHeaders: ['#', 'Nome', 'Data Inicio', 'Data Fim', 'Status'],
       pages: 1,
       currentPage: 1,
       page: 1,

@@ -23,4 +23,8 @@ class Client < ApplicationRecord
   belongs_to :user
 
   validates :user_id, uniqueness: { scope: :company_id }
+
+  def name
+    user.name
+  end
 end
