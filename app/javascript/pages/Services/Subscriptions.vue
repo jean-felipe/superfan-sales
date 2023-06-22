@@ -4,12 +4,12 @@
       :title="product_name"
       title_description="Gerencie suas assinaturas"
       :has_action_button="true"
-      button_action_label="Novo Assinatura"
+      button_action_label="Nova Assinatura"
       :action_path="product_id + '/new'"
-      :has_input_search="false">
+      :has_input_search="true">
 
         <div>
-          <Table :headers="tableHeaders" :elements="loadProducts" :hasDeleteAction="false" url="/subscriptions"/>
+          <Table :headers="tableHeaders" :elements="loadProducts" :hasEditAction="false" :hasDeleteAction="false" url="/subscriptions"/>
           <Pagination :pages="pages" :currentPage="loadCurrentPage" @changePage="handleChangePage" />
         </div>
 

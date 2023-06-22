@@ -8,6 +8,7 @@ module Api::V1
       @subscription.pay_at = extract_pay_day
 
       if @subscription.save
+       
         render json: @subscription, status: 201
       else
         render json: @subscription.errors.messages, status: 422

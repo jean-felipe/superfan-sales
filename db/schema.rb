@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_12_004839) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_17_130246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -186,6 +186,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_004839) do
     t.index ["company_id"], name: "index_tables_on_company_id"
   end
 
+  create_table "user_subscription_details", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "subscription_id", null: false
+    t.integer "total_used"
+    t.integer "total_available"
+    t.string "total_month_period"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_id"], name: "index_user_subscription_details_on_subscription_id"
+    t.index ["user_id"], name: "index_user_subscription_details_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -232,4 +244,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_004839) do
   add_foreign_key "subscriptions", "companies"
   add_foreign_key "subscriptions", "products"
   add_foreign_key "tables", "companies"
+  add_foreign_key "user_subscription_details", "subscriptions"
+  add_foreign_key "user_subscription_details", "users"
 end

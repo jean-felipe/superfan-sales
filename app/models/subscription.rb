@@ -34,5 +34,7 @@ class Subscription < ApplicationRecord
   belongs_to :product
   belongs_to :company
 
+  has_one :user_subscription_details
+
   enum status: STATUSES
 end
