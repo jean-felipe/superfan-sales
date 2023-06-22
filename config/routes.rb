@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   get '/services', to: 'service_definitions#index'
   get '/services/:product_id', to: 'service_definitions#show'
-  get '/services/:product_id/new', to: 'service_definitions#new'
+  get '/new-service', to: 'service_definitions#new'
 
   namespace :api do
     namespace :v1 do

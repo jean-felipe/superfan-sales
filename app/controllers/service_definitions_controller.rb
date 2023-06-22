@@ -1,5 +1,5 @@
 class ServiceDefinitionsController < ApplicationController
-  before_action :load_product, except: [:create, :index]
+  before_action :load_product, except: [:create, :index, :new]
 
   def index
     @services = current_user.company.products.service

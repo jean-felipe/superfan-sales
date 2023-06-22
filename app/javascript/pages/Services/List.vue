@@ -5,7 +5,7 @@
       title_description="Gerencie os serviços"
       :has_action_button="true"
       button_action_label="Novo Serviço"
-      action_path="services/new"
+      action_path="new-service"
       :has_input_search="false">
 
         <div>
