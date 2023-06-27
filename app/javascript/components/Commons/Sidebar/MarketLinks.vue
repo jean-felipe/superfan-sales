@@ -68,7 +68,7 @@ export default {
     },
 
     goToServices() {
-      window.location.href = '/services';
+      window.location.href = '/service_definitions';
     },
 
     goToClients() {

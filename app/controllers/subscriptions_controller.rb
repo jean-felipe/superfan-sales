@@ -1,8 +1,8 @@
-class ServiceDefinitionsController < ApplicationController
-  before_action :load_service, except: [:create, :index, :new]
+class SubscriptionsController < ApplicationController
+  before_action :load_product, except: [:create, :index, :new]
 
   def index
-    @services = current_user.company.service_definitions
+    @services = current_user.company.services
 
     @props = {
       component_name: 'services_list',
@@ -12,29 +12,29 @@ class ServiceDefinitionsController < ApplicationController
   end
 
   def product_config
-    @service = Product.find(params[:product_id])
+    @product = Product.find(params[:product_id])
 
     @props = {
       component_name: 'product_service_definition',
-      component_data: { product: @service },
+      component_data: { product: @product },
       user: user_info
     }
   end
 
   def new
     @props = {
-      component_name: 'service_form',
-      component_data: { product: @service },
+      component_name: 'subscription_form',
+      component_data: { product: @product },
       user: user_info
     }
   end
 
   def edit
-    @service = @service.service_definition || @service.service_definition.new
+    @service = @product.service_definition || @product.service_definition.new
 
     @props = {
       component_name: 'product_service_definition',
-      component_data: { product: @service },
+      component_data: { product: @product },
       user: user_info
     }
   end
@@ -49,7 +49,7 @@ class ServiceDefinitionsController < ApplicationController
   end
 
   def show
-    @subscriptions = @service.subscriptions.includes(:client, :product)
+    @subscriptions = @product.subscriptions.includes(:client, :product)
 
     @props = {
       component_name: 'subscriptions_list',
@@ -60,8 +60,8 @@ class ServiceDefinitionsController < ApplicationController
 
   private
 
-  def load_service
-    @service = ServiceDefinition.find(params[:product_id])
+  def load_product
+    @product = Product.find(params[:product_id])
   end
 
   def list_response
@@ -74,7 +74,6 @@ class ServiceDefinitionsController < ApplicationController
           name: service.name,
           description: service.description,
           price: 'R$ ' + service.price.to_s,
-          quantity: service.definitions[:quantity]
         }
       end
     }
@@ -84,8 +83,8 @@ class ServiceDefinitionsController < ApplicationController
     {
       pages: @subscriptions.count / 10,
       current_page: params[:page].to_i || 1,
-      product_name: @service.name,
-      product_id: @service.id,
+      product_name: @product.name,
+      product_id: @product.id,
       subscriptions: @subscriptions.limit(10).page(params[:page]).map do |sub|
         {
           id: sub.id,

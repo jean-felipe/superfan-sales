@@ -48,6 +48,7 @@ import DailyReport from "../../pages/Reports/DailyReport.vue";
 import AdminClientList from "../../pages/Admin/List.vue";
 
 import ServicesList from "../../pages/Services/List.vue";
+import ServiceForm from "../../pages/Services/ServiceForm.vue";
 import SubscriptionsList from "../../pages/Services/Subscriptions.vue";
 import SubscriptionForm from "../../pages/Services/SubscriptionForm.vue";
 
@@ -67,6 +68,7 @@ const componentDicionary = {
   daily_report: DailyReport,
   admin_clients: AdminClientList,
   services_list: ServicesList,
+  service_form: ServiceForm,
   subscriptions_list: SubscriptionsList,
   subscription_form: SubscriptionForm,
 };

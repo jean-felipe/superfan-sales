@@ -5,7 +5,7 @@
       title_description="Gerencie os serviços"
       :has_action_button="true"
       button_action_label="Novo Serviço"
-      action_path="new-service"
+      action_path="/service_definitions/new"
       :has_input_search="false">
 
         <div>
@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       services: [],
-      tableHeaders: ['#', 'Nome', 'Descrição', 'Preço', 'Estoque'],
+      tableHeaders: ['#', 'Nome', 'Descrição', 'Preço'],
       pages: 1,
       currentPage: 1,
       page: 1,

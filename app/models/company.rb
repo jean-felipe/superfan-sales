@@ -29,6 +29,7 @@ class Company < ApplicationRecord
   has_many :tables
   has_many :orders
   has_many :clients
+  has_many :service_definitions
   has_many :users, through: :clients
   has_many :order_payments, through: :orders, source: 'order_id'
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_17_130246) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_27_125537) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -131,7 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_17_130246) do
     t.bigint "company_id", null: false
     t.integer "logged_user", null: false
     t.integer "payment_method", null: false
-    t.datetime "transaction_date", precision: nil, default: "2023-05-27 11:54:27", null: false
+    t.datetime "transaction_date", precision: nil, default: "2023-06-27 09:10:30", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_sales_on_company_id"
@@ -144,13 +144,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_17_130246) do
   end
 
   create_table "service_definitions", force: :cascade do |t|
-    t.bigint "product_id", null: false
+    t.bigint "company_id", null: false
     t.jsonb "definitions", default: {}
     t.integer "status", default: 0
+    t.integer "service_type", default: 0
     t.string "code"
+    t.string "name"
+    t.float "price"
+    t.boolean "has_discount", default: false
+    t.float "discount_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_service_definitions_on_product_id"
+    t.string "description"
+    t.index ["company_id"], name: "index_service_definitions_on_company_id"
   end
 
   create_table "sub_categories", force: :cascade do |t|
@@ -239,7 +245,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_17_130246) do
   add_foreign_key "products", "companies"
   add_foreign_key "sale_items", "sales"
   add_foreign_key "sales", "companies"
-  add_foreign_key "service_definitions", "products"
+  add_foreign_key "service_definitions", "companies"
   add_foreign_key "subscriptions", "clients"
   add_foreign_key "subscriptions", "companies"
   add_foreign_key "subscriptions", "products"
