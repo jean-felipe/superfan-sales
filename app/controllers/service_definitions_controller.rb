@@ -73,8 +73,7 @@ class ServiceDefinitionsController < ApplicationController
           id: service.id,
           name: service.name,
           description: service.description,
-          price: 'R$ ' + service.price.to_s,
-          quantity: service.definitions[:quantity]
+          price: 'R$ ' + service.price.to_s
         }
       end
     }

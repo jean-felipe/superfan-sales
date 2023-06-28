@@ -50,32 +50,32 @@
           </div>
 
           <div class="field is-horizontal">
-          <div class="field-body">
-            <div class="field">
-               <label class="label">Tipo do serviço</label>
-                <div class="control is-expanded">
-                    <div class="select is-fullwidth">
-                      <select name="service_type" v-model="newService.service_type">
-                        <option v-for="unit in serviceTypeOptions"
-                          v-bind:key="unit"
-                          v-bind:value="unit">
-                            {{ unit }}
-                        </option>
+            <div class="field-body">
+              <div class="field">
+                <label class="label">Tipo do serviço</label>
+                  <div class="control is-expanded">
+                      <div class="select is-fullwidth">
+                        <select name="service_type" v-model="newService.service_type">
+                          <option v-for="unit in serviceTypeOptions"
+                            v-bind:key="unit"
+                            v-bind:value="unit">
+                              {{ unit }}
+                          </option>
 
-                      </select>
+                        </select>
+                      </div>
                     </div>
-                  </div>
-            </div>
+              </div>
 
             <div class="field">
-            <label class="label">Preço Unitário (equivalente a um consumo desse serviço)</label>
-            <div class="control is-expanded">
-              <div class="is-fullwidth">
-                <input class="input is-marginless" type="number" placeholder="3.99"
-                  v-model="newService.price" min="0" step=".01" required>
+              <label class="label">Preço Unitário (equivalente a um consumo desse serviço)</label>
+              <div class="control is-expanded">
+                <div class="is-fullwidth">
+                  <input class="input is-marginless" type="number" placeholder="3.99"
+                    v-model="newService.price" min="0" step=".01" required>
+                </div>
               </div>
             </div>
-          </div>
           </div>
         </div>
 
