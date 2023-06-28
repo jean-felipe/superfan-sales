@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
-  before_action :load_service, except: [:create, :index]
+  before_action :load_service, except: %i[create index]
+  before_action :load_subscription, only: %i[show edit]
 
   def index
     @services = current_user.company.service_definitions
@@ -37,21 +38,10 @@ class SubscriptionsController < ApplicationController
     }
   end
 
-  def create
-  end
-
-  def update
-  end
-
-  def delete
-  end
-
   def show
-    @subscriptions = @service.subscriptions.includes(:client)
-
     @props = {
-      component_name: 'subscriptions_list',
-      component_data: [subscriptions_list],
+      component_name: 'subscription_detail',
+      component_data: subscription_details,
       user: user_info
     }
   end
@@ -60,6 +50,26 @@ class SubscriptionsController < ApplicationController
 
   def load_service
     @service = ServiceDefinition.find(params[:service_definition_id])
+  end
+
+  def load_subscription
+    @subscription = Subscription.find(params[:id])
+  end
+
+  def subscription_details
+    {
+      client: @subscription.client.details,
+      service: @subscription.service_definition,
+      subscription: {
+        id: @subscription.id,
+        additional_details: @subscription.additional_details,
+        end_at: @subscription.end_at.strftime("%d/%m/%Y"),
+        pay_at: @subscription.pay_at,
+        start_at: @subscription.start_at.strftime("%d/%m/%Y"),
+        start_payment: @subscription.start_payment,
+        status: @subscription.status
+      }
+    }
   end
 
   def list_response

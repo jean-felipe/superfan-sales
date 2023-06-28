@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
       post '/import-products', to: 'importations#products'
       post '/subscriptions', to: 'subscriptions#create'
+      patch '/subscriptions/:id', to: 'subscriptions#update'
 
       get '/daily-report', to: 'reports#daily_report'
 

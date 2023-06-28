@@ -51,6 +51,7 @@ import ServicesList from "../../pages/Services/List.vue";
 import ServiceForm from "../../pages/Services/ServiceForm.vue";
 import SubscriptionsList from "../../pages/Services/Subscriptions.vue";
 import SubscriptionForm from "../../pages/Services/SubscriptionForm.vue";
+import SubscriptionDetails from "../../pages//Services/SubscriptionDetails.vue";
 
 const componentDicionary = {
   products_list: ProductsList,
@@ -71,6 +72,7 @@ const componentDicionary = {
   service_form: ServiceForm,
   subscriptions_list: SubscriptionsList,
   subscription_form: SubscriptionForm,
+  subscription_detail: SubscriptionDetails
 };
 
 export default {

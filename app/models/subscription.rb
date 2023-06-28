@@ -28,13 +28,11 @@
 #  fk_rails_...  (service_definition_id => service_definitions.id)
 #
 class Subscription < ApplicationRecord
-  STATUSES = %w(active inactive late ended)
+  STATUSES = %w[active inactive late ended].freeze
 
   belongs_to :client
   belongs_to :service_definition
   belongs_to :company
-
-  has_one :user_subscription_details
 
   enum status: STATUSES
 end

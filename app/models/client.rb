@@ -24,6 +24,19 @@ class Client < ApplicationRecord
 
   validates :user_id, uniqueness: { scope: :company_id }
 
+  def details
+    {
+      name: user.name,
+      birthdate: user.birthdate.strftime("%d/%m/%Y"),
+      code: user.code,
+      document: user.document,
+      email: user.email,
+      gender: user.gender,
+      role: user.role,
+      status: user.status
+    }
+  end
+
   def name
     user.name
   end
