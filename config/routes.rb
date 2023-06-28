@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show, :new]
   resources :clients, only: [:new, :index, :show, :edit]
   resources :admin, only: [:new, :index, :show, :edit]
-  resources :service_definitions
+  resources :service_definitions do
+    resources :subscriptions
+  end
 
   get '/saloon', to: 'saloon#index'
   get '/tables/new', to: 'saloon#new'

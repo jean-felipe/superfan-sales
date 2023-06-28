@@ -147,7 +147,7 @@ export default {
         client_id: '',
         start_at: '',
         end_at: '',
-        product_id: '',
+        service_definition_id: '',
         pay_at: '',
         start_payment: false,
         additional_details: {
@@ -186,7 +186,7 @@ export default {
           .then((response) => {
             Swal.fire("Parabéns!", "Assinatura editada com sucesso!", "success")
               .then(() => {
-                window.location = '/subscriptions'
+                window.location = `/service_definitions/${this.newSubscription.service_definition_id}`
               })
           })
       } else {
@@ -197,7 +197,7 @@ export default {
 
           Swal.fire("Parabéns!", "Assinatura criada com sucesso!", "success")
             .then(() => {
-              window.location = '/subscriptions'
+              window.location = `/service_definitions/${this.newSubscription.service_definition_id}`
             })
         })
       }
@@ -225,10 +225,8 @@ export default {
         this.edition = true
       }
     }
-
-    console.log(this.data[0])
-
-    this.newSubscription.product_id = this.data.product.id
+    console.log(this.data)
+    this.newSubscription.service_definition_id = this.data.service.id
   }
 }
 </script>

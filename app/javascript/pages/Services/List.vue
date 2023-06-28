@@ -9,7 +9,7 @@
       :has_input_search="false">
 
         <div>
-          <Table :headers="tableHeaders" :elements="loadProducts" url="/services"/>
+          <Table :headers="tableHeaders" :elements="loadProducts" url="/service_definitions"/>
           <Pagination :pages="pages" :currentPage="loadCurrentPage" @changePage="handleChangePage" />
         </div>
 

@@ -5,7 +5,7 @@
       title_description="Gerencie suas assinaturas"
       :has_action_button="true"
       button_action_label="Nova Assinatura"
-      :action_path="product_id + '/new'"
+      :action_path="product_id + '/subscriptions/new'"
       :has_input_search="true">
 
         <div>

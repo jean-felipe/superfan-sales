@@ -30,6 +30,8 @@ class ServiceDefinition < ApplicationRecord
 
   belongs_to :company
 
+  has_many :subscriptions
+
   enum status: STATUSES
   enum service_type: TYPES
 end

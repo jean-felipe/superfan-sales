@@ -131,7 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_27_125537) do
     t.bigint "company_id", null: false
     t.integer "logged_user", null: false
     t.integer "payment_method", null: false
-    t.datetime "transaction_date", precision: nil, default: "2023-06-27 09:10:30", null: false
+    t.datetime "transaction_date", precision: nil, default: "2023-06-27 20:54:08", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_sales_on_company_id"
@@ -167,7 +167,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_27_125537) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "client_id", null: false
-    t.bigint "product_id", null: false
+    t.bigint "service_definition_id", null: false
     t.bigint "company_id", null: false
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
@@ -179,7 +179,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_27_125537) do
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_subscriptions_on_client_id"
     t.index ["company_id"], name: "index_subscriptions_on_company_id"
-    t.index ["product_id"], name: "index_subscriptions_on_product_id"
+    t.index ["service_definition_id"], name: "index_subscriptions_on_service_definition_id"
   end
 
   create_table "tables", force: :cascade do |t|
@@ -248,7 +248,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_27_125537) do
   add_foreign_key "service_definitions", "companies"
   add_foreign_key "subscriptions", "clients"
   add_foreign_key "subscriptions", "companies"
-  add_foreign_key "subscriptions", "products"
+  add_foreign_key "subscriptions", "service_definitions"
   add_foreign_key "tables", "companies"
   add_foreign_key "user_subscription_details", "subscriptions"
   add_foreign_key "user_subscription_details", "users"

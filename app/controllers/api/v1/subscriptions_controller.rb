@@ -8,7 +8,7 @@ module Api::V1
       @subscription.pay_at = extract_pay_day
 
       if @subscription.save
-       
+
         render json: @subscription, status: 201
       else
         render json: @subscription.errors.messages, status: 422
@@ -19,7 +19,7 @@ module Api::V1
 
     def subscription_params
       params.require(:subscription).permit(
-        :client_id, :start_at, :end_at, :product_id, :pay_at, :start_payment, additional_details: {}
+        :id, :client_id, :start_at, :end_at, :service_definition_id, :pay_at, :start_payment, additional_details: {}
       )
     end
 
@@ -28,7 +28,7 @@ module Api::V1
     end
 
     def extract_pay_day
-      date_string = subscription_params.dig("pay_at")
+      date_string = subscription_params['pay_at']
       date = Date.parse(date_string)
       date.day
     end

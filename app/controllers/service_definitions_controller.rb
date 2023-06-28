@@ -49,7 +49,7 @@ class ServiceDefinitionsController < ApplicationController
   end
 
   def show
-    @subscriptions = @service.subscriptions.includes(:client, :product)
+    @subscriptions = @service.subscriptions.includes(:client)
 
     @props = {
       component_name: 'subscriptions_list',
@@ -61,7 +61,7 @@ class ServiceDefinitionsController < ApplicationController
   private
 
   def load_service
-    @service = ServiceDefinition.find(params[:product_id])
+    @service = ServiceDefinition.find(params[:id])
   end
 
   def list_response
