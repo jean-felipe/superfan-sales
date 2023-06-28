@@ -5,11 +5,16 @@
       title_description="Gerencie suas assinaturas"
       :has_action_button="true"
       button_action_label="Nova Assinatura"
-      :action_path="product_id + '/subscriptions/new'"
+      :action_path="service_id + '/subscriptions/new'"
       :has_input_search="true">
 
         <div>
-          <Table :headers="tableHeaders" :elements="loadProducts" :hasEditAction="false" :hasDeleteAction="false" url="/subscriptions"/>
+          <Table
+            :headers="tableHeaders"
+            :elements="loadProducts"
+            :hasEditAction="true"
+            :hasDeleteAction="false"
+            :url="`/service_definitions/${service_id}/subscriptions`"/>
           <Pagination :pages="pages" :currentPage="loadCurrentPage" @changePage="handleChangePage" />
         </div>
 
@@ -34,6 +39,7 @@ export default {
       page: 1,
       product_name: '',
       product_id: '',
+      service_id: '',
       // productConfigs: {
       //   registrationRequired: false,
       //   registrationPrice: 0,
@@ -73,6 +79,7 @@ export default {
     this.subscriptions = this.data[0].subscriptions
     this.product_name = this.data[0].product_name
     this.product_id = this.data[0].product_id
+    this.service_id = this.data[0].service_id
   }
 }
 </script>

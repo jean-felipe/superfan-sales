@@ -30,11 +30,9 @@ class SubscriptionsController < ApplicationController
   end
 
   def edit
-    @service = service.service_definition || service.service_definition.new
-
     @props = {
       component_name: 'subscription_form',
-      component_data: { edit: true, service: },
+      component_data: { edit: true, service_id: @service.id },
       user: user_info
     }
   end
@@ -49,7 +47,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def show
-    @subscriptions = @service.subscriptions.includes(:client, :product)
+    @subscriptions = @service.subscriptions.includes(:client)
 
     @props = {
       component_name: 'subscriptions_list',
@@ -68,6 +66,7 @@ class SubscriptionsController < ApplicationController
     {
       pages: @services.count / 10,
       current_page: params[:page].to_i || 1,
+      service_id: @service.id,
       services: @services.limit(10).page(params[:page]).map do |service|
         {
           id: service.id,

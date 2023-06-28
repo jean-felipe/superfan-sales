@@ -85,7 +85,7 @@ class ServiceDefinitionsController < ApplicationController
       pages: @subscriptions.count / 10,
       current_page: params[:page].to_i || 1,
       product_name: @service.name,
-      product_id: @service.id,
+      service_id: @service.id,
       subscriptions: @subscriptions.limit(10).page(params[:page]).map do |sub|
         {
           id: sub.id,

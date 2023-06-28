@@ -28,8 +28,8 @@
             </button>
 
 
-              <p v-if="has_input_search" class="control has-icons-left has-icons-right">
-                <input type="search" class="input is-marginless" placeholder="Pesquisa" />
+              <p v-if="has_input_search" class="control has-icons-left has-icons-right" style="margin-left: 10px;">
+                <input type="search" class="input is-marginless ml-2" placeholder="Pesquisa" />
                 <span class="icon is-small is-left">
                   <i class="fas fa-search"></i>
                 </span>

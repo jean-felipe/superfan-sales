@@ -1,11 +1,9 @@
 <template>
   <div>
     <Panel
-      title="Configuração de serviço"
-      title_description="Gerencie os serviços"
+      title="Criar Assinatura"
+      title_description="Insira os dados da nova assinatura"
       :has_action_button="false"
-      button_action_label="Novo Serviço"
-      action_path="subscriptions/new"
       :has_input_search="false">
 
         <form @submit.prevent="handleSubmit">
@@ -41,83 +39,74 @@
                 </table>
               </div>
 
-          <div class="field">
-            <div class="field">
-              <label class="label">Data de Inicio</label>
-              <div class="control is-expanded">
-                <div class="is-fullwidth">
-                  <input class="input is-marginless" type="date" v-model="newSubscription.start_at" required>
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field">
+                  <label class="label">Data de Inicio</label>
+                  <div class="control is-expanded">
+                    <div class="is-fullwidth">
+                      <input class="input is-marginless" type="date" v-model="newSubscription.start_at" required>
+                    </div>
+                  </div>
+                </div>
+
+              <div class="field">
+                <label class="label">Data de Fim</label>
+                  <div class="control is-expanded">
+                    <div class="is-fullwidth">
+                      <input class="input is-marginless" type="date" v-model="newSubscription.end_at" required>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="field">
-            <div class="field">
-              <label class="label">Data de Fim</label>
-                <div class="control is-expanded">
-                  <div class="is-fullwidth">
-                    <input class="input is-marginless" type="date" v-model="newSubscription.end_at" required>
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field">
+                <label class="label">Data de Pagamento</label>
+                  <div class="control is-expanded">
+                    <div class="is-fullwidth">
+                      <input class="input is-marginless" type="date" v-model="newSubscription.pay_at" required>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div class="field">
-            <div class="field">
-              <label class="label">Data de Pagamento</label>
-                <div class="control is-expanded">
-                  <div class="is-fullwidth">
-                    <input class="input is-marginless" type="date" v-model="newSubscription.pay_at" required>
-                </div>
-              </div>
+              <div class="field"></div>
             </div>
           </div>
 
           <hr />
 
-          <div class="field">
-            <div class="field">
-                <label class="checkbox">
-                  <input type="checkbox" v-model="newSubscription.start_payment">
-                  Inicio pago
-                </label>
-            </div>
-            <div class="field">
-                <label class="checkbox">
-                  <input type="checkbox" v-model="additional_details">
-                  Detalhes adicionais
-                </label>
-            </div>
-          </div>
 
-          <div class="field" v-if="newSubscription.start_payment">
-            <div class="field">
-              <label class="label">Data do primeiro pagamento</label>
+          <div class="field is-horizontal" v-if="service.service_type == 'class'">
+          <hr>
+            <div class="field-body">
+              <div class="field" >
+                <label class="label">Total de Aulas</label>
                 <div class="control is-expanded">
-                  <div class="is-fullwidth">
-                    <input class="input is-marginless" type="date"
-                       v-model="newSubscription.additional_details.start_payment_date">
+                  <input class="input is-marginless" type="number"
+                  v-model="newSubscription.additional_details.total_classes"  required>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Frequencia semanal</label>
+                <div class="control is-expanded">
+                  <input class="input is-marginless" type="number"
+                  v-model="newSubscription.additional_details.weekly_attendance"  required>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="field" v-if="additional_details">
-            <label class="label">Total de uso</label>
-            <div class="control is-expanded">
-              <input class="input is-marginless" type="number" v-model="newSubscription.additional_details.total_use"  required>
-            </div>
-          </div>
-
       <hr />
-
+       <p>Valor estimado: <label>R$ {{ newSubscription.additional_details.total_classes * service.price }}</label></p>
       <div class="field is-grouped">
         <div class="control" v-if="edition">
-          <button type="submit" class="button is-link">Editar Produto</button>
+          <button type="submit" class="button is-link">Editar Assinatura</button>
         </div>
         <div class="control" v-else>
-          <button type="submit" class="button is-link">Criar Produto</button>
+          <button type="submit" class="button is-link">Criar Assinatura</button>
         </div>
         <div class="control">
           <button class="button is-link is-light">Cancelar</button>
@@ -153,13 +142,18 @@ export default {
         additional_details: {
           start_payment_date: '',
           total_use: 0,
+          total_classes: 0,
+          weekly_attendance: 0,
+          total_price: 0.0
         },
       },
       additional_details: false,
       searchCustomer: '',
+      total_price: 0.0,
       customers: [],
       customersList: false,
       edition: false,
+      service: {},
       serviceDurationOptions: ['Hora', 'Dia', 'Semana', 'Mes'],
     }
   },
@@ -225,8 +219,15 @@ export default {
         this.edition = true
       }
     }
-    console.log(this.data)
+
     this.newSubscription.service_definition_id = this.data.service.id
+    this.service = this.data.service
+  },
+
+  computed: {
+    total_price() {
+      return this.newSubscription.additional_details.total_classes * this.service.price
+    }
   }
 }
 </script>
