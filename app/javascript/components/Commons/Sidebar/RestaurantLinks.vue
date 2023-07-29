@@ -9,7 +9,7 @@
     <li class="menu-item">
       <a class="menu-link" @click="goToSaloon()">
         <i class="fas fa-utensils"></i>
-        
+
         <p class="title is-4 has-text-white">Mesas</p>
       </a>
     </li>
@@ -31,7 +31,7 @@
         <p class="title is-4 has-text-white">Frente de caixa</p>
       </a>
     </li>
-    
+
   </ul>
 </template>
 
@@ -74,10 +74,6 @@ export default {
       window.location.href = '/times';
     }
   },
-
-  created() {
-    this.name = this.user.user.name;
-  }
 }
 </script>
 

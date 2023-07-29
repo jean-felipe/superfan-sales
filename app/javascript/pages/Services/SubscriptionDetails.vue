@@ -31,6 +31,7 @@
             <th>Fim</th>
             <th>Data de pagamento</th>
             <th>Status</th>
+            <th>Mensalidade</th>
             <th v-if="service.service_type == 'class'">Total de Aulas</th>
             <th v-if="service.service_type == 'class'">Aulas</th>
           </tr>
@@ -40,6 +41,7 @@
           <td>{{ subscription.end_at }}</td>
           <td>{{ subscription.pay_at }}</td>
           <td>{{ subscription.status }}</td>
+          <td>R$ {{ subscription.additional_details?.custom_price }}</td>
           <td v-if="service.service_type == 'class'">{{ subscription.additional_details.total_classes }}</td>
           <td v-if="service.service_type == 'class'">{{ subscription.additional_details.total_use }}</td></tr>
         </tbody>
@@ -120,6 +122,7 @@ export default {
     this.user = this.data.client;
     this.service = this.data.service;
     this.subscription = this.data.subscription;
+    console.log(this.subscription.additional_details.custom_price)
     if(this.data.service.service_type === 'class') {
       this.total_use = this.data.subscription.additional_details.total_use
     }

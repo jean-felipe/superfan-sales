@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       patch '/subscriptions/:id', to: 'subscriptions#update'
 
       get '/daily-report', to: 'reports#daily_report'
+      get '/customer-resume', to: 'reports#customer_resume'
 
       get 'admin/clients', to: 'admin#clients'
       get 'admin/company/:id', to: 'admin#company'

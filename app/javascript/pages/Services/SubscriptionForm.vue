@@ -80,7 +80,7 @@
 
 
           <div class="field is-horizontal" v-if="service.service_type == 'class'">
-          <hr>
+            <hr>
             <div class="field-body">
               <div class="field" >
                 <label class="label">Total de Aulas</label>
@@ -99,8 +99,25 @@
             </div>
           </div>
 
+          <div class="field is-horizontal" v-if="service.service_type == 'class'">
+            <hr>
+            <div class="field-body">
+              <div class="field" >
+                <label class="label">Preço Final</label>
+                <div class="control is-expanded">
+                  <input class="input is-marginless" type="number"
+                  v-model="newSubscription.additional_details.custom_price"  required>
+                </div>
+              </div>
+              <div class="field">
+
+              </div>
+            </div>
+          </div>
+
       <hr />
        <p>Valor estimado: <label>R$ {{ newSubscription.additional_details.total_classes * service.price }}</label></p>
+       <p>Desconto: <label>R$ {{ (newSubscription.additional_details.total_classes * service.price) - newSubscription.additional_details.custom_price}}</label></p>
       <div class="field is-grouped">
         <div class="control" v-if="edition">
           <button type="submit" class="button is-link">Editar Assinatura</button>
@@ -144,7 +161,8 @@ export default {
           total_use: 0,
           total_classes: 0,
           weekly_attendance: 0,
-          total_price: 0.0
+          total_price: 0.0,
+          custom_price: 0.0
         },
       },
       additional_details: false,
