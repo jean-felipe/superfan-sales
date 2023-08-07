@@ -10,15 +10,15 @@
       :has_input_search="false">
         <div class="tabs is-toggle">
           <ul>
-            <li class="is-active">
+            <li :class="{ 'is-active': componentToShow == 'list' }">
               <a @click="setComponentToShow('list')">
-                <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
+                <span class="icon is-small"><i class="far fa-list-alt"></i></span>
                 <span>Lista</span>
               </a>
             </li>
-            <li>
+            <li :class="{ 'is-active': componentToShow == 'resume' }">
               <a @click="setComponentToShow('resume')">
-                <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+                <span class="icon is-small"><i class="far fa-chart-bar"></i></span>
                 <span>Resumo</span>
               </a>
             </li>

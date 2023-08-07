@@ -22,7 +22,7 @@ class ClientsServices
       return {} if user.nil?
 
       {
-        user: {
+        {
           id: user.id,
           name: user.name,
           email: user.email,

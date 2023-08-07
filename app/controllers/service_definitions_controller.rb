@@ -30,7 +30,7 @@ class ServiceDefinitionsController < ApplicationController
   end
 
   def edit
-    @service = @service.service_definition || @service.service_definition.new
+    @service = @service || ServiceDefinition.new
 
     @props = {
       component_name: 'product_service_definition',

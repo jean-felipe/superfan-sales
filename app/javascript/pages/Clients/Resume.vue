@@ -1,22 +1,20 @@
 <template>
   <div>
     <div>
+      Aniversariantes:
       <Table
         :headers="birthdateHeaders"
-        :elements="birthdates"
-        v-if="birthdates.length > 0"
+        :elements="loadBirthdates"
       />
-
-      <p v-if="birthdates.length === 0">Sem aniversariantes hoje</p>
     </div>
 
-    <Table
-      :headers="birthdateHeaders"
-      :elements="subscriptions"
-      v-if="subscriptions.length > 0"
-    />
+    <br />
 
-    <p v-if="subscriptions.length === 0">Sem assinaturas vencendo nos proximos 5 dias</p>
+    Assinaturas
+    <Table
+      :headers="subscribersHeaders"
+      :elements="loadSubscribers"
+    />
 
 
   </div>
@@ -32,7 +30,8 @@ export default {
 
   data() {
     return {
-      birthdateHeaders: ['Nome', 'Data'],
+      birthdateHeaders: ['#', 'Nome', 'Email', 'Genero', 'Documento', 'Aniversario'],
+      subscribersHeaders: ['#', 'Serviço', 'Cliente', 'Vencimento'],
       birthdates: [],
       subscriptions: []
     }
@@ -44,11 +43,21 @@ export default {
     }
   },
 
+  computed: {
+    loadBirthdates() {
+      return this.birthdates
+    },
+
+    loadSubscribers() {
+      return this.subscriptions
+    }
+  },
+
   mounted() {
     axios.get('/api/v1/customer-resume')
       .then(response => {
-        this.birthdates.push(response.data.birthdates)
-        this.subscriptions.push(response.data.subscribers)
+        this.birthdates = response.data.birthdates
+        this.subscriptions = response.data.subscribers
       })
   }
 
