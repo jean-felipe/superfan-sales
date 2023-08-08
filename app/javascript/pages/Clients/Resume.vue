@@ -14,6 +14,8 @@
     <Table
       :headers="subscribersHeaders"
       :elements="loadSubscribers"
+      :hasDeleteAction="false"
+      :hasEditAction="false"
     />
 
 
