@@ -5,7 +5,7 @@
         <Sidebar :user="user" />
         <div class="main-panel">
           <Header :user="user" />
-          <div class="content">
+          <div class="content" data-theme="light">
             <component :is="loadComponent" :data="componentData" />
           </div>
         </div>

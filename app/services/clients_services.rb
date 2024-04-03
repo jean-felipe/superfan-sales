@@ -22,19 +22,17 @@ class ClientsServices
       return {} if user.nil?
 
       {
-        {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          gender: user.gender,
-          document: user.document,
-          birthdate: user.birthdate.strftime('%Y-%m-%d')
-        }
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        gender: user.gender,
+        document: user.document,
+        birthdate: user.birthdate.strftime('%Y-%m-%d')
       }
     end
 
     def verify_client(company_id, user_id)
-      @client = Client.find_by(company_id: company_id , user_id: user_id)
+      @client = Client.find_by(company_id:, user_id:)
     end
   end
 end

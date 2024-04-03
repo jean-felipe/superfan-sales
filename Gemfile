@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.0"
+ruby "3.2.3"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.3"
+gem "rails", "~> 7.1.3"
 # Use postgresql as the database for Active Record
-gem 'pg', '>= 0.18', '< 2.0'
+gem "pg", "~> 1.1"
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem "puma", ">= 5.0"
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/ElMassimo/vite_ruby
@@ -34,6 +34,9 @@ gem 'strong_migrations'
 gem "roo", "~> 2.8.0"
 
 gem 'will_paginate', '~> 3.1.0'
+
+gem "sentry-ruby"
+gem "sentry-rails"
 
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -67,3 +70,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
