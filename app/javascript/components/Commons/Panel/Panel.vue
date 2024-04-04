@@ -15,7 +15,7 @@
               {{ button_action_label }}
             </a>
 
-            <button v-if="has_second_action_button" :href="second_action_path" class="button is-success new-button">
+            <button v-if="has_second_action_button" :href="second_action_path" class="button is-success new-button ml-2">
               {{ second_button_action_label }}
             </button>
 

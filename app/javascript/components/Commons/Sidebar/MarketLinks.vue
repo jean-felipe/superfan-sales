@@ -20,18 +20,18 @@
         <p class="title is-4 has-text-white">Serviços</p>
       </a>
     </li>
-      <li class="menu-item">
+    <li class="menu-item">
       <a class="menu-link" @click="goToClients()">
         <i class="fas fa-users"></i>
         <p class="title is-4 has-text-white">Clientes</p>
       </a>
     </li>
-    <!-- <li class="menu-item">
-      <a class="menu-link" @click="goToCheckouts()">
+    <li class="menu-item">
+      <a class="menu-link" @click="goToClients()">
         <i class="fas fa-play-circle"></i>
-        <p class="title is-4 has-text-white">Frente de caixa</p>
+        <p class="title is-4 has-text-white">Fidelidade</p>
       </a>
-    </li> -->
+    </li>
 
   </ul>
 </template>

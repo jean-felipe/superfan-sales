@@ -1,68 +1,49 @@
 <template>
   <div>
-    <div class="card">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card-content">
-            <div class="media">
-              <div class="header-content beerconsumptions">
-                <div class="media-left">
-                  <h4 class="card-title mt-0">Pedidos</h4>
-                  <p class="card-category">Gerenciamento dos pedidos</p>
-                </div>
+    <Panel title="Pedidos" title_description="Gerencie seus pedidos" :has_action_button="true"
+      button_action_label="Novo Pedido" action_path="/orders/new" :has_input_search="true">
 
-                <div>
-                  <button class="button is-success" @click="newOrder()">Novo Pedido</button>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-            </div>
-
-            <div>
-               <table class="table is-bordered is-striped">
-                <thead>
-                  <tr>
-                    <th v-for="header in headers" v-bind:key="header">{{ header }}</th>
-                    <th>Ações</th>
-                  </tr>
-                </thead>
-                <tbody v-for="order in orders" v-bind:key="order.id">
-                  <tr>
-                    <td>
-                      {{ order.order_number }}
-                    </td>
-                    <td>{{ order.status }}</td>
-                    <td>R$ {{ order.total_price }}</td>
-                    <td>{{ order.user.name || order.user.document || order.user.code }}</td>
-                    <td>{{ order.payments.map((pay) => pay.name).join(',')}}</td>
-                    <td>{{ order.delivery_type }}</td>
-                    <td>{{ order.created_at }}</td>
-                    <td>
-                      <button class="button is-info" @click="editOrder(order.id)">
-                        <i class="fas fa-edit"></i>
-                      </button>
-                      <button class="button is-danger" @click="excludeOrder(order.id)">
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+      <div>
+        <table class="table is-bordered is-striped">
+          <thead>
+            <tr>
+              <th v-for="header in headers" v-bind:key="header">{{ header }}</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody v-for="order in orders" v-bind:key="order.id">
+            <tr>
+              <td>
+                {{ order.order_number }}
+              </td>
+              <td>{{ order.status }}</td>
+              <td>R$ {{ order.total_price }}</td>
+              <td>{{ order.user.name || order.user.document || order.user.code }}</td>
+              <td>{{ order.payments.map((pay) => pay.name).join(',')}}</td>
+              <td>{{ order.delivery_type }}</td>
+              <td>{{ order.created_at }}</td>
+              <td>
+                <button class="button is-info mr-1" @click="editOrder(order.id)">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="button is-danger" @click="excludeOrder(order.id)">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </div>
+    </Panel>
   </div>
 </template>
 
 <script>
-import Table from '../../components/Commons/Table/Table.vue'
+import Panel from '../../components/Commons/Panel/Panel.vue'
 
 export default {
   name: 'OrdersList',
-  components: { Table },
+  components: { Panel },
 
   data() {
     return {
@@ -74,6 +55,12 @@ export default {
   props: {
     data: {
       type: Array
+    }
+  },
+
+  computed: {
+    loadOrders() {
+      return this.orders
     }
   },
 

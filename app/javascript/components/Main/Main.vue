@@ -150,7 +150,7 @@ export default {
 }
 
 .main-panel > .content {
-  margin-top: 80px;
+/*  margin-top: 80px;*/
   padding: 30px 15px;
   min-height: calc(100vh - 123px);
 }

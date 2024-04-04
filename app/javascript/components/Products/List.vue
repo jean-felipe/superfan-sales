@@ -1,48 +1,20 @@
 <template>
   <div>
-    <div class="card">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card-content">
-            <div class="media">
-              <div class="header-content beerconsumptions">
-                <div class="media-left">
-                  <h4 class="card-title mt-0">Produtos</h4>
-                  <p class="card-category">Gerenciamento de produtos</p>
-                </div>
-
-                <div>
-                  <button class="button is-success" @click="showModal = true">
-                    <span>Importação</span>
-                    <span class="icon"><i class="fas fa-download"></i></span>
-                  </button>
-                  <button class="button is-success" @click="newProduct()">Novo Produto</button>
-                </div>
-                <div class="search">
-
-                  <div class="field">
-                    <p class="control has-icons-left has-icons-right">
-                      <input type="search" class="input is-marginless" placeholder="Pesquisa" v-model="searchTerm"/>
-                      <span class="icon is-small is-left">
-                        <i class="fas fa-search"></i>
-                      </span>
-                    </p>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-            </div>
-
-            <div>
-              <Table :headers="tableHeaders" :elements="loadProducts" url="/products"/>
-              <Pagination :pages="pages" :currentPage="loadCurrentPage" @changePage="handleChangePage" />
-            </div>
-          </div>
+    <Panel
+      title="Produtos"
+      title_description="Gerencie seus produtos"
+      :has_action_button="true"
+      button_action_label="Novo Produto"
+      action_path="/products/new"
+      has_second_action_button="true"
+      second_action_path="products/import"
+      second_button_action_label="Importar"
+      :has_input_search="true">
+        <div>
+          <Table :headers="tableHeaders" :elements="loadProducts" url="/products"/>
+          <Pagination :pages="pages" :currentPage="loadCurrentPage" @changePage="handleChangePage" />
         </div>
-      </div>
-    </div>
+    </Panel>
 
     <ImportationModal v-if="showModal" @close="showModal = false"/>
   </div>
@@ -52,11 +24,13 @@
 import Table from '../Commons/Table/Table.vue';
 import Pagination from '../Commons/Table/Pagination.vue';
 import ImportationModal from './ImportationModal.vue';
+import Panel from "../Commons/Panel/Panel.vue";
+
 import axios from 'axios';
 
 export default {
   name: 'ProductsList',
-  components: { Table, ImportationModal, Pagination },
+  components: { Table, ImportationModal, Pagination, Panel },
 
   data() {
     return {
